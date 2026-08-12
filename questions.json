@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "question": "How much rock salt goes into the 2kg batch of idli batter?",
+    "expected_recipe_id": "idli-batter-01",
+    "expected_section": "Ingredients table",
+    "answer_substring": " 20g",
+    "type": "table-row"
+  },
+  {
+    "id": 2,
+    "question": "How much fine sea salt is in the appam batter?",
+    "expected_recipe_id": "appam-03",
+    "expected_section": "Ingredients table",
+    "answer_substring": " 7g",
+    "type": "table-row"
+  },
+  {
+    "id": 3,
+    "question": "What weight of crystal sea salt is used to brine the tender mangoes for kadumanga achar?",
+    "expected_recipe_id": "kadumanga-06",
+    "expected_section": "Ingredients table",
+    "answer_substring": " 150g",
+    "type": "table-row"
+  },
+  {
+    "id": 4,
+    "question": "How much poha (flattened rice) goes into the crisp dosa batter?",
+    "expected_recipe_id": "dosa-batter-02",
+    "expected_section": "Ingredients table",
+    "answer_substring": " 50g",
+    "type": "table-row"
+  },
+  {
+    "id": 5,
+    "question": "To what temperature should the milk be cooled before adding the curd starter?",
+    "expected_recipe_id": "thayir-04",
+    "expected_section": "Method",
+    "answer_substring": "40–43°C",
+    "type": "method-prose"
+  },
+  {
+    "id": 6,
+    "question": "How long should the ragi slurry ferment before the koozh is cooked?",
+    "expected_recipe_id": "ragi-koozh-05",
+    "expected_section": "Method",
+    "answer_substring": "10 to 12 hours",
+    "type": "method-prose"
+  },
+  {
+    "id": 7,
+    "question": "How long and at what temperature does the dosa batter ferment?",
+    "expected_recipe_id": "dosa-batter-02",
+    "expected_section": "Method",
+    "answer_substring": "10 to 14 hours",
+    "type": "method-prose"
+  },
+  {
+    "id": 8,
+    "question": "Why might kadumanga achar not be suitable for a gluten-free diet?",
+    "expected_recipe_id": "kadumanga-06",
+    "expected_section": "Allergen note",
+    "answer_substring": "wheat flour",
+    "type": "allergen-note"
+  }
+]
