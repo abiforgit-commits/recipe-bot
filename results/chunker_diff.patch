@@ -1,0 +1,55 @@
+diff --git a/chunkers.py b/chunkers.py
+index f4e3a79..41348f6 100644
+--- a/chunkers.py
++++ b/chunkers.py
+@@ -1,7 +1,8 @@
+-"""Chunking for the recipe cards.
++"""Two chunking strategies for the recipe cards.
+ 
+ A chunk is the unit of retrieval: it is what gets embedded, stored, and
+-returned by a search.
++returned by a search. Task Set B's whole experiment is asking: does the way
++we cut the cards change whether the right chunk comes back in the top 5?
+ """
+ 
+ NAIVE_CHUNK_SIZE = 400  # characters
+@@ -26,6 +27,39 @@ def chunk_naive(card):
+     return chunks
+ 
+ 
++def chunk_structure_aware(card):
++    """One chunk per markdown section (## Ingredients, ## Method, ...).
++
++    Two rules the naive chunker breaks and this one never does:
++      1. A table is never split - the whole ingredient table travels as one
++         chunk, so '20g rock salt' always sits next to its header row.
++      2. Every chunk starts with the recipe title, so no chunk is ever
++         orphaned from the recipe it belongs to.
++    """
++    title = card["meta"]["title"]
++    sections = []
++    current = []
++    for line in card["body"].splitlines():
++        if line.startswith("## ") and current:
++            sections.append("\n".join(current).strip())
++            current = [line]
++        else:
++            current.append(line)
++    if current:
++        sections.append("\n".join(current).strip())
++
++    chunks = []
++    for section in sections:
++        if not section:
++            continue
++        if section.startswith("# "):  # the intro section already has the title
++            chunks.append(section)
++        else:
++            chunks.append(f"# {title}\n\n{section}")
++    return chunks
++
++
+ STRATEGIES = {
+     "naive": chunk_naive,
++    "structure": chunk_structure_aware,
+ }
