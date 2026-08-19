@@ -3,7 +3,33 @@
 Mini "ask my documents" app over recipe cards, plus the Task Set B chunking
 experiment (two chunkers, hit-in-top-5 over 8 known-answer questions).
 
-## Setup (already done)
+## Setup on a new machine
+
+```powershell
+git clone https://github.com/abiforgit-commits/week3-rag
+cd week3-rag
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+Then create a `.env` file in the project root (it is git-ignored, so it never
+travels with the repo — you must recreate it by hand):
+
+```
+GEMINI_API_KEY=your-key-here
+```
+
+Finally rebuild the search index (also not in the repo; first run downloads
+the ~80MB local embedding model):
+
+```powershell
+python ingest.py --strategy naive
+python ingest.py --strategy structure
+python measure.py        # should reproduce the 8/8 vs 8/8 table
+```
+
+## Setup (already done on the original machine)
 
 - Python 3.12.10 (installed via winget, user scope)
 - Virtual env in `.venv/` with: chromadb, anthropic, openai, python-dotenv, pypdf, python-docx
