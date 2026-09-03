@@ -5,11 +5,14 @@ batch (disclosed in the write-up). The mix mirrors how real cooks ask:
 direct quantity questions, how-tos, vague one-liners, typos, comparisons,
 out-of-scope asks, multi-part requests, and food-safety worries. It was
 written as a population, NOT engineered to trigger failures we expect.
+
+Resumable: questions that already have a trace are skipped, so the script can
+be re-run after an interruption without creating duplicates.
 """
 import sys
 import time
 
-from w5_trace import traced_ask
+from w5_trace import TRACES, load_traces, traced_ask
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -82,24 +85,37 @@ QUESTIONS = [
     "My koozh has been in the clay pot for two days, still fine?",
 ]
 
+TRANSIENT = ("429", "503", "RESOURCE_EXHAUSTED", "UNAVAILABLE", "overloaded")
+
 
 def main():
-    print(f"{len(QUESTIONS)} questions to run")
-    for i, q in enumerate(QUESTIONS, 1):
-        for attempt in range(5):
+    done = {t["question"] for t in load_traces()} if TRACES.exists() else set()
+    todo = [q for q in QUESTIONS if q not in done]
+    print(f"{len(QUESTIONS)} total, {len(done)} already traced, {len(todo)} to run", flush=True)
+
+    failed = []
+    for i, q in enumerate(todo, 1):
+        for attempt in range(1, 7):
             try:
                 rec = traced_ask(q)
-                print(f"{i:>2}/{len(QUESTIONS)} [{rec['trace_id']}] {q[:60]}")
+                print(f"{i:>2}/{len(todo)} [{rec['trace_id']}] {q[:60]}", flush=True)
                 break
             except Exception as e:
-                if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
-                    print(f"   rate-limited, waiting 30s (attempt {attempt + 1})")
-                    time.sleep(30)
+                msg = str(e)
+                if any(tok in msg for tok in TRANSIENT):
+                    wait = 20 * attempt
+                    print(f"   transient error, waiting {wait}s (attempt {attempt})", flush=True)
+                    time.sleep(wait)
                 else:
-                    print(f"   ERROR on '{q[:40]}': {e}")
+                    print(f"   ERROR on '{q[:40]}': {msg[:120]}", flush=True)
+                    failed.append(q)
                     break
-        time.sleep(4)  # stay inside free-tier requests-per-minute
-    print("done")
+        else:
+            print(f"   gave up on '{q[:40]}' after 6 attempts", flush=True)
+            failed.append(q)
+        time.sleep(5)  # stay inside free-tier requests-per-minute
+
+    print(f"done. {len(failed)} failed: {failed}", flush=True)
 
 
 if __name__ == "__main__":
