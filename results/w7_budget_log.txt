@@ -1,0 +1,32 @@
+request: Double the appam recipe and make it coconut-free, nut-free and gluten-free, then tell me every substitution you considered
+
+--- scenario: max_iters (MAX_ITERS=2) ---
+[lap 1] search_recipes({"query": "appam"}) -> [{'recipe_id': 'appam-03', 'title': 'Appam (lace-edged fermented rice hoppers)', 'cuisine' (620 tok)
+[lap 2] substitute_ingredient({"recipe_id": "appam-03", "allergen": "coconut"}) -> {'recipe_id': 'appam-03', 'allergen_removed': 'coconut', 'swaps': [{'from': 'Fresh thick c (716 tok)
+  STOPPED: BUDGET:max_iters (2 laps used)
+  laps=2  tokens=1336  cost=$0.000148  latency=5.18s
+  returned cleanly (no exception, no spin); final is None - terminated before answering
+
+--- scenario: max_tokens (MAX_TOKENS=1200) ---
+[lap 1] search_recipes({"query": "appam"}) -> [{'recipe_id': 'appam-03', 'title': 'Appam (lace-edged fermented rice hoppers)', 'cuisine' (620 tok)
+[lap 2] substitute_ingredient({"recipe_id": "appam-03", "allergen": "coconut"}) -> {'recipe_id': 'appam-03', 'allergen_removed': 'coconut', 'swaps': [{'from': 'Fresh thick c (716 tok)
+  STOPPED: BUDGET:max_tokens (1336 >= 1200)
+  laps=2  tokens=1336  cost=$0.000148  latency=9.01s
+  returned cleanly (no exception, no spin); final is None - terminated before answering
+
+--- scenario: max_cost (MAX_COST_USD=0.0002) ---
+[lap 1] search_recipes({"query": "appam"}) -> [{'recipe_id': 'appam-03', 'title': 'Appam (lace-edged fermented rice hoppers)', 'cuisine' (620 tok)
+[lap 2] substitute_ingredient({"recipe_id": "appam-03", "allergen": "coconut"}) -> {'recipe_id': 'appam-03', 'allergen_removed': 'coconut', 'swaps': [{'from': 'Fresh thick c (716 tok)
+[lap 3] scale_recipe({"recipe_id": "appam-03", "factor": 2}) -> {'recipe_id': 'appam-03', 'scale_factor': 2, 'ingredients': [{'name': 'Raw rice (pachari), (867 tok)
+  STOPPED: BUDGET:max_cost ($0.00024 >= $0.0002)
+  laps=3  tokens=2203  cost=$0.000242  latency=13.58s
+  returned cleanly (no exception, no spin); final is None - terminated before answering
+
+--- scenario: wall_clock (MAX_WALL_SEC=6) ---
+[lap 1] search_recipes({"query": "appam"}) -> [{'recipe_id': 'appam-03', 'title': 'Appam (lace-edged fermented rice hoppers)', 'cuisine' (620 tok)
+[lap 2] substitute_ingredient({"recipe_id": "appam-03", "allergen": "coconut"}) -> {'recipe_id': 'appam-03', 'allergen_removed': 'coconut', 'swaps': [{'from': 'Fresh thick c (716 tok)
+  STOPPED: BUDGET:wall_clock (9.0s >= 6s)
+  laps=2  tokens=1336  cost=$0.000148  latency=9.04s
+  returned cleanly (no exception, no spin); final is None - terminated before answering
+
+budgets restored to defaults: {'MAX_ITERS': 8, 'MAX_TOKENS': 20000, 'MAX_COST_USD': 0.02, 'MAX_WALL_SEC': 120}

@@ -1,0 +1,10 @@
+{"id":1,"request":"Double the idli batter recipe","recipe_id":"idli-batter-01","factor":2.0,"banned":[],"class":"simple-scale"}
+{"id":2,"request":"I need half a batch of dosa batter","recipe_id":"dosa-batter-02","factor":0.5,"banned":[],"class":"simple-scale"}
+{"id":3,"request":"Give me the kadumanga achar recipe scaled to 3 times","recipe_id":"kadumanga-06","factor":3.0,"banned":[],"class":"simple-scale"}
+{"id":4,"request":"Scale the ragi koozh recipe to one and a half times","recipe_id":"ragi-koozh-05","factor":1.5,"banned":[],"class":"simple-scale"}
+{"id":5,"request":"Make the thayir curd recipe dairy-free","recipe_id":"thayir-04","factor":1.0,"banned":["dairy"],"class":"single-swap"}
+{"id":6,"request":"Make the mango pickle sesame-free","recipe_id":"kadumanga-06","factor":1.0,"banned":["sesame"],"class":"single-swap"}
+{"id":7,"request":"Halve the appam recipe and make it coconut-free and nut-free","recipe_id":"appam-03","factor":0.5,"banned":["coconut","nuts"],"class":"allergen-cascade"}
+{"id":8,"request":"Make the thayir curd recipe dairy-free and nut-free","recipe_id":"thayir-04","factor":1.0,"banned":["dairy","nuts"],"class":"allergen-cascade"}
+{"id":9,"request":"Make the mango pickle sesame-free and nut-free","recipe_id":"kadumanga-06","factor":1.0,"banned":["sesame","nuts"],"class":"allergen-cascade"}
+{"id":10,"request":"Double the appam recipe and make it coconut-free, nut-free and gluten-free","recipe_id":"appam-03","factor":2.0,"banned":["coconut","nuts","gluten"],"class":"allergen-cascade"}
