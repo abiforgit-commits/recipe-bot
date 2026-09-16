@@ -113,7 +113,7 @@ def main():
         else:
             print(f"   gave up on '{q[:40]}' after 6 attempts", flush=True)
             failed.append(q)
-        time.sleep(5)  # stay inside free-tier requests-per-minute
+        time.sleep(2)  # stay inside free-tier requests-per-minute
 
     print(f"done. {len(failed)} failed: {failed}", flush=True)
 

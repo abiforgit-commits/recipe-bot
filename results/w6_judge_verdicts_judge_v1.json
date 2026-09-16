@@ -1,0 +1,110 @@
+{
+  "c01": {
+    "verdict": "FAIL",
+    "reason": "The assistant incorrectly claims the information is missing, even though multiple recipes in the context contain salt measurements."
+  },
+  "c02": {
+    "verdict": "FAIL",
+    "reason": "The assistant failed to answer from the shown chunks, even though the chunks contain specific completion indicators for multiple recipes (e.g., appam, curd)."
+  },
+  "c03": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though the question (\"Can I make it faster?\") could be interpreted as asking about preparation times across the various recipes provided, or at least required acknowledging the set times in the chunks."
+  },
+  "c04": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though the provided chunks contain multiple temperatures (e.g., 40–43°C and around 30°C for the curd recipe)."
+  },
+  "c05": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly and completely extracts all fermentation times for each of the recipes provided in the context chunks without introducing any outside information."
+  },
+  "c06": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though the chunks mention storing it overnight in a clay pot for a second fermentation and serving it cold."
+  },
+  "c07": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though the provided chunks do not contain any information about troubleshooting a batter that failed to rise."
+  },
+  "c08": {
+    "verdict": "PASS",
+    "reason": "The answer accurately uses the provided context to explain that no water should touch the mangoes and only dry spoons should enter the jar to prevent spoiling."
+  },
+  "c09": {
+    "verdict": "PASS",
+    "reason": "The answer directly addresses the question using accurate, fully supported methods from the provided text for cold weather curd setting."
+  },
+  "c10": {
+    "verdict": "PASS",
+    "reason": "The answer correctly identifies the required rice from the provided recipe chunks without any unsupported claims."
+  },
+  "c11": {
+    "verdict": "PASS",
+    "reason": "The answer correctly identifies the required flour using only the provided context chunks."
+  },
+  "c12": {
+    "verdict": "PASS",
+    "reason": "The assistant accurately lists both dals specified in the dosa batter recipe context."
+  },
+  "c13": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though the Dosa Batter recipe card explicitly lists a salt percentage (2.4%), and no salt quantities/percentages are provided for the other recipes to compare."
+  },
+  "c14": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly identified the recipe with the longest fermentation time based solely on the provided context chunks."
+  },
+  "c15": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though the provided chunks clearly show water quantities for the recipes (e.g., Ragi Koozh uses 1500g of water, Idli Batter uses ~720g, while Appam and Dosa Batter have no explicit water listed)."
+  },
+  "c16": {
+    "verdict": "PASS",
+    "reason": "The answer correctly identifies gingelly (sesame) oil and the neutral oil substitution using only the provided context chunks."
+  },
+  "c17": {
+    "verdict": "PASS",
+    "reason": "The answer accurately confirms the presence of sesame in the mango pickle using the provided context."
+  },
+  "c18": {
+    "verdict": "PASS",
+    "reason": "The answer correctly explains based on the text that asafoetida is an optional addition with a label warning."
+  },
+  "c19": {
+    "verdict": "PASS",
+    "reason": "The answer accurately reflects the context, stating that the coconut milk is stirred in just before cooking without a subsequent rest."
+  },
+  "c20": {
+    "verdict": "PASS",
+    "reason": "The answer directly and accurately addresses the user's question using the provided context chunks."
+  },
+  "c21": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though the context chunks clearly state that dosa batter is \"thinner than idli batter\" and uses different preparation methods (soaking ingredients together vs. separately), which answers the question about whether they are the same."
+  },
+  "c22": {
+    "verdict": "PASS",
+    "reason": "The answer accurately provides the correct quantity of rock salt for the idli batter based directly on the provided context chunks."
+  },
+  "c23": {
+    "verdict": "PASS",
+    "reason": "The answer accurately reflects the fermentation time and conditions for idli batter found directly in the provided context chunk."
+  },
+  "c24": {
+    "verdict": "PASS",
+    "reason": "The answer correctly extracts the mustard seed quantity from the provided recipe chunk."
+  },
+  "c25": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly refused to answer because the calorie count is not present in the provided chunks."
+  },
+  "r01": {
+    "verdict": "PASS",
+    "reason": "The answer correctly identifies the required rice types for appam directly from the provided recipe chunks."
+  },
+  "r02": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though the context chunk mentions storing/fermenting the koozh overnight in a clay pot at room temperature and enjoying it the next day sold cold from mud pots."
+  }
+}

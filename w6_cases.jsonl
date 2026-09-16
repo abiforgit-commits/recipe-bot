@@ -1,0 +1,27 @@
+{"case_id":"c01","mode":"mode1_vague_no_recipe_named","question":"How much salt?"}
+{"case_id":"c02","mode":"mode1_vague_no_recipe_named","question":"Is it done?"}
+{"case_id":"c03","mode":"mode1_vague_no_recipe_named","question":"Can I make it faster?"}
+{"case_id":"c04","mode":"mode1_vague_no_recipe_named","question":"What temperature?"}
+{"case_id":"c05","mode":"mode1_vague_no_recipe_named","question":"How long to ferment?"}
+{"case_id":"c06","mode":"mode2_refuses_despite_chunk","question":"How should I store koozh after cooking?"}
+{"case_id":"c07","mode":"mode2_refuses_despite_chunk","question":"My batter didn't rise, what went wrong?"}
+{"case_id":"c08","mode":"mode2_refuses_despite_chunk","question":"How do I keep the mango pickle from spoiling?"}
+{"case_id":"c09","mode":"mode2_refuses_despite_chunk","question":"My kitchen is cold and the curd will not set, what can I do?"}
+{"case_id":"c10","mode":"mode3_lists_all_rows","question":"What rice do I use for appam?"}
+{"case_id":"c11","mode":"mode3_lists_all_rows","question":"What flour do I need for ragi koozh?"}
+{"case_id":"c12","mode":"mode3_lists_all_rows","question":"What dal goes into dosa batter?"}
+{"case_id":"c13","mode":"mode4_cross_card_comparison","question":"Which recipe has the highest salt percentage?"}
+{"case_id":"c14","mode":"mode4_cross_card_comparison","question":"Which recipe ferments for the longest time?"}
+{"case_id":"c15","mode":"mode4_cross_card_comparison","question":"Which of these recipes uses the most water?"}
+{"case_id":"c16","mode":"mode5_wrong_citation_target","question":"Which oil is used on the dosa tawa?"}
+{"case_id":"c17","mode":"mode5_wrong_citation_target","question":"Is there sesame in the mango pickle?"}
+{"case_id":"c18","mode":"mode5_wrong_citation_target","question":"Does the idli recipe use asafoetida?"}
+{"case_id":"c19","mode":"mode6_requote_not_answer","question":"Should the appam batter rest after adding coconut milk?"}
+{"case_id":"c20","mode":"mode6_requote_not_answer","question":"Do I need to stir the idli batter after it has risen?"}
+{"case_id":"c21","mode":"mode6_requote_not_answer","question":"Can I use the same batter for both idli and dosa?"}
+{"case_id":"c22","mode":"mode0_baseline_correct","question":"How much rock salt goes into the idli batter?"}
+{"case_id":"c23","mode":"mode0_baseline_correct","question":"How long should idli batter ferment?"}
+{"case_id":"c24","mode":"mode0_baseline_correct","question":"How much mustard seed goes in the mango pickle?"}
+{"case_id":"c25","mode":"mode0_baseline_correct","question":"How many calories are in one idli?","expect_refusal":true}
+{"case_id": "r01", "mode": "mode3_lists_all_rows", "question": "What rice do I use for appam?", "regression_from_trace": "f6873d76", "replay_output": "You use raw rice (pachari), soaked, and cooked rice for appam [appam-03::structure::1].", "replay_context_ids": ["appam-03::structure::0", "appam-03::structure::1", "appam-03::structure::2", "idli-batter-01::structure::2", "appam-03::structure::3"]}
+{"case_id": "r02", "mode": "mode2_refuses_despite_chunk", "question": "How should I store koozh after cooking?", "regression_from_trace": "00e338e3", "replay_output": "I cannot find this in the recipe cards.", "replay_context_ids": ["ragi-koozh-05::structure::0", "ragi-koozh-05::structure::3", "ragi-koozh-05::structure::2", "appam-03::structure::2", "ragi-koozh-05::structure::1"]}

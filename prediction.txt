@@ -1,0 +1,35 @@
+WEEK 5 PREDICTION — dated 2026-09-17, written before any fix is applied.
+
+TARGET MODE
+  Mode 1 — "Refuses a one-line question instead of asking which recipe is
+  meant." Baseline frequency: 3 of 20 traces = 15% (seed 20260917 sample;
+  example traces 8c2b5e88 "Can I make it faster?", 4b3ae3f7 "How much salt?",
+  7c7023dc "Is it done?").
+
+THE CHANGE I WILL MAKE
+  One change, in the grounding prompt only (prompt_version v2): add a
+  clarify branch ahead of the refusal rule — when the question names no
+  recipe and the retrieved chunks come from more than one recipe, the app
+  must ask which recipe is meant and list the candidate recipe titles,
+  instead of emitting the refusal sentence. Retrieval, chunking, k and the
+  model stay untouched.
+
+WHAT I EXPECT, IN NUMBERS
+  On a FRESH seeded 20-trace sample drawn after the change:
+  1. Mode 1 drops from 15% (3/20) to under 5% (0 or 1 of 20).
+  2. Correct out-of-corpus refusals do NOT regress: questions whose answers
+     are genuinely absent (biryani, microwaving idlis, white film on pickle)
+     still produce the exact refusal sentence, so the A3_refusal_exact
+     assertion stays at 100% on out-of-corpus cases.
+  3. Invented quantities do not appear: A4_no_invented_grams stays at 100%.
+
+HOW THIS CAN BE FALSIFIED
+  If mode 1 stays at or above 10%, the prediction is wrong and the diagnosis
+  ("the refusal rule fires before any clarify path exists") was wrong.
+  If mode 1 drops but out-of-corpus refusals fall below 100%, the change
+  traded a real safety property for a convenience one and must be reverted.
+
+WHAT I AM NOT PREDICTING
+  Modes 3, 4, 5 and 6 are untouched by a clarify branch. Mode 4 (comparison
+  across cards) in particular cannot be fixed by any prompt or retrieval
+  change; it needs computation over the tables.

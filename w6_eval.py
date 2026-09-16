@@ -20,7 +20,7 @@ from pathlib import Path
 
 from w4_retriever import _DOC_BY_ID, hybrid_top
 from w5_trace import _build_messages
-from ask import LLM, DEFAULT_MODEL
+from ask import call_llm, DEFAULT_MODEL
 from w6_assertions import ASSERTIONS, run_assertions
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -45,7 +45,7 @@ def generate_outputs(cases):
             continue
         top = hybrid_top(case["question"], k=K)
         chunks = [(cid, doc) for cid, doc, _ in top]
-        resp = LLM.chat.completions.create(
+        resp = call_llm(
             model=DEFAULT_MODEL, temperature=0,
             messages=_build_messages(case["question"], chunks))
         rows.append({"case_id": case["case_id"],
@@ -83,7 +83,8 @@ def main():
         checks = run_assertions(row["output"], case, _DOC_BY_ID)
         ok = all(checks.values())
         why = [name for name, passed in checks.items() if not passed]
-        if ok and judge_fn:
+        if judge_fn:  # judge every case, independent of assertions, so the
+            # human-vs-judge agreement sample is not truncated by assertion bugs
             context = "\n\n".join(f"[{cid}]\n{_DOC_BY_ID.get(cid, '')}"
                                   for cid in row["context_ids"])
             verdict, reason = judge_fn(args.judge, case, row["output"], context)
@@ -104,7 +105,7 @@ def main():
         total_n += n
     print(f"{'ALL':<38}{total_p:>6}{total_n:>7}{total_p / total_n:>8.0%}")
     print(f"\nassertions (deterministic): {len(ASSERTIONS)}   judged criteria: "
-          f"{'1 (SAFE_AND_GROUNDED)' if args.judge else '0 (judge not run)'}")
+          f"{'1 (USEFUL_AND_GROUNDED)' if args.judge else '0 (judge not run)'}")
     if failures:
         print("\nfailed cases:")
         for cid, mode, why in failures:

@@ -1,0 +1,110 @@
+{
+  "c01": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though multiple recipe cards clearly contain salt quantities."
+  },
+  "c02": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused, but the shown chunks contain doneness indicators for appam, thayir, and kadumanga."
+  },
+  "c03": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly recognized that the shown recipe cards do not contain a general method for making the dishes faster."
+  },
+  "c04": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though the shown chunks contain multiple specific temperature guidelines (e.g., cooling milk to 40-43°C and fermenting at around 30°C for Thayir)."
+  },
+  "c05": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly and completely extracts the fermentation times for all recipes found in the context chunks."
+  },
+  "c06": {
+    "verdict": "PASS",
+    "reason": "Reasoning: The shown chunks discuss leaving the koozh overnight for fermentation and enjoying it the next day sold cold from mud pots, but they do not contain specific instructions on how it should be stored after cooking, so the refusal is correct."
+  },
+  "c07": {
+    "verdict": "PASS",
+    "reason": "The shown chunks do not contain troubleshooting advice for when batter fails to rise, so a refusal is correct."
+  },
+  "c08": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the provided text to explain how to prevent the pickle from spoiling (keeping water away and using only dry spoons)."
+  },
+  "c09": {
+    "verdict": "PASS",
+    "reason": "The answer accurately provides the exact methods for cold weather curd setting given in the recipe chunks without introducing outside information."
+  },
+  "c10": {
+    "verdict": "FAIL",
+    "reason": "The answer omits the quantities and specific types/roles needed for the rice (the 500g raw pachari base and 100g cooked rice), which is incomplete for a cook to act on correctly."
+  },
+  "c11": {
+    "verdict": "PASS",
+    "reason": "The answer correctly identifies the flour needed for ragi koozh based directly on the provided recipe chunks."
+  },
+  "c12": {
+    "verdict": "PASS",
+    "reason": "The answer correctly identifies both dals from the provided recipe chunks with full support."
+  },
+  "c13": {
+    "verdict": "PASS",
+    "reason": "The shown chunks do not contain salt percentages for Ragi Koozh or Idli Batter, so a \"highest salt percentage\" comparison cannot be made."
+  },
+  "c14": {
+    "verdict": "PASS",
+    "reason": "Every claim is supported by the context chunks, and it correctly identifies the longest fermentation time by comparing all the given recipes."
+  },
+  "c15": {
+    "verdict": "PASS",
+    "reason": "Reasoning: The question asks to compare water amounts across recipes, but only Ragi Koozh and Idli Batter list water quantities, leaving the others without values to compare."
+  },
+  "c16": {
+    "verdict": "PASS",
+    "reason": "The answer correctly identifies gingelly (sesame) oil (or a neutral oil substitute) based directly on the provided text."
+  },
+  "c17": {
+    "verdict": "PASS",
+    "reason": "The answer correctly identifies that the mango pickle contains sesame based on the provided context chunks, citing both the allergen note and the ingredient list."
+  },
+  "c18": {
+    "verdict": "PASS",
+    "reason": "The answer correctly addresses the question using information directly from the provided idli batter chunks regarding asafoetida."
+  },
+  "c19": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the provided context to answer that the batter is cooked immediately after stirring in the remaining coconut milk, without any subsequent resting period."
+  },
+  "c20": {
+    "verdict": "PASS",
+    "reason": "The answer directly and accurately answers the question using explicit instructions from the provided idli batter recipe chunk."
+  },
+  "c21": {
+    "verdict": "PASS",
+    "reason": "The shown chunks do not state whether the same batter can be used for both idli and dosa, so a refusal is correct."
+  },
+  "c22": {
+    "verdict": "PASS",
+    "reason": "The answer correctly states the amount of rock salt needed for the idli batter based entirely on the provided recipe card."
+  },
+  "c23": {
+    "verdict": "PASS",
+    "reason": "The answer directly and accurately provides the fermentation time from the correct recipe chunk."
+  },
+  "c24": {
+    "verdict": "PASS",
+    "reason": "The answer correctly gives the exact amount of mustard seeds from the recipe chunk."
+  },
+  "c25": {
+    "verdict": "PASS",
+    "reason": "The shown chunks do not contain calorie information, so the assistant correctly refused to answer."
+  },
+  "r01": {
+    "verdict": "FAIL",
+    "reason": "The assistant omits the specific amounts and roles of the rices (such as 500g raw rice versus 100g cooked rice), making the answer incomplete for a cook to act on correctly."
+  },
+  "r02": {
+    "verdict": "FAIL",
+    "reason": "The shown chunks state to leave the cooked koozh to ferment overnight in a clay pot, but the assistant incorrectly refused to answer."
+  }
+}

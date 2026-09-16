@@ -31,10 +31,36 @@ if os.getenv("GEMINI_API_KEY"):
         api_key=os.environ["GEMINI_API_KEY"],
         base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
     )
-    DEFAULT_MODEL = "gemini-flash-latest"  # stable alias, survives model rotations
+    DEFAULT_MODEL = "gemini-flash-lite-latest"  # flash-latest hit its free-tier daily quota
 else:
     LLM = OpenAI()
     DEFAULT_MODEL = "gpt-4o-mini"
+
+
+_LAST_CALL = [0.0]
+MIN_INTERVAL = 4.5  # free tier allows ~15 requests/minute
+
+
+def call_llm(**kwargs):
+    """LLM call with free-tier pacing and retry on quota/congestion errors."""
+    import time as _t
+    for attempt in range(1, 8):
+        gap = _t.time() - _LAST_CALL[0]
+        if gap < MIN_INTERVAL:
+            _t.sleep(MIN_INTERVAL - gap)
+        try:
+            _LAST_CALL[0] = _t.time()
+            return LLM.chat.completions.create(**kwargs)
+        except Exception as e:
+            msg = str(e)
+            if not any(t in msg for t in ("429", "503", "RESOURCE_EXHAUSTED", "UNAVAILABLE")):
+                raise
+            m = re.search(r"retryDelay['\":\s]+(\d+)s", msg)
+            wait = int(m.group(1)) + 2 if m else 15 * attempt
+            print(f"   [rate limit] waiting {wait}s (attempt {attempt})", flush=True)
+            _t.sleep(wait)
+    raise RuntimeError("LLM call failed after 7 attempts")
+
 
 REFUSAL = "I cannot find this in the recipe cards."
 

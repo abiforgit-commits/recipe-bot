@@ -18,7 +18,7 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-from ask import LLM, SYSTEM_PROMPT, DEFAULT_MODEL
+from ask import call_llm, SYSTEM_PROMPT, DEFAULT_MODEL
 from w4_retriever import hybrid_top
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -43,7 +43,7 @@ def traced_ask(question):
     """Answer a question and append a complete trace record."""
     top = hybrid_top(question, k=K)
     chunks = [(cid, doc) for cid, doc, _ in top]
-    resp = LLM.chat.completions.create(
+    resp = call_llm(
         model=DEFAULT_MODEL, temperature=TEMPERATURE,
         messages=_build_messages(question, chunks))
     output = resp.choices[0].message.content.strip()
@@ -75,7 +75,7 @@ def replay(trace_id):
     """Re-run one request using ONLY what the trace stored (no fresh retrieval)."""
     trace = next(t for t in load_traces() if t["trace_id"] == trace_id)
     chunks = [(r["chunk_id"], r["text"]) for r in trace["retrieved"]]
-    resp = LLM.chat.completions.create(
+    resp = call_llm(
         model=trace["model"], temperature=trace["temperature"],
         messages=_build_messages(trace["question"], chunks))
     replayed = resp.choices[0].message.content.strip()

@@ -1,0 +1,32 @@
+WEEK 6 PREDICTION — written 2026-09-17, BEFORE judge_v2 exists.
+
+AGREEMENT BEFORE: 22/27 = 81% (judge_v1 vs labels_25.json).
+
+THE PATTERN I SEE IN THE 5 DISAGREEMENTS
+  Two opposite error directions, not one:
+  (a) Over-strict on correct refusals — c03, c13, c21. The judge calls a
+      refusal FAIL whenever the chunks contain anything topically related,
+      even when they cannot actually answer the question asked.
+  (b) Blind to incompleteness — c10, r01. The judge calls an answer PASS
+      because every claim is supported, missing that the omitted amounts
+      are what would make a cook act wrongly.
+
+ONE-SENTENCE PREDICTION
+  Adding exactly two of the judge's own disagreements as few-shot examples —
+  c13 (a correct refusal it wrongly failed) and c10 (an incomplete answer it
+  wrongly passed) — will teach both directions at once and raise agreement
+  from 81% to at least 90% (>= 25/27), with any remaining error staying in
+  direction (a).
+
+HOW THIS CAN BE FALSIFIED
+  - Agreement stays below 90%: the two examples were not enough, or the
+    directions interfere with each other.
+  - Agreement rises but a previously-agreeing case flips: the few-shot
+    examples over-corrected, and the gain is not free.
+  - Remaining errors land in direction (b): my read of which direction is
+    harder to teach was wrong.
+
+WHAT I AM NOT PREDICTING
+  I am not predicting that either of the two example cases themselves will
+  flip — a judge can copy an example's verdict without generalising, so the
+  number that matters is agreement on the other 25.

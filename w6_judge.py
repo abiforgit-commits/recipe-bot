@@ -9,7 +9,7 @@ prompt file to use is a parameter, so v1 and v2 run identically:
 import re
 from pathlib import Path
 
-from ask import LLM, DEFAULT_MODEL
+from ask import call_llm, DEFAULT_MODEL
 
 ROOT = Path(__file__).parent
 VERDICT_RE = re.compile(r"VERDICT:\s*(PASS|FAIL)", re.IGNORECASE)
@@ -22,7 +22,7 @@ def judge_case(prompt_file, case, output, context_text):
             f"CONTEXT CHUNKS SHOWN TO THE ASSISTANT:\n{context_text}\n\n"
             f"ASSISTANT'S ANSWER:\n{output}")
     for _ in range(2):
-        resp = LLM.chat.completions.create(
+        resp = call_llm(
             model=DEFAULT_MODEL, temperature=0,
             messages=[{"role": "system", "content": system},
                       {"role": "user", "content": user}])
