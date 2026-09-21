@@ -1,0 +1,250 @@
+{
+  "summary": {
+    "tag": "baseline",
+    "tool_choice_accuracy": 0.883,
+    "argument_validity": 1.0,
+    "step_efficiency": 1.333,
+    "cost_p50": 0.000421,
+    "cost_max": 0.000579,
+    "latency_p50": 17.89,
+    "tokens_total": 33169,
+    "outcome_pass_rate": 1.0,
+    "trajectory_pass_rate": 0.6,
+    "gap": 0.4,
+    "mode_counts": {
+      "wrong_tool": 4,
+      "redundant_steps": 2
+    }
+  },
+  "rows": [
+    {
+      "id": 1,
+      "class": "simple-scale",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.00029,
+      "latency_s": 9.93,
+      "tokens": 2336,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 2,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 2,
+      "class": "simple-scale",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000302,
+      "latency_s": 13.49,
+      "tokens": 2388,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 2,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 3,
+      "class": "simple-scale",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.00031,
+      "latency_s": 13.66,
+      "tokens": 2380,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 2,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 4,
+      "class": "simple-scale",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000293,
+      "latency_s": 13.49,
+      "tokens": 2302,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 2,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 5,
+      "class": "single-swap",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000422,
+      "latency_s": 18.01,
+      "tokens": 3403,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 0.6666666666666666,
+      "argument_validity": 1.0,
+      "steps_taken": 3,
+      "step_efficiency": 1.5,
+      "missing_tools": [],
+      "modes": [
+        "wrong_tool"
+      ],
+      "trajectory_pass": false
+    },
+    {
+      "id": 6,
+      "class": "single-swap",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000464,
+      "latency_s": 18.26,
+      "tokens": 3458,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 0.6666666666666666,
+      "argument_validity": 1.0,
+      "steps_taken": 3,
+      "step_efficiency": 1.5,
+      "missing_tools": [],
+      "modes": [
+        "wrong_tool"
+      ],
+      "trajectory_pass": false
+    },
+    {
+      "id": 7,
+      "class": "allergen-cascade",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000421,
+      "latency_s": 17.76,
+      "tokens": 3389,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 3,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 8,
+      "class": "allergen-cascade",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000544,
+      "latency_s": 22.54,
+      "tokens": 4521,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "substitute_ingredient",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 0.75,
+      "argument_validity": 1.0,
+      "steps_taken": 4,
+      "step_efficiency": 2.0,
+      "missing_tools": [],
+      "modes": [
+        "wrong_tool",
+        "redundant_steps"
+      ],
+      "trajectory_pass": false
+    },
+    {
+      "id": 9,
+      "class": "allergen-cascade",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000579,
+      "latency_s": 22.71,
+      "tokens": 4502,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "substitute_ingredient",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 0.75,
+      "argument_validity": 1.0,
+      "steps_taken": 4,
+      "step_efficiency": 2.0,
+      "missing_tools": [],
+      "modes": [
+        "wrong_tool",
+        "redundant_steps"
+      ],
+      "trajectory_pass": false
+    },
+    {
+      "id": 10,
+      "class": "allergen-cascade",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000556,
+      "latency_s": 22.45,
+      "tokens": 4490,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "substitute_ingredient",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 4,
+      "step_efficiency": 1.3333333333333333,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    }
+  ]
+}

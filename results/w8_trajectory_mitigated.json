@@ -1,0 +1,239 @@
+{
+  "summary": {
+    "tag": "mitigated",
+    "tool_choice_accuracy": 1.0,
+    "argument_validity": 1.0,
+    "step_efficiency": 1.03,
+    "cost_p50": 0.000373,
+    "cost_max": 0.000579,
+    "latency_p50": 13.73,
+    "tokens_total": 30830,
+    "outcome_pass_rate": 1.0,
+    "trajectory_pass_rate": 0.9,
+    "gap": 0.1,
+    "mode_counts": {
+      "no_op_call": 1
+    }
+  },
+  "rows": [
+    {
+      "id": 1,
+      "class": "simple-scale",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000331,
+      "latency_s": 11.46,
+      "tokens": 2538,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 2,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 2,
+      "class": "simple-scale",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000346,
+      "latency_s": 13.68,
+      "tokens": 2600,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 2,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 3,
+      "class": "already-compliant",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000309,
+      "latency_s": 13.17,
+      "tokens": 2442,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 2,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 4,
+      "class": "already-compliant",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000326,
+      "latency_s": 13.73,
+      "tokens": 2439,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 2,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 5,
+      "class": "single-swap",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000437,
+      "latency_s": 17.9,
+      "tokens": 3577,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 3,
+      "step_efficiency": 1.5,
+      "missing_tools": [],
+      "modes": [
+        "no_op_call"
+      ],
+      "trajectory_pass": false
+    },
+    {
+      "id": 6,
+      "class": "single-swap",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000373,
+      "latency_s": 13.73,
+      "tokens": 2575,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 2,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 7,
+      "class": "allergen-cascade",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000373,
+      "latency_s": 13.28,
+      "tokens": 2810,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "substitute_ingredient",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 4,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 8,
+      "class": "allergen-cascade",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000443,
+      "latency_s": 18.29,
+      "tokens": 3592,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "substitute_ingredient"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 3,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 9,
+      "class": "allergen-cascade",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000472,
+      "latency_s": 18.16,
+      "tokens": 3542,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "substitute_ingredient"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 3,
+      "step_efficiency": 1.0,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "id": 10,
+      "class": "allergen-cascade",
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "cost_usd": 0.000579,
+      "latency_s": 22.21,
+      "tokens": 4715,
+      "stop_reason": "completed",
+      "sequence": [
+        "search_recipes",
+        "substitute_ingredient",
+        "substitute_ingredient",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "steps_taken": 4,
+      "step_efficiency": 0.8,
+      "missing_tools": [],
+      "modes": [],
+      "trajectory_pass": true
+    }
+  ]
+}

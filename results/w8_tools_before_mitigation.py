@@ -134,7 +134,7 @@ TOOL_SCHEMAS = [
             "required": ["query"]}}},
     {"type": "function", "function": {
         "name": "scale_recipe",
-        "description": "Multiply every ingredient quantity of one known recipe_id by a numeric factor. Pure arithmetic on amounts. Does not choose recipes and knows nothing about allergens or substitutes. Call this ONLY when the amounts actually change: if the request keeps the recipe at its written size, the factor is 1, multiplying by 1 changes nothing, and you must skip this tool entirely rather than calling it.",
+        "description": "Multiply every ingredient quantity of one known recipe_id by a numeric factor. Pure arithmetic on amounts. Does not choose recipes and knows nothing about allergens or substitutes.",
         "parameters": {"type": "object", "properties": {
             "recipe_id": {"type": "string", "description": "exact recipe_id from search_recipes"},
             "factor": {"type": "number", "description": "multiplier, e.g. 0.5 to halve, 2 to double"}},
