@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "recipes": {
+      "command": "python",
+      "args": ["w9_recipe_server.py"]
+    }
+  }
+}
