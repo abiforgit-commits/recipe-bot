@@ -1,0 +1,254 @@
+{
+  "what": "Raw MCP JSON-RPC exchange with the ingredient database server over stdio",
+  "server": "ingredient_db_server/server.py",
+  "captured_with": "w9_wire_capture.py - hand-written JSON lines on stdin/stdout, no SDK client, no model",
+  "raw_file": "results/w9_wire_raw.jsonl",
+  "sequence": "initialize -> notifications/initialized -> tools/list -> tools/call (+ a failing tools/call)",
+  "where_the_model_call_happens": "The model is called only by the host (w9_agent.py -> call_llm), BETWEEN tools/list and tools/call, where it reads the tool schemas and chooses the call; nothing in this exchange touches a model, and the server never does.",
+  "exchange": [
+    {
+      "step": 0,
+      "direction": "client -> server",
+      "raw_line": "{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"initialize\", \"params\": {\"protocolVersion\": \"2026-07-28\", \"capabilities\": {}, \"clientInfo\": {\"name\": \"w9-wire-capture\", \"version\": \"1.0\"}}}",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2026-07-28",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "w9-wire-capture",
+            "version": "1.0"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "Always the literal '2.0': every MCP message is a JSON-RPC 2.0 message.",
+        "id": "1 = a REQUEST that demands a reply; the reply must echo this same id.",
+        "method": "'initialize' is always first: the handshake that fixes version and capabilities.",
+        "params": "What the client offers the server.",
+        "params.protocolVersion": "The newest MCP revision this client speaks (2026-07-28).",
+        "params.capabilities": "Empty: this bare client offers no sampling/roots/elicitation back to the server.",
+        "params.clientInfo": "Self-reported name/version of the client - informational, not authentication."
+      }
+    },
+    {
+      "step": 1,
+      "direction": "server -> client",
+      "raw_line": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"experimental\":{},\"prompts\":{\"listChanged\":false},\"resources\":{\"listChanged\":false,\"subscribe\":false},\"tools\":{\"listChanged\":false}},\"protocolVersion\":\"2025-11-25\",\"serverInfo\":{\"name\":\"ingredient-db\",\"version\":\"\"}}}",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "capabilities": {
+            "experimental": {},
+            "prompts": {
+              "listChanged": false
+            },
+            "resources": {
+              "listChanged": false,
+              "subscribe": false
+            },
+            "tools": {
+              "listChanged": false
+            }
+          },
+          "protocolVersion": "2025-11-25",
+          "serverInfo": {
+            "name": "ingredient-db",
+            "version": ""
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "'2.0' again.",
+        "id": "1 - matches the request, which is how the client pairs replies with requests.",
+        "result": "Success (a failure would carry an 'error' member instead of 'result').",
+        "result.capabilities": "What this server offers: tools, resources and prompts. listChanged:false means it will never push a 'my tool list changed' notification.",
+        "result.protocolVersion": "2025-11-25, NOT the 2026-07-28 the client asked for: the server negotiated down to the newest revision its handshake supports. The client must accept this version or disconnect.",
+        "result.serverInfo": "Self-reported identity 'ingredient-db', version empty. Unverified - it tells you what the server CLAIMS to be, which is why the risk note matters."
+      }
+    },
+    {
+      "step": 2,
+      "direction": "client -> server",
+      "raw_line": "{\"jsonrpc\": \"2.0\", \"method\": \"notifications/initialized\"}",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "annotations": {
+        "jsonrpc": "'2.0'.",
+        "method": "'notifications/initialized': the client confirms the handshake is done.",
+        "(no id)": "No 'id' field = a NOTIFICATION: fire-and-forget, the server sends no reply. That is why no server line follows this one."
+      }
+    },
+    {
+      "step": 3,
+      "direction": "client -> server",
+      "raw_line": "{\"jsonrpc\": \"2.0\", \"id\": 2, \"method\": \"tools/list\", \"params\": {}}",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "annotations": {
+        "jsonrpc": "'2.0'.",
+        "id": "2 - a new request, so a new id.",
+        "method": "'tools/list': DISCOVERY. The agent learns its tools from this reply rather than from anything hard-coded - the reason server two needed no agent change.",
+        "params": "Empty object; a cursor would go here to page through a long tool list."
+      }
+    },
+    {
+      "step": 4,
+      "direction": "server -> client",
+      "raw_line": "{\"jsonrpc\":\"2.0\",\"id\":2,\"result\":{\"tools\":[{\"description\":\"Look up the allergen flags for ONE ingredient by name, e.g. \\\"urad dal\\\" or\\n    \\\"Gingelly (sesame) oil\\\". Returns every allergen class (dairy, sesame, nuts,\\n    coconut, soy, gluten, mustard) as true/false, plus the list it contains.\\n    Call once per ingredient. If the name is not found, the error lists the\\n    closest entries - retry with one of them; never assume an unknown\\n    ingredient is allergen-free. Does not return nutrition.\",\"inputSchema\":{\"properties\":{\"ingredient\":{\"title\":\"Ingredient\",\"type\":\"string\"}},\"required\":[\"ingredient\"],\"type\":\"object\",\"title\":\"lookup_allergensArguments\"},\"name\":\"lookup_allergens\"},{\"description\":\"Look up approximate nutrition per 100 g for ONE ingredient by name:\\n    kcal, protein_g, fat_g, carbs_g. Values are reference approximations, not\\n    lab results. If the ingredient is known but has no nutrition recorded, the\\n    error says so - do not estimate a figure. Does not return allergens.\",\"inputSchema\":{\"properties\":{\"ingredient\":{\"title\":\"Ingredient\",\"type\":\"string\"}},\"required\":[\"ingredient\"],\"type\":\"object\",\"title\":\"lookup_nutritionArguments\"},\"name\":\"lookup_nutrition\"}]}}",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "tools": [
+            {
+              "description": "Look up the allergen flags for ONE ingredient by name, e.g. \"urad dal\" or\n    \"Gingelly (sesame) oil\". Returns every allergen class (dairy, sesame, nuts,\n    coconut, soy, gluten, mustard) as true/false, plus the list it contains.\n    Call once per ingredient. If the name is not found, the error lists the\n    closest entries - retry with one of them; never assume an unknown\n    ingredient is allergen-free. Does not return nutrition.",
+              "inputSchema": {
+                "properties": {
+                  "ingredient": {
+                    "title": "Ingredient",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ingredient"
+                ],
+                "type": "object",
+                "title": "lookup_allergensArguments"
+              },
+              "name": "lookup_allergens"
+            },
+            {
+              "description": "Look up approximate nutrition per 100 g for ONE ingredient by name:\n    kcal, protein_g, fat_g, carbs_g. Values are reference approximations, not\n    lab results. If the ingredient is known but has no nutrition recorded, the\n    error says so - do not estimate a figure. Does not return allergens.",
+              "inputSchema": {
+                "properties": {
+                  "ingredient": {
+                    "title": "Ingredient",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ingredient"
+                ],
+                "type": "object",
+                "title": "lookup_nutritionArguments"
+              },
+              "name": "lookup_nutrition"
+            }
+          ]
+        }
+      },
+      "annotations": {
+        "jsonrpc": "'2.0'.",
+        "id": "2 - pairs with the tools/list request.",
+        "result": "Success.",
+        "result.tools": "Two tools. For each: 'name' (what tools/call must use), 'description' (the docstring VERBATIM - this is the text the model reads to decide when to call it, i.e. the docstring is a prompt), and 'inputSchema' (JSON Schema for the arguments). The 'title' keys inside inputSchema are why w9_agent.clean_schema strips them before handing schemas to Gemini."
+      }
+    },
+    {
+      "step": 5,
+      "direction": "client -> server",
+      "raw_line": "{\"jsonrpc\": \"2.0\", \"id\": 3, \"method\": \"tools/call\", \"params\": {\"name\": \"lookup_allergens\", \"arguments\": {\"ingredient\": \"Gingelly (sesame) oil\"}}}",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "lookup_allergens",
+          "arguments": {
+            "ingredient": "Gingelly (sesame) oil"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "'2.0'.",
+        "id": "3.",
+        "method": "'tools/call': EXECUTE one tool. In the real agent the host builds this from the model's chosen function call; here it was typed by hand, proving the protocol itself needs no model.",
+        "params": "What to run.",
+        "params.name": "'lookup_allergens' - the bare server-side name. The agent's model saw it as 'ingredient_db__lookup_allergens'; the host strips the prefix before this call.",
+        "params.arguments": "Must satisfy the inputSchema from tools/list."
+      }
+    },
+    {
+      "step": 6,
+      "direction": "server -> client",
+      "raw_line": "{\"jsonrpc\":\"2.0\",\"id\":3,\"result\":{\"content\":[{\"text\":\"{\\n  \\\"ingredient\\\": \\\"gingelly (sesame) oil\\\",\\n  \\\"allergens\\\": {\\n    \\\"dairy\\\": false,\\n    \\\"sesame\\\": true,\\n    \\\"nuts\\\": false,\\n    \\\"coconut\\\": false,\\n    \\\"soy\\\": false,\\n    \\\"gluten\\\": false,\\n    \\\"mustard\\\": false\\n  },\\n  \\\"contains\\\": [\\n    \\\"sesame\\\"\\n  ]\\n}\",\"type\":\"text\"}],\"isError\":false}}",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": {
+          "content": [
+            {
+              "text": "{\n  \"ingredient\": \"gingelly (sesame) oil\",\n  \"allergens\": {\n    \"dairy\": false,\n    \"sesame\": true,\n    \"nuts\": false,\n    \"coconut\": false,\n    \"soy\": false,\n    \"gluten\": false,\n    \"mustard\": false\n  },\n  \"contains\": [\n    \"sesame\"\n  ]\n}",
+              "type": "text"
+            }
+          ],
+          "isError": false
+        }
+      },
+      "annotations": {
+        "jsonrpc": "'2.0'.",
+        "id": "3 - pairs with the call.",
+        "result": "The tool ran.",
+        "result.content": "A list of content blocks; here one text block holding the allergen flags as JSON text. This text is what the host feeds back to the model.",
+        "result.isError": "false: the lookup succeeded - sesame is true for gingelly oil."
+      }
+    },
+    {
+      "step": 7,
+      "direction": "client -> server",
+      "raw_line": "{\"jsonrpc\": \"2.0\", \"id\": 4, \"method\": \"tools/call\", \"params\": {\"name\": \"lookup_allergens\", \"arguments\": {\"ingredient\": \"creme fraiche lite\"}}}",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "method": "tools/call",
+        "params": {
+          "name": "lookup_allergens",
+          "arguments": {
+            "ingredient": "creme fraiche lite"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "'2.0'.",
+        "id": "4.",
+        "method": "'tools/call' again, deliberately with an ingredient the database lacks.",
+        "params": "name 'lookup_allergens', arguments {ingredient: 'creme fraiche lite'}."
+      }
+    },
+    {
+      "step": 8,
+      "direction": "server -> client",
+      "raw_line": "{\"jsonrpc\":\"2.0\",\"id\":4,\"result\":{\"content\":[{\"text\":\"Error executing tool lookup_allergens: no ingredient matched 'creme fraiche lite' and nothing is close. The database holds 37 ingredients; check the spelling rather than assuming the ingredient is allergen-free.\",\"type\":\"text\"}],\"isError\":true}}",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "result": {
+          "content": [
+            {
+              "text": "Error executing tool lookup_allergens: no ingredient matched 'creme fraiche lite' and nothing is close. The database holds 37 ingredients; check the spelling rather than assuming the ingredient is allergen-free.",
+              "type": "text"
+            }
+          ],
+          "isError": true
+        }
+      },
+      "annotations": {
+        "jsonrpc": "'2.0'.",
+        "id": "4.",
+        "result": "Note: still a JSON-RPC RESULT, not a JSON-RPC 'error'. A failed TOOL is not a failed PROTOCOL - the transport worked perfectly; only the lookup missed.",
+        "result.content": "The failure is explained in plain words the model can act on (check the spelling; do not assume allergen-free). The SDK prefixed 'Error executing tool lookup_allergens:' to the server's own message.",
+        "result.isError": "true: tells the host this is an error message, not data - so a spelling miss is distinguishable from a dead server (which would be a JSON-RPC error or a broken pipe, never an isError result)."
+      }
+    }
+  ]
+}

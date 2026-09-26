@@ -1,0 +1,24 @@
+# agent_diff.txt — proof the agent module did not change when server two was added
+#
+# commit A = f3c0f6bf8a8e9fef41e00eede83ac7a6fa4cddce   (server one only)
+# commit B = 67f129db75b63b119f7b142e4c3727c7268370e0   (server one + ingredient_db)
+#
+# NOTE: the commit MESSAGES of A and B are swapped by mistake (both already pushed,
+# so not rewritten). Judge by CONTENTS: A adds the agent with a one-server config;
+# B adds ingredient_db_server/ and the second config entry. Order is correct.
+
+$ git diff A B -- w9_agent.py
+(no output)
+
+$ git diff A B -- w9_agent.py | wc -l
+0
+
+$ sha256 of w9_agent.py at each commit
+A: e6c0b1a0104e83ac98f675fcd5f39a4f8bfc912c0dea92c38fb5e468c2d685cb
+B: e6c0b1a0104e83ac98f675fcd5f39a4f8bfc912c0dea92c38fb5e468c2d685cb
+
+$ git diff --stat A B               # everything that DID change
+ ingredient_db_server/ingredients.json | 767 ++++++++++++++++++++++++++++++++++
+ ingredient_db_server/server.py        |  89 ++++
+ mcp_config.json                       |   4 +
+ 3 files changed, 860 insertions(+)

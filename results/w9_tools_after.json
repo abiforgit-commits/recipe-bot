@@ -1,0 +1,162 @@
+{
+  "config": "mcp_config.json",
+  "servers": {
+    "recipes": {
+      "tools_list_raw": {
+        "ttlMs": 0,
+        "cacheScope": "private",
+        "tools": [
+          {
+            "name": "search_recipes",
+            "description": "Search recipes.",
+            "inputSchema": {
+              "properties": {
+                "dish": {
+                  "title": "Dish",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "dish"
+              ],
+              "type": "object",
+              "title": "search_recipesArguments"
+            }
+          },
+          {
+            "name": "get_recipe",
+            "description": "Return the full card for one recipe_id: title, the ingredient table exactly\n    as written (name and amount), and the method. Use this when you need to know\n    what is IN a recipe or how to make it. Does not scale amounts and does not\n    swap allergens.",
+            "inputSchema": {
+              "properties": {
+                "recipe_id": {
+                  "title": "Recipe Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "recipe_id"
+              ],
+              "type": "object",
+              "title": "get_recipeArguments"
+            }
+          },
+          {
+            "name": "scale_recipe",
+            "description": "Multiply every ingredient quantity of one known recipe_id by a numeric\n    factor. Pure arithmetic on amounts. Does not choose recipes and knows nothing\n    about allergens or substitutes. Call this ONLY when the amounts actually\n    change: at factor 1 nothing changes, so skip the tool entirely.",
+            "inputSchema": {
+              "properties": {
+                "recipe_id": {
+                  "title": "Recipe Id",
+                  "type": "string"
+                },
+                "factor": {
+                  "title": "Factor",
+                  "type": "number"
+                }
+              },
+              "required": [
+                "recipe_id",
+                "factor"
+              ],
+              "type": "object",
+              "title": "scale_recipeArguments"
+            }
+          },
+          {
+            "name": "substitute_ingredient",
+            "description": "List replacement options for the ingredients of one recipe_id that carry\n    the given allergen class. Each option states the allergen it itself carries,\n    so a follow-up swap can be made if the first choice is also banned. Does not\n    scale quantities and does not search for recipes.",
+            "inputSchema": {
+              "properties": {
+                "recipe_id": {
+                  "title": "Recipe Id",
+                  "type": "string"
+                },
+                "allergen": {
+                  "enum": [
+                    "dairy",
+                    "sesame",
+                    "nuts",
+                    "coconut",
+                    "soy",
+                    "gluten",
+                    "mustard"
+                  ],
+                  "title": "Allergen",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "recipe_id",
+                "allergen"
+              ],
+              "type": "object",
+              "title": "substitute_ingredientArguments"
+            }
+          }
+        ],
+        "resultType": "complete"
+      },
+      "resources_list_raw": []
+    },
+    "ingredient_db": {
+      "tools_list_raw": {
+        "ttlMs": 0,
+        "cacheScope": "private",
+        "tools": [
+          {
+            "name": "lookup_allergens",
+            "description": "Look up the allergen flags for ONE ingredient by name, e.g. \"urad dal\" or\n    \"Gingelly (sesame) oil\". Returns every allergen class (dairy, sesame, nuts,\n    coconut, soy, gluten, mustard) as true/false, plus the list it contains.\n    Call once per ingredient. If the name is not found, the error lists the\n    closest entries - retry with one of them; never assume an unknown\n    ingredient is allergen-free. Does not return nutrition.",
+            "inputSchema": {
+              "properties": {
+                "ingredient": {
+                  "title": "Ingredient",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ingredient"
+              ],
+              "type": "object",
+              "title": "lookup_allergensArguments"
+            }
+          },
+          {
+            "name": "lookup_nutrition",
+            "description": "Look up approximate nutrition per 100 g for ONE ingredient by name:\n    kcal, protein_g, fat_g, carbs_g. Values are reference approximations, not\n    lab results. If the ingredient is known but has no nutrition recorded, the\n    error says so - do not estimate a figure. Does not return allergens.",
+            "inputSchema": {
+              "properties": {
+                "ingredient": {
+                  "title": "Ingredient",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ingredient"
+              ],
+              "type": "object",
+              "title": "lookup_nutritionArguments"
+            }
+          }
+        ],
+        "resultType": "complete"
+      },
+      "resources_list_raw": [
+        {
+          "name": "allergen_matrix",
+          "uri": "allergens://matrix",
+          "description": "The standing allergen matrix: every ingredient against every allergen\n    class. Context for the host to attach, not a tool for the model to fetch\n    on every turn.",
+          "mimeType": "text/plain"
+        }
+      ]
+    }
+  },
+  "total_tools": 6,
+  "tool_names": [
+    "recipes__search_recipes",
+    "recipes__get_recipe",
+    "recipes__scale_recipe",
+    "recipes__substitute_ingredient",
+    "ingredient_db__lookup_allergens",
+    "ingredient_db__lookup_nutrition"
+  ]
+}

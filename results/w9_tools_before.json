@@ -1,0 +1,109 @@
+{
+  "config": "mcp_config.json",
+  "servers": {
+    "recipes": {
+      "tools_list_raw": {
+        "ttlMs": 0,
+        "cacheScope": "private",
+        "tools": [
+          {
+            "name": "search_recipes",
+            "description": "Search recipes.",
+            "inputSchema": {
+              "properties": {
+                "dish": {
+                  "title": "Dish",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "dish"
+              ],
+              "type": "object",
+              "title": "search_recipesArguments"
+            }
+          },
+          {
+            "name": "get_recipe",
+            "description": "Return the full card for one recipe_id: title, the ingredient table exactly\n    as written (name and amount), and the method. Use this when you need to know\n    what is IN a recipe or how to make it. Does not scale amounts and does not\n    swap allergens.",
+            "inputSchema": {
+              "properties": {
+                "recipe_id": {
+                  "title": "Recipe Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "recipe_id"
+              ],
+              "type": "object",
+              "title": "get_recipeArguments"
+            }
+          },
+          {
+            "name": "scale_recipe",
+            "description": "Multiply every ingredient quantity of one known recipe_id by a numeric\n    factor. Pure arithmetic on amounts. Does not choose recipes and knows nothing\n    about allergens or substitutes. Call this ONLY when the amounts actually\n    change: at factor 1 nothing changes, so skip the tool entirely.",
+            "inputSchema": {
+              "properties": {
+                "recipe_id": {
+                  "title": "Recipe Id",
+                  "type": "string"
+                },
+                "factor": {
+                  "title": "Factor",
+                  "type": "number"
+                }
+              },
+              "required": [
+                "recipe_id",
+                "factor"
+              ],
+              "type": "object",
+              "title": "scale_recipeArguments"
+            }
+          },
+          {
+            "name": "substitute_ingredient",
+            "description": "List replacement options for the ingredients of one recipe_id that carry\n    the given allergen class. Each option states the allergen it itself carries,\n    so a follow-up swap can be made if the first choice is also banned. Does not\n    scale quantities and does not search for recipes.",
+            "inputSchema": {
+              "properties": {
+                "recipe_id": {
+                  "title": "Recipe Id",
+                  "type": "string"
+                },
+                "allergen": {
+                  "enum": [
+                    "dairy",
+                    "sesame",
+                    "nuts",
+                    "coconut",
+                    "soy",
+                    "gluten",
+                    "mustard"
+                  ],
+                  "title": "Allergen",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "recipe_id",
+                "allergen"
+              ],
+              "type": "object",
+              "title": "substitute_ingredientArguments"
+            }
+          }
+        ],
+        "resultType": "complete"
+      },
+      "resources_list_raw": []
+    }
+  },
+  "total_tools": 4,
+  "tool_names": [
+    "recipes__search_recipes",
+    "recipes__get_recipe",
+    "recipes__scale_recipe",
+    "recipes__substitute_ingredient"
+  ]
+}
