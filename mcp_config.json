@@ -3,6 +3,10 @@
     "recipes": {
       "command": "python",
       "args": ["w9_recipe_server.py"]
+    },
+    "ingredient_db": {
+      "command": "python",
+      "args": ["ingredient_db_server/server.py"]
     }
   }
 }

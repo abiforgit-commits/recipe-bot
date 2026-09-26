@@ -1,0 +1,767 @@
+{
+  "meta": {
+    "owner": "content team (ingredient database)",
+    "allergen_classes": [
+      "dairy",
+      "sesame",
+      "nuts",
+      "coconut",
+      "soy",
+      "gluten",
+      "mustard"
+    ],
+    "nutrition_basis": "approximate per-100g reference values compiled for this project; not lab-verified; null = not recorded",
+    "notes": {
+      "asafoetida (hing)": "compounded hing is usually bound with wheat flour",
+      "oat milk": "flagged gluten for cross-contact risk",
+      "groundnut oil": "peanut; flagged under nuts to match the recipe app's allergen classes"
+    }
+  },
+  "ingredients": [
+    {
+      "name": "idli rice (parboiled)",
+      "aliases": [
+        "idli rice",
+        "parboiled rice"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 374,
+        "protein_g": 7.5,
+        "fat_g": 1.0,
+        "carbs_g": 81.0
+      }
+    },
+    {
+      "name": "whole white urad dal",
+      "aliases": [
+        "urad dal",
+        "urad",
+        "black gram dal"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 341,
+        "protein_g": 25.0,
+        "fat_g": 1.6,
+        "carbs_g": 59.0
+      }
+    },
+    {
+      "name": "fenugreek seeds",
+      "aliases": [
+        "fenugreek",
+        "methi seeds"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 323,
+        "protein_g": 23.0,
+        "fat_g": 6.4,
+        "carbs_g": 58.0
+      }
+    },
+    {
+      "name": "rock salt",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 0,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 0.0
+      }
+    },
+    {
+      "name": "water for grinding",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 0,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 0.0
+      }
+    },
+    {
+      "name": "dosa rice (raw, short-grain)",
+      "aliases": [
+        "dosa rice"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 365,
+        "protein_g": 7.1,
+        "fat_g": 0.7,
+        "carbs_g": 80.0
+      }
+    },
+    {
+      "name": "chana dal",
+      "aliases": [
+        "bengal gram dal",
+        "split chickpeas"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 364,
+        "protein_g": 19.3,
+        "fat_g": 6.0,
+        "carbs_g": 61.0
+      }
+    },
+    {
+      "name": "thick poha (flattened rice)",
+      "aliases": [
+        "poha",
+        "flattened rice"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 346,
+        "protein_g": 6.6,
+        "fat_g": 1.2,
+        "carbs_g": 77.0
+      }
+    },
+    {
+      "name": "fine sea salt",
+      "aliases": [
+        "sea salt"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 0,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 0.0
+      }
+    },
+    {
+      "name": "raw rice (pachari), soaked",
+      "aliases": [
+        "raw rice",
+        "pachari"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 365,
+        "protein_g": 7.1,
+        "fat_g": 0.7,
+        "carbs_g": 80.0
+      }
+    },
+    {
+      "name": "cooked rice",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 130,
+        "protein_g": 2.7,
+        "fat_g": 0.3,
+        "carbs_g": 28.0
+      }
+    },
+    {
+      "name": "fresh thick coconut milk",
+      "aliases": [
+        "coconut milk"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": true,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 230,
+        "protein_g": 2.3,
+        "fat_g": 24.0,
+        "carbs_g": 5.5
+      }
+    },
+    {
+      "name": "fresh toddy (or 1g instant yeast + 10g sugar in warm water)",
+      "aliases": [
+        "toddy",
+        "palm toddy"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": null
+    },
+    {
+      "name": "sugar",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 387,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 100.0
+      }
+    },
+    {
+      "name": "whole milk (full-fat)",
+      "aliases": [
+        "whole milk",
+        "milk"
+      ],
+      "allergens": {
+        "dairy": true,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 61,
+        "protein_g": 3.2,
+        "fat_g": 3.3,
+        "carbs_g": 4.8
+      }
+    },
+    {
+      "name": "live curd from the previous batch",
+      "aliases": [
+        "curd",
+        "yogurt",
+        "yoghurt",
+        "curd starter"
+      ],
+      "allergens": {
+        "dairy": true,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 61,
+        "protein_g": 3.5,
+        "fat_g": 3.3,
+        "carbs_g": 4.7
+      }
+    },
+    {
+      "name": "ragi (finger millet) flour",
+      "aliases": [
+        "ragi flour",
+        "finger millet flour",
+        "ragi"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 328,
+        "protein_g": 7.3,
+        "fat_g": 1.3,
+        "carbs_g": 72.0
+      }
+    },
+    {
+      "name": "broken rice (noi arisi)",
+      "aliases": [
+        "broken rice",
+        "noi arisi"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 365,
+        "protein_g": 7.1,
+        "fat_g": 0.7,
+        "carbs_g": 80.0
+      }
+    },
+    {
+      "name": "water",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 0,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 0.0
+      }
+    },
+    {
+      "name": "tender baby mangoes (kannimanga), whole",
+      "aliases": [
+        "kannimanga",
+        "baby mangoes",
+        "tender mango"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 60,
+        "protein_g": 0.8,
+        "fat_g": 0.4,
+        "carbs_g": 15.0
+      }
+    },
+    {
+      "name": "crystal sea salt",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 0,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 0.0
+      }
+    },
+    {
+      "name": "kashmiri chilli powder",
+      "aliases": [
+        "chilli powder",
+        "chili powder",
+        "kashmiri chilli"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 282,
+        "protein_g": 13.5,
+        "fat_g": 14.3,
+        "carbs_g": 49.7
+      }
+    },
+    {
+      "name": "gingelly (sesame) oil",
+      "aliases": [
+        "gingelly oil",
+        "sesame oil",
+        "til oil"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": true,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 884,
+        "protein_g": 0.0,
+        "fat_g": 100.0,
+        "carbs_g": 0.0
+      }
+    },
+    {
+      "name": "mustard seeds",
+      "aliases": [
+        "mustard",
+        "rai"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": true
+      },
+      "nutrition_per_100g": {
+        "kcal": 508,
+        "protein_g": 26.1,
+        "fat_g": 36.2,
+        "carbs_g": 28.1
+      }
+    },
+    {
+      "name": "fenugreek powder, roasted",
+      "aliases": [
+        "fenugreek powder",
+        "methi powder"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 323,
+        "protein_g": 23.0,
+        "fat_g": 6.4,
+        "carbs_g": 58.0
+      }
+    },
+    {
+      "name": "asafoetida (hing)",
+      "aliases": [
+        "asafoetida",
+        "hing"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": true,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 297,
+        "protein_g": 4.0,
+        "fat_g": 1.1,
+        "carbs_g": 67.8
+      }
+    },
+    {
+      "name": "cashew milk",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": true,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 25,
+        "protein_g": 0.5,
+        "fat_g": 2.0,
+        "carbs_g": 1.0
+      }
+    },
+    {
+      "name": "oat milk",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": true,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 46,
+        "protein_g": 1.0,
+        "fat_g": 1.5,
+        "carbs_g": 7.0
+      }
+    },
+    {
+      "name": "soy milk",
+      "aliases": [
+        "soya milk"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": true,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 54,
+        "protein_g": 3.3,
+        "fat_g": 1.8,
+        "carbs_g": 6.3
+      }
+    },
+    {
+      "name": "cashew curd starter",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": true,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": null
+    },
+    {
+      "name": "coconut yoghurt starter",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": true,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": null
+    },
+    {
+      "name": "groundnut oil",
+      "aliases": [
+        "peanut oil"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": true,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 884,
+        "protein_g": 0.0,
+        "fat_g": 100.0,
+        "carbs_g": 0.0
+      }
+    },
+    {
+      "name": "sunflower oil",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 884,
+        "protein_g": 0.0,
+        "fat_g": 100.0,
+        "carbs_g": 0.0
+      }
+    },
+    {
+      "name": "almond milk",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": true,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": {
+        "kcal": 15,
+        "protein_g": 0.6,
+        "fat_g": 1.1,
+        "carbs_g": 0.6
+      }
+    },
+    {
+      "name": "sunflower-seed milk",
+      "aliases": [],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": null
+    },
+    {
+      "name": "nigella seeds",
+      "aliases": [
+        "kalonji"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": null
+    },
+    {
+      "name": "gluten-free asafoetida",
+      "aliases": [
+        "gluten-free hing"
+      ],
+      "allergens": {
+        "dairy": false,
+        "sesame": false,
+        "nuts": false,
+        "coconut": false,
+        "soy": false,
+        "gluten": false,
+        "mustard": false
+      },
+      "nutrition_per_100g": null
+    }
+  ]
+}
