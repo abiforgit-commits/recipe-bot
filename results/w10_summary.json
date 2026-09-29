@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "single": {
+      "pass": 10,
+      "n": 10,
+      "p50_wall": 46.195,
+      "p99_wall": 105.6728,
+      "p50_net": 46.195,
+      "p99_net": 104.51849999999999,
+      "tokens": 49167,
+      "cost_per_q": 0.0005496,
+      "calls": 32
+    },
+    "multi": {
+      "pass": 10,
+      "n": 10,
+      "p50_wall": 85.71,
+      "p99_wall": 164.5862,
+      "p50_net": 85.275,
+      "p99_net": 157.09499999999997,
+      "tokens": 70482,
+      "cost_per_q": 0.0008361,
+      "calls": 60
+    }
+  },
+  "multiplier": 1.4,
+  "multiplier_line": "Context re-send multiplier: 70,482 multi / 49,167 single = 1.4x. Largest share: \"manager -> substitution_worker\" hand-off, 56,504 tokens = 80% of all multi-arm tokens (53,125 of them re-sent prompt tokens, over 37 calls).",
+  "by_handoff": {
+    "manager -> substitution_worker": {
+      "tokens": 56504,
+      "prompt": 53125,
+      "calls": 37
+    },
+    "substitution_worker -> manager (re-read)": {
+      "tokens": 7855,
+      "prompt": 7367,
+      "calls": 10
+    },
+    "user -> manager (plan)": {
+      "tokens": 4253,
+      "prompt": 3866,
+      "calls": 10
+    },
+    "manager -> allergen_worker": {
+      "tokens": 969,
+      "prompt": 879,
+      "calls": 2
+    },
+    "allergen_worker -> manager (re-read)": {
+      "tokens": 901,
+      "prompt": 871,
+      "calls": 1
+    }
+  }
+}

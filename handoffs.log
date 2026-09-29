@@ -1,0 +1,68 @@
+# handoffs.log — every hand-off in the kitchen squad, with its token count
+#
+# tokens = the LLM tokens that hand-off caused:
+#   user -> manager / worker -> manager : the manager lap that re-read it
+#   manager -> worker                   : the whole worker loop it started
+# Every multi-arm LLM call is counted under exactly one hand-off, so each case's
+# hand-off tokens sum to its total (shared = one manager lap read two results).
+
+== c05  How long to ferment?   total=425 tokens, 1 LLM calls, completed
+  #1                  user -> manager              chars=20     tokens=425                    read by manager lap 1
+
+== c08  How do I keep the mango pickle from spoiling?   total=3,971 tokens, 5 LLM calls, completed
+  #1                  user -> manager              chars=45     tokens=429                    read by manager lap 1
+  #2               manager -> substitution_worker  chars=121    tokens=2,885                  worker loop
+  #3   substitution_worker -> manager              chars=417    tokens=657                    read by manager lap 2
+
+== c10  What rice do I use for appam?   total=3,730 tokens, 5 LLM calls, completed
+  #1                  user -> manager              chars=29     tokens=421                    read by manager lap 1
+  #2               manager -> substitution_worker  chars=66     tokens=2,780                  worker loop
+  #3   substitution_worker -> manager              chars=177    tokens=529                    read by manager lap 2
+
+== c12  What dal goes into dosa batter?   total=3,712 tokens, 5 LLM calls, completed
+  #1                  user -> manager              chars=31     tokens=418                    read by manager lap 1
+  #2               manager -> substitution_worker  chars=68     tokens=2,770                  worker loop
+  #3   substitution_worker -> manager              chars=169    tokens=524                    read by manager lap 2
+
+== c13  Which recipe has the highest salt percentage?   total=19,579 tokens, 11 LLM calls, completed
+  #1                  user -> manager              chars=45     tokens=421                    read by manager lap 1
+  #2               manager -> substitution_worker  chars=109    tokens=9,491                  worker loop
+  #3   substitution_worker -> manager              chars=1539   tokens=1,175                  read by manager lap 2
+  #4               manager -> substitution_worker  chars=256    tokens=6,792                  worker loop
+  #5   substitution_worker -> manager              chars=1112   tokens=1,700                  read by manager lap 3
+
+== c14  Which recipe ferments for the longest time?   total=9,949 tokens, 7 LLM calls, completed
+  #1                  user -> manager              chars=43     tokens=426                    read by manager lap 1
+  #2               manager -> substitution_worker  chars=122    tokens=8,948                  worker loop
+  #3   substitution_worker -> manager              chars=303    tokens=575                    read by manager lap 2
+
+== c15  Which of these recipes uses the most water?   total=15,611 tokens, 8 LLM calls, completed
+  #1                  user -> manager              chars=43     tokens=447                    read by manager lap 1
+  #2               manager -> substitution_worker  chars=233    tokens=14,287                 worker loop
+  #3   substitution_worker -> manager              chars=1134   tokens=877                    read by manager lap 2
+
+== c16  Which oil is used on the dosa tawa?   total=3,747 tokens, 5 LLM calls, completed
+  #1                  user -> manager              chars=35     tokens=427                    read by manager lap 1
+  #2               manager -> substitution_worker  chars=100    tokens=2,783                  worker loop
+  #3   substitution_worker -> manager              chars=201    tokens=537                    read by manager lap 2
+
+== c17  Is there sesame in the mango pickle?   total=6,096 tokens, 8 LLM calls, completed
+  #1                  user -> manager              chars=36     tokens=413                    read by manager lap 1
+  #2               manager -> substitution_worker  chars=54     tokens=3,040                  worker loop
+  #3   substitution_worker -> manager              chars=1070   tokens=773                    read by manager lap 2
+  #4               manager -> allergen_worker      chars=47     tokens=969                    worker loop
+  #5       allergen_worker -> manager              chars=235    tokens=901                    read by manager lap 3
+
+== c22  How much rock salt goes into the idli batter?   total=3,662 tokens, 5 LLM calls, completed
+  #1                  user -> manager              chars=45     tokens=426                    read by manager lap 1
+  #2               manager -> substitution_worker  chars=85     tokens=2,728                  worker loop
+  #3   substitution_worker -> manager              chars=108    tokens=508                    read by manager lap 2
+
+# totals by hand-off type (all 10 cases)
+  manager -> substitution_worker                   calls=37  tokens= 56,504  (80%)
+  substitution_worker -> manager (re-read)         calls=10  tokens=  7,855  (11%)
+  user -> manager (plan)                           calls=10  tokens=  4,253  (6%)
+  manager -> allergen_worker                       calls=2   tokens=    969  (1%)
+  allergen_worker -> manager (re-read)             calls=1   tokens=    901  (1%)
+
+Context re-send multiplier: 70,482 multi / 49,167 single = 1.4x. Largest share: "manager -> substitution_worker" hand-off, 56,504 tokens = 80% of all multi-arm tokens (53,125 of them re-sent prompt tokens, over 37 calls).

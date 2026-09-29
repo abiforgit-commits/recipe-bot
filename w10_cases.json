@@ -1,0 +1,61 @@
+{
+  "what": "The 10 Week-6 eval cases raced in Week 10. Drawn, not chosen.",
+  "source": "w6_cases.jsonl (unchanged)",
+  "pool": "c01-c25 (r01/r02 excluded: fixed replays of c10/c06, not runnable questions)",
+  "method": "random.Random(SEED).sample(pool, 10), sorted by case_id",
+  "seed": 20260929,
+  "selected_before_any_run": true,
+  "judge": "judge_v2.txt via w6_judge.judge_case (the Week 6 judge, unchanged)",
+  "cases": [
+    {
+      "case_id": "c05",
+      "mode": "mode1_vague_no_recipe_named",
+      "question": "How long to ferment?"
+    },
+    {
+      "case_id": "c08",
+      "mode": "mode2_refuses_despite_chunk",
+      "question": "How do I keep the mango pickle from spoiling?"
+    },
+    {
+      "case_id": "c10",
+      "mode": "mode3_lists_all_rows",
+      "question": "What rice do I use for appam?"
+    },
+    {
+      "case_id": "c12",
+      "mode": "mode3_lists_all_rows",
+      "question": "What dal goes into dosa batter?"
+    },
+    {
+      "case_id": "c13",
+      "mode": "mode4_cross_card_comparison",
+      "question": "Which recipe has the highest salt percentage?"
+    },
+    {
+      "case_id": "c14",
+      "mode": "mode4_cross_card_comparison",
+      "question": "Which recipe ferments for the longest time?"
+    },
+    {
+      "case_id": "c15",
+      "mode": "mode4_cross_card_comparison",
+      "question": "Which of these recipes uses the most water?"
+    },
+    {
+      "case_id": "c16",
+      "mode": "mode5_wrong_citation_target",
+      "question": "Which oil is used on the dosa tawa?"
+    },
+    {
+      "case_id": "c17",
+      "mode": "mode5_wrong_citation_target",
+      "question": "Is there sesame in the mango pickle?"
+    },
+    {
+      "case_id": "c22",
+      "mode": "mode0_baseline_correct",
+      "question": "How much rock salt goes into the idli batter?"
+    }
+  ]
+}

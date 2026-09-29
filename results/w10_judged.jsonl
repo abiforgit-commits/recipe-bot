@@ -1,0 +1,20 @@
+{"arm": "single", "case_id": "c05", "verdict": "PASS", "reason": "The answer correctly extracts the fermentation time from the recipe method provided in the chunks."}
+{"arm": "multi", "case_id": "c05", "verdict": "PASS", "reason": "The assistant correctly refused to answer because no recipe chunks were provided to supply a fermentation time."}
+{"arm": "single", "case_id": "c08", "verdict": "PASS", "reason": "The answer accurately reflects the preservation instructions provided in the recipe method, including keeping water away, using dry spoons, storing in a sterilized jar, and its one-year shelf life."}
+{"arm": "multi", "case_id": "c08", "verdict": "PASS", "reason": "The answer accurately and completely reflects the preservation instructions provided in the recipe chunk without adding unsupported information."}
+{"arm": "single", "case_id": "c10", "verdict": "PASS", "reason": "The answer correctly identifies both types of rice required for appam along with their exact quantities from the recipe card."}
+{"arm": "multi", "case_id": "c10", "verdict": "PASS", "reason": "The answer correctly identifies the types of rice used for appam (raw rice/pachari and cooked rice) with their roles, directly supported by the context chunks."}
+{"arm": "single", "case_id": "c12", "verdict": "PASS", "reason": "The assistant accurately lists both dals and their recipe context from the shown chunks."}
+{"arm": "multi", "case_id": "c12", "verdict": "PASS", "reason": "The assistant correctly identifies the two types of dal listed in the recipe context along with their correct roles in the dish."}
+{"arm": "single", "case_id": "c13", "verdict": "PASS", "reason": "The assistant correctly calculated and compared the salt percentages from the provided recipe chunks and identified the highest one."}
+{"arm": "multi", "case_id": "c13", "verdict": "PASS", "reason": "The assistant correctly calculated and identified the recipe with the highest salt percentage using the ingredients and quantities provided in the chunks."}
+{"arm": "single", "case_id": "c14", "verdict": "PASS", "reason": "The assistant correctly identifies that 10 to 14 days (Kadumanga Achar) is longer than 10 to 14 hours (Crisp Dosa Batter), using information supported directly by the context chunks."}
+{"arm": "multi", "case_id": "c14", "verdict": "PASS", "reason": "Every claim is supported by the shown context chunks and correctly identifies the longest fermentation time."}
+{"arm": "single", "case_id": "c15", "verdict": "PASS", "reason": "The assistant correctly analyzed the water content across the three recipes using only the provided context chunks."}
+{"arm": "multi", "case_id": "c15", "verdict": "PASS", "reason": "The assistant correctly identified Ragi Koozh as using the most explicit water (1500g) based on the provided recipe chunks."}
+{"arm": "single", "case_id": "c16", "verdict": "PASS", "reason": "The answer accurately and completely reflects the information provided in the recipe chunks regarding the oils used on the tawa."}
+{"arm": "multi", "case_id": "c16", "verdict": "PASS", "reason": "The assistant correctly identifies both the gingelly oil and the oiled onion half used on the tawa, entirely supported by the recipe text."}
+{"arm": "single", "case_id": "c17", "verdict": "PASS", "reason": "The answer correctly identifies that sesame is in the mango pickle, supported by both the dietary tags and the substitution list in the context."}
+{"arm": "multi", "case_id": "c17", "verdict": "PASS", "reason": "The answer correctly identifies that sesame is present in the mango pickle using the dietary tags, ingredient list, and allergen lookup provided in the chunks."}
+{"arm": "single", "case_id": "c22", "verdict": "PASS", "reason": "The answer correctly states the exact quantity of rock salt (20g) specified in the recipe card for the idli batter."}
+{"arm": "multi", "case_id": "c22", "verdict": "PASS", "reason": "The assistant correctly provided the rock salt amount and context from the recipe chunks."}

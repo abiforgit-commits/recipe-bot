@@ -1,0 +1,159 @@
+{
+  "arm": "multi",
+  "request": "Is there sesame in the mango pickle?",
+  "final": "Yes, the mango pickle (Kadumanga Achar) recipe contains **gingelly (sesame) oil**.",
+  "stop_reason": "completed",
+  "fail_allergen": true,
+  "tokens_in": 5017,
+  "tokens_out": 270,
+  "tokens_total": 5287,
+  "cost_usd": 0.00061,
+  "latency_s": 99.99,
+  "llm_calls": 7,
+  "calls": [
+    {
+      "actor": "manager",
+      "handoff": "user -> manager (plan)",
+      "lap": 1,
+      "prompt_tokens": 386,
+      "completion_tokens": 30,
+      "tokens": 416
+    },
+    {
+      "actor": "substitution_worker",
+      "handoff": "manager -> substitution_worker",
+      "lap": 1,
+      "prompt_tokens": 665,
+      "completion_tokens": 19,
+      "tokens": 684
+    },
+    {
+      "actor": "substitution_worker",
+      "handoff": "manager -> substitution_worker",
+      "lap": 2,
+      "prompt_tokens": 776,
+      "completion_tokens": 25,
+      "tokens": 801
+    },
+    {
+      "actor": "substitution_worker",
+      "handoff": "manager -> substitution_worker",
+      "lap": 3,
+      "prompt_tokens": 1275,
+      "completion_tokens": 118,
+      "tokens": 1393
+    },
+    {
+      "actor": "manager",
+      "handoff": "substitution_worker -> manager (re-read)",
+      "lap": 2,
+      "prompt_tokens": 571,
+      "completion_tokens": 30,
+      "tokens": 601
+    },
+    {
+      "actor": "manager",
+      "handoff": "allergen_worker -> manager (re-read)",
+      "lap": 3,
+      "prompt_tokens": 640,
+      "completion_tokens": 25,
+      "tokens": 665
+    },
+    {
+      "actor": "manager",
+      "handoff": "allergen_worker -> manager (re-read)",
+      "lap": 4,
+      "prompt_tokens": 704,
+      "completion_tokens": 23,
+      "tokens": 727,
+      "synthesis": true
+    }
+  ],
+  "handoffs": [
+    {
+      "seq": 1,
+      "from": "user",
+      "to": "manager",
+      "chars": 36,
+      "tokens": 416,
+      "note": "read by manager lap 1"
+    },
+    {
+      "seq": 2,
+      "from": "manager",
+      "to": "substitution_worker",
+      "chars": 65,
+      "tokens": 2878,
+      "note": "worker loop"
+    },
+    {
+      "seq": 3,
+      "from": "substitution_worker",
+      "to": "manager",
+      "chars": 357,
+      "tokens": 601,
+      "note": "read by manager lap 2"
+    },
+    {
+      "seq": 4,
+      "from": "manager",
+      "to": "allergen_worker",
+      "chars": 47,
+      "tokens": 0,
+      "note": "INJECTED 500 - worker never ran"
+    },
+    {
+      "seq": 5,
+      "from": "allergen_worker",
+      "to": "manager",
+      "chars": 82,
+      "tokens": 665,
+      "note": "read by manager lap 3"
+    },
+    {
+      "seq": 6,
+      "from": "manager",
+      "to": "allergen_worker",
+      "chars": 36,
+      "tokens": 0,
+      "note": "INJECTED 500 - worker never ran"
+    },
+    {
+      "seq": 7,
+      "from": "allergen_worker",
+      "to": "manager",
+      "chars": 82,
+      "tokens": 727,
+      "note": "read by manager lap 4"
+    }
+  ],
+  "tool_calls": [
+    {
+      "worker": "substitution_worker",
+      "tool": "recipes__search_recipes",
+      "arguments": {
+        "dish": "mango pickle"
+      },
+      "is_error": false,
+      "result": "{\n  \"recipe_id\": \"kadumanga-06\",\n  \"title\": \"Kadumanga Achar (Kerala fermented tender mango pickle)\",\n  \"cuisine\": \"kerala\",\n  \"dietary_tags\": \"vegan, contains-sesame\"\n}"
+    },
+    {
+      "worker": "substitution_worker",
+      "tool": "recipes__get_recipe",
+      "arguments": {
+        "recipe_id": "kadumanga-06"
+      },
+      "is_error": false,
+      "result": "{\n  \"recipe_id\": \"kadumanga-06\",\n  \"title\": \"Kadumanga Achar (Kerala fermented tender mango pickle)\",\n  \"ingredients\": [\n    {\n      \"name\": \"Tender baby mangoes (kannimanga), whole\",\n      \"amount\": \"1000g\"\n    },\n    {\n      \"name\": \"Crystal sea salt\",\n      \"amount\": \"150g\"\n    },\n    {\n      \"name\": \"Kashmiri chilli powder\",\n      \"amount\": \"50g\"\n    },\n    {\n      \"name\": \"Gingelly (sesame) oil\",\n      \"amount\": \"60g\"\n    },\n    {\n      \"name\": \"Mustard seeds\",\n      \"amount\": \"10g\"\n    },\n    {\n      \"name\": \"Fenugreek powder, roasted\",\n      \"amount\": \"5g\"\n    },\n    {\n      \"name\": \"Asafoetida (hing)\",\n      \"amount\": \"3g\"\n    }\n  ],\n  \"method\": \"Wipe the mangoes dry — no water must touch them at any stage. Layer them\\nwith the crystal salt in a sterilised bharani (ceramic pickle jar), close,\\nand shake once daily. Over 10 to 14 days the salt draws out the mango's own\\nbrine and the fruit ferments in it, turning olive-drab and pleasantly tangy.\\nThen heat the gingelly oil, crackle the mustard seeds, switch off the heat,\\nand stir in the chilli powder, fenugreek powder and asafoetida. Cool the\\nspiced oil completely and fold it through the mangoes and their brine.\\nReturn everything to the bharani. The pickle is eatable in a week but\\nmatures over a month; it keeps a year at room temperature if only dry\\nspoons ever enter the jar.\"\n}"
+    }
+  ],
+  "context": [
+    "[recipes__search_recipes] {\"dish\": \"mango pickle\"} -> {\n  \"recipe_id\": \"kadumanga-06\",\n  \"title\": \"Kadumanga Achar (Kerala fermented tender mango pickle)\",\n  \"cuisine\": \"kerala\",\n  \"dietary_tags\": \"vegan, contains-sesame\"\n}",
+    "[recipes__get_recipe] {\"recipe_id\": \"kadumanga-06\"} -> {\n  \"recipe_id\": \"kadumanga-06\",\n  \"title\": \"Kadumanga Achar (Kerala fermented tender mango pickle)\",\n  \"ingredients\": [\n    {\n      \"name\": \"Tender baby mangoes (kannimanga), whole\",\n      \"amount\": \"1000g\"\n    },\n    {\n      \"name\": \"Crystal sea salt\",\n      \"amount\": \"150g\"\n    },\n    {\n      \"name\": \"Kashmiri chilli powder\",\n      \"amount\": \"50g\"\n    },\n    {\n      \"name\": \"Gingelly (sesame) oil\",\n      \"amount\": \"60g\"\n    },\n    {\n      \"name\": \"Mustard seeds\",\n      \"amount\": \"10g\"\n    },\n    {\n      \"name\": \"Fenugreek powder, roasted\",\n      \"amount\": \"5g\"\n    },\n    {\n      \"name\": \"Asafoetida (hing)\",\n      \"amount\": \"3g\"\n    }\n  ],\n  \"method\": \"Wipe the mangoes dry — no water must touch them at any stage. Layer them\\nwith the crystal salt in a sterilised bharani (ceramic pickle jar), close,\\nand shake once daily. Over 10 to 14 days the salt draws out the mango's own\\nbrine and the fruit ferments in it, turning olive-drab and pleasantly tangy.\\nThen heat the gingelly oil, crackle the mustard seeds, switch off the heat,\\nand stir in the chilli powder, fenugreek powder and asafoetida. Cool the\\nspiced oil completely and fold it through the mangoes and their brine.\\nReturn everything to the bharani. The pickle is eatable in a week but\\nmatures over a month; it keeps a year at room temperature if only dry\\nspoons ever enter the jar.\"\n}"
+  ],
+  "latency_wall_s": 99.99,
+  "latency_slept_s": 0.89,
+  "latency_net_s": 99.11,
+  "case_id": "c17",
+  "question": "Is there sesame in the mango pickle?"
+}
