@@ -9,6 +9,10 @@ Assertions implemented (moved from judge to code):
   A3 refusal_exact      - out-of-corpus cases must produce the exact refusal
   A4 no_invented_grams  - every gram/percent quantity in the answer must
                           appear verbatim in at least one cited chunk
+  A5 no_dairy_side_for_dairy_free
+                        - Week 11 regression (trace e6fa2dbb1746): on a dairy-free
+                          request, an answer that mentions curd chilli / mor milagai
+                          must say outright that it contains dairy
 """
 import re
 
@@ -51,11 +55,35 @@ def no_invented_grams(output, case, chunk_lookup):
     return True
 
 
+DAIRY_SIDE = re.compile(r"curd[- ]chill?i|mor\s*milagai", re.I)
+# Said outright. Hedges ("if you are strictly avoiding dairy, you can substitute", "or
+# skip it!") don't count: that is exactly how the failing answers were worded.
+DAIRY_STATED = re.compile(
+    r"contains? dairy|counts as dairy|\bis dairy\b|not dairy[- ]free|isn'?t dairy[- ]free", re.I)
+
+
+def a5_no_dairy_side_for_dairy_free(output, case, chunk_lookup):
+    """A5: the ragi koozh card lists curd chilli (mor milagai) as a side although the
+    card is tagged vegan. Curd chilli is soaked in curd or buttermilk, so a dairy-free
+    answer that mentions it must say outright, on a line that names it, that it
+    contains dairy."""
+    if not case.get("expect_dairy_free"):
+        return True
+    # Third version. v1 (sentence scope) and v2 (line scope + a broad list of warning
+    # words: avoid / skip / without ...) each scored a correct answer FAIL, and v2 also
+    # PASSED two bad ones ("Without the buttermilk ... you can still enjoy it with curd
+    # chilli"). v3 agrees with all 45 hand-labelled dairy-free answers in
+    # results/w11_a5_validation.json (w11_a5_check.py); v2 agreed with 42.
+    lines = [u for u in re.split(r"\n+", output) if DAIRY_SIDE.search(u)]
+    return not lines or any(DAIRY_STATED.search(u) for u in lines)
+
+
 ASSERTIONS = {
     "A1_citation_present": citation_present,
     "A2_citations_resolve": citations_resolve,
     "A3_refusal_exact": refusal_exact,
     "A4_no_invented_grams": no_invented_grams,
+    "A5_no_dairy_side_for_dairy_free": a5_no_dairy_side_for_dairy_free,
 }
 
 

@@ -1,0 +1,32 @@
+[
+  {
+    "run": 1,
+    "kind": "repeat",
+    "question": "I'm dairy-free. How should I serve ragi koozh?",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The answer correctly identifies safe and unsafe serving options for a dairy-free diet using only the provided chunks.",
+    "output": "Hello! I'd be happy to help you enjoy your Ragi Koozh safely while keeping it completely dairy-free. \n\nBased on the recipe and allergen guidelines, here is how you can serve it:\n\n* **Safe to serve with:** Sliced shallots and green chilli [ragi-koozh-05::structure::1].\n\n* **What to avoid:** \n  * **Curd chilli (mor milagai):** Even though it is sometimes listed as a side, curd chilli contains dairy because it is soaked in salted curd or buttermilk before sun-drying [allergen-notes::dairy::0]. Please leave this out.\n  * **Buttermilk:** The recipe notes that stirring in buttermilk contains dairy [ragi-koozh-05::structure::3], so you should skip that version as well. \n\nEnjoy your traditional fermented finger-millet porridge with the sliced shallots and green chilli for a refreshing, dairy-free meal!"
+  },
+  {
+    "run": 2,
+    "kind": "repeat",
+    "question": "I'm dairy-free. How should I serve ragi koozh?",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The assistant correctly identifies that the dish is vegan as written, lists the safe serving options from the chunks, and properly warns against the dairy-containing serving options based on the provided allergen notes.",
+    "output": "Hello! I would be happy to help you enjoy your Ragi Koozh while keeping it completely dairy-free. \n\nAccording to the recipe, Ragi Koozh is traditionally served with:\n* Sliced shallots\n* Green chilli\n\nHowever, the recipe's traditional serving suggestions also mention **curd chilli (mor milagai)** and stirring in **buttermilk** [ragi-koozh-05::structure::1, ragi-koozh-05::structure::3]. Please note that these contain dairy and must be left out, as curd, buttermilk, and curd chilli are classified as dairy [allergen-notes::dairy::0]. \n\nSince no dairy-free replacements for those specific sides appear in the provided text or tool results, you can simply enjoy your fermented finger-millet porridge with the safe, tasty options of sliced shallots and green chilli!"
+  },
+  {
+    "run": 3,
+    "kind": "repeat",
+    "question": "I'm dairy-free. How should I serve ragi koozh?",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The assistant correctly uses the recipe and allergen chunks to identify the dairy-free serving options (shallots and green chilli) while correctly warning against the dairy-containing serving suggestions (curd chilli and buttermilk).",
+    "output": "Hello! I'd be happy to help you with that. \n\nFor a dairy-free serving of Ragi Koozh, you can enjoy it with sliced shallots and green chilli [ragi-koozh-05::structure::1]. \n\nThe recipe traditionally suggests serving it with curd chilli (*mor milagai*) and stirring in buttermilk [ragi-koozh-05::structure::1, ragi-koozh-05::structure::3], but **these contain dairy** because curd chilli is soaked in salted curd or buttermilk, and buttermilk is made from milk (as outlined in the allergen notes) [allergen-notes::dairy::0, ragi-koozh-05::structure::3]. Therefore, please leave those out! \n\nSince the tool results did not provide any alternative dairy-free swaps for the sides, you can simply stick to the sliced shallots and green chilli for a refreshing, traditional, and completely dairy-free experience [ragi-koozh-05::structure::1, ragi-koozh-05::structure::3]. Enjoy your porridge!"
+  }
+]

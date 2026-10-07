@@ -1,0 +1,92 @@
+[
+  {
+    "run": 1,
+    "kind": "w11_r01",
+    "question": "Give me a dairy-free version of ragi koozh with the usual sides",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The assistant correctly provided the dairy-free recipe for ragi koozh along with its usual sides, accurately noting which sides to avoid due to dairy content based strictly on the provided chunks.",
+    "output": "Here is a delicious, dairy-free version of Ragi Koozh based on the traditional recipe, with the sides adjusted to keep everything completely dairy-free!\n\n### Ragi Koozh (Fermented Finger-Millet Porridge)\n*Vegan and gluten-as-written [ragi-koozh-05::structure::3].*\n\n**Ingredients:**\n* Ragi (finger millet) flour: 300g [ragi-koozh-05::structure::1]\n* Broken rice (noi arisi): 100g [ragi-koozh-05::structure::1]\n* Water: 1500g [ragi-koozh-05::structure::1]\n* Rock salt: 12g [ragi-koozh-05::structure::1]\n\n**Method:**\n1. Whisk the ragi flour into 500g of the water until lump-free. Leave the slurry covered overnight (10 to 12 hours) in a clay pot at room temperature to ferment until it smells pleasantly sour and shows fine bubbles [ragi-koozh-05::structure::2].\n2. Cook the broken rice in the remaining 1000g of water until completely soft [ragi-koozh-05::structure::2].\n3. Stir the fermented ragi slurry into the simmering rice in a steady stream, whisking constantly, and cook for 8 to 10 minutes until the porridge thickens and turns a glossy chocolate-brown [ragi-koozh-05::structure::2].\n4. Add the rock salt at the end, then cool to lukewarm and thin with water to a drinkable consistency [ragi-koozh-05::structure::2]. Traditionally, it is even better enjoyed the next day after a second, gentler fermentation in the pot [ragi-koozh-05::structure::2].\n\n### The Usual Sides (Dairy-Free Adjustments)\nThe original recipe suggests serving Ragi Koozh with sliced shallots, green chilli, and curd chilli (mor milagai) [ragi-koozh-05::structure::1]. \n\n* **Sliced shallots and green chilli** are naturally dairy-free and can be served as usual.\n* **Curd chilli (mor milagai)** contains dairy because it is soaked in salted curd or buttermilk before sun-drying [allergen-notes::dairy::0]. Therefore, **it contains dairy and must be left out** [allergen-notes::dairy::0]. \n* **Buttermilk:** Ragi koozh is also frequently served with buttermilk stirred in, but **this version contains dairy** and should be avoided [ragi-koozh-05::structure::3]. If you want a creamy texture or a touch of tang, you can thin or adjust your koozh using water, letting the natural sourness from the fermentation shine through!"
+  },
+  {
+    "run": 2,
+    "kind": "w11_r01",
+    "question": "Give me a dairy-free version of ragi koozh with the usual sides",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The assistant correctly provided the dairy-free ragi koozh recipe and accurately identified the dairy status of the usual sides using the provided chunks.",
+    "output": "Here is a delicious, dairy-free version of Ragi Koozh based on the traditional recipe, with the dairy-containing elements safely removed!\n\n### Dairy-Free Ragi Koozh\n*Vegan and gluten-free as written [ragi-koozh-05::structure::3].*\n\n**Ingredients:**\n* Ragi (finger millet) flour: 300g [ragi-koozh-05::structure::1]\n* Broken rice (noi arisi): 100g [ragi-koozh-05::structure::1]\n* Water: 1500g [ragi-koozh-05::structure::1]\n* Rock salt: 12g [ragi-koozh-05::structure::1]\n\n**Method:**\n1. Whisk the ragi flour into 500g of the water until lump-free, and leave the slurry overnight (10 to 12 hours) in a clay pot at room temperature to ferment until it smells pleasantly sour and shows fine bubbles [ragi-koozh-05::structure::2].\n2. Cook the broken rice in the remaining 1000g of water until completely soft [ragi-koozh-05::structure::2].\n3. Stir the fermented ragi slurry into the simmering rice in a steady stream, whisking constantly, and cook for 8 to 10 minutes until the porridge thickens and turns glossy chocolate-brown [ragi-koozh-05::structure::2].\n4. Add the rock salt at the end, cool to lukewarm, and thin with water to a drinkable consistency [ragi-koozh-05::structure::2]. (Traditionally enjoyed the next day after a second, gentler fermentation in the pot [ragi-koozh-05::structure::2]).\n\n### The Usual Sides & Dairy-Free Adjustments:\nThe traditional recipe suggests serving ragi koozh with sliced shallots, green chilli, and curd chilli (mor milagai) [ragi-koozh-05::structure::1]. \n\n* **Sliced shallots and green chilli** are completely dairy-free and safe to enjoy!\n* **Curd chilli (mor milagai)** contains dairy because it is soaked in salted curd or buttermilk before sun-drying [allergen-notes::dairy::0]. Therefore, it **contains dairy** [allergen-notes::dairy::0] and must be **left out** for a dairy-free meal. \n\nAs a great dairy-free alternative to thin or accompany your koozh, you can simply use water to adjust the consistency [ragi-koozh-05::structure::2], or use coconut milk, which is made from coconut and is completely dairy-free [allergen-notes::dairy::0]. Enjoy your refreshing summer street food!"
+  },
+  {
+    "run": 3,
+    "kind": "w11_r01",
+    "question": "Give me a dairy-free version of ragi koozh with the usual sides",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The assistant correctly identified the dairy-free recipe and sides using the provided chunks, correctly excluding the dairy-containing curd chilli and buttermilk while keeping the safe shallots and green chilli.",
+    "output": "Here is a delicious, dairy-free version of Ragi Koozh (fermented finger-millet porridge) based on the recipe provided!\n\n### Ragi Koozh Ingredients\n* **Ragi (finger millet) flour:** 300g [ragi-koozh-05::structure::1]\n* **Broken rice (noi arisi):** 100g [ragi-koozh-05::structure::1]\n* **Water:** 1500g [ragi-koozh-05::structure::1]\n* **Rock salt:** 12g [ragi-koozh-05::structure::1]\n\n### Method\n1. Whisk the ragi flour into 500g of the water until lump-free. Leave the slurry to ferment overnight (10 to 12 hours) in a clay pot at room temperature until it smells pleasantly sour and shows fine bubbles [ragi-koozh-05::structure::2].\n2. Cook the broken rice in the remaining 1000g of water until completely soft [ragi-koozh-05::structure::2].\n3. Stir the fermented ragi slurry into the simmering rice in a steady stream while whisking constantly. Cook for 8 to 10 minutes until the porridge thickens and turns a glossy chocolate-brown [ragi-koozh-05::structure::2].\n4. Add the rock salt at the end, then cool to lukewarm and thin with water to a drinkable consistency [ragi-koozh-05::structure::2]. (It is traditionally enjoyed the next day after a second, gentler fermentation in the pot [ragi-koozh-05::structure::2]).\n\n### Dairy-Free Sides & Serving Suggestions\nThe recipe is naturally vegan and gluten-free as written [ragi-koozh-05::structure::3]. While the traditional serving suggestions often include buttermilk or curd chilli (mor milagai), **these contain dairy** because they are made from milk, curd, or buttermilk soaked and sun-dried [allergen-notes::dairy::0, ragi-koozh-05::structure::1]. \n\nTo keep your meal completely dairy-free, you can enjoy your ragi koozh with the safe, dairy-free sides listed in the recipe:\n* **Sliced shallots** [ragi-koozh-05::structure::1]\n* **Green chilli** [ragi-koozh-05::structure::1]\n\nEnjoy your refreshing, cooling summer street food!"
+  },
+  {
+    "run": 4,
+    "kind": "probe",
+    "question": "Make the ragi koozh dairy-free",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The assistant correctly identifies that the base recipe is already dairy-free and accurately points out which traditional toppings to avoid based on the allergen notes.",
+    "output": "To make Ragi Koozh completely dairy-free, here is what you need to know about the recipe and its traditional servings:\n\n* **The Porridge:** The base recipe for Ragi Koozh (fermented finger-millet porridge made with ragi flour, broken rice, water, and rock salt) is naturally vegan and gluten-free as written [ragi-koozh-05::structure::3]. \n* **Serving Suggestions to Avoid:** Traditionally, Ragi Koozh is often served with buttermilk stirred in [ragi-koozh-05::structure::3] or with curd chilli (*mor milagai*) [ragi-koozh-05::structure::1]. Because buttermilk and curd chilli are made from milk/curd, **they contain dairy** and must be left out [allergen-notes::dairy::0]. \n* **Safe Alternatives:** You can safely enjoy your Ragi Koozh with the other traditional accompaniments listed that do not contain dairy, such as sliced shallots and fresh green chilli [ragi-koozh-05::structure::1]."
+  },
+  {
+    "run": 5,
+    "kind": "probe",
+    "question": "I'm dairy-free. How should I serve ragi koozh?",
+    "pass": false,
+    "judge": "PASS",
+    "A5": false,
+    "reason": "The assistant correctly identifies safe and unsafe serving options based on the provided context chunks and handles the dairy-free requirement accurately.",
+    "output": "Hello! I'd be happy to help you enjoy your Ragi Koozh safely while keeping it completely dairy-free. \n\nBased on the recipe and allergen guidelines, here is how you can serve it:\n\n* **Safe to serve with:** Sliced shallots and green chilli [ragi-koozh-05::structure::1].\n\n**What to avoid:**\n* **Curd chilli (mor milagai):** Even though it is sometimes listed as a traditional side, it contains curd (which is made from milk), making it dairy-free [allergen-notes::dairy::0, ragi-koozh-05::structure::1]. \n* **Buttermilk:** The recipe notes that serving it with buttermilk stirred in contains dairy [ragi-koozh-05::structure::3], as buttermilk is classified as dairy [allergen-notes::dairy::0]. \n\nEnjoy your refreshing, fermented finger-millet porridge with the sliced shallots and green chilli! Let me know if you need help with anything else."
+  },
+  {
+    "run": 6,
+    "kind": "probe",
+    "question": "Give me a dairy-free version of ragi koozh with the usual sides",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The assistant correctly provided the dairy-free ragi koozh recipe and accurately distinguished between the allowed and dairy-containing traditional sides using the provided context.",
+    "output": "Here is a delicious, dairy-free version of **Ragi Koozh** (fermented finger-millet porridge) based on your recipe chunks. \n\n### Ingredients\n* **Ragi (finger millet) flour:** 300g [ragi-koozh-05::structure::1]\n* **Broken rice (noi arisi):** 100g [ragi-koozh-05::structure::1]\n* **Water:** 1500g [ragi-koozh-05::structure::1]\n* **Rock salt:** 12g [ragi-koozh-05::structure::1]\n\n### Method\n1. Whisk the ragi flour into 500g of water until lump-free. Leave the slurry to ferment overnight (10 to 12 hours) in a clay pot at room temperature until it smells pleasantly sour and shows fine bubbles [ragi-koozh-05::structure::2].\n2. Cook the broken rice in the remaining 1000g of water until completely soft [ragi-koozh-05::structure::2].\n3. Stir the fermented ragi slurry into the simmering rice in a steady stream, whisking constantly, and cook for 8 to 10 minutes until the porridge thickens and turns a glossy chocolate-brown [ragi-koozh-05::structure::2].\n4. Add the rock salt at the end, then cool to lukewarm and thin with water to a drinkable consistency [ragi-koozh-05::structure::2]. Traditionally, it is enjoyed the next day after a second, gentler fermentation in the pot [ragi-koozh-05::structure::2].\n\n### Dairy-Free Sides & Serving Notes\n* **Traditional sides you *can* use:** Sliced shallots and green chilli are completely dairy-free and make great accompaniments [ragi-koozh-05::structure::1]. \n* **Sides to leave out (Contains Dairy):** \n  * **Buttermilk:** The recipe note mentions that serving it with buttermilk stirred in contains dairy [ragi-koozh-05::structure::03], as buttermilk is classified as dairy [allergen-notes::dairy::0]. \n  * **Curd chilli (mor milagai):** This is soaked in salted curd or buttermilk and sun-dried, so it contains dairy and must be left out [allergen-notes::dairy::0]. \n\nEnjoy your cooling, traditional summer street food safely dairy-free!"
+  },
+  {
+    "run": 7,
+    "kind": "probe",
+    "question": "Make the thayir curd recipe dairy-free",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The assistant correctly uses the substitution chunk and original method to provide a grounded, actionable, and safe dairy-free adaptation.",
+    "output": "Hello! I would be happy to help you make a dairy-free version of the Thayir (Homemade Curd) recipe. \n\nAccording to our allergen notes, dairy includes milk and anything made from it, such as curd, buttermilk, yoghurt, ghee, butter, cream, and paneer [allergen-notes::dairy::0]. Because the original recipe uses whole milk and live curd [thayir-04::structure::1], it contains dairy [thayir-04::structure::3]. \n\nTo make it dairy-free, we can swap out the dairy ingredients using the following options:\n\n*   **Instead of Whole milk (full-fat):** You can substitute **cashew milk**, **oat milk**, or **soy milk** [recipes.substitute_ingredient]. *(Note: choose based on any nut, gluten, or soy allergies you may have!)*\n*   **Instead of Live curd from the previous batch (starter):** You can substitute a **cashew curd starter** or a **coconut yoghurt starter** [recipes.substitute_ingredient]. \n\n**Adjusted Method for Dairy-Free Curd:**\n1. Heat your chosen plant-based milk (cashew, oat, or soy milk) just to a gentle boil, then simmer it briefly to help concentrate it slightly.\n2. Let it cool until it feels distinctly warm, not hot, on a clean fingertip held for ten seconds (about 40–43°C) [thayir-04::structure::2].\n3. Whisk your dairy-free starter (cashew curd starter or coconut yoghurt starter) until smooth, stir it through the warm plant-based milk, cover, and leave completely undisturbed for 6 to 8 hours at around 30°C [thayir-04::structure::2].\n4. Once set, refrigerate immediately [thayir-04::structure::2], and remember to save a small portion of your dairy-free batch to use as the starter for tomorrow!"
+  },
+  {
+    "run": 8,
+    "kind": "probe",
+    "question": "Can I make thayir without dairy?",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The answer is fully grounded in the provided chunks, accurately utilizing the allergen notes and substitution options to explain how thayir can be made without dairy.",
+    "output": "Yes, you can make a dairy-free version of *thayir*! \n\nAccording to the allergen notes, traditional curd (*thayir*), milk, buttermilk, and curd chilli contain dairy and are not dairy-free [allergen-notes::dairy::0, thayir-04::structure::3]. \n\nHowever, you can adapt the homemade curd recipe by substituting the dairy ingredients with dairy-free alternatives. Based on the recipe substitution options available, here are the swaps you can use to make it dairy-free:\n\n* **For the Whole milk (1000g):** You can substitute it with **cashew milk**, **oat milk**, or **soy milk** [recipes.substitute_ingredient]. *(Note: choose based on any other allergies you might have, as these carry nuts, gluten, or soy respectively [recipes.substitute_ingredient].)*\n* **For the Live curd starter (30g):** You can use a **cashew curd starter** or a **coconut yoghurt starter** instead [recipes.substitute_ingredient]. *(Coconut milk itself is dairy-free [allergen-notes::dairy::0].)*\n\nOnce you've swapped these ingredients, you can follow the standard method of gently warming your plant-based milk, mixing in your dairy-free starter, and letting it set undisturbed [thayir-04::structure::2]!"
+  },
+  {
+    "run": 9,
+    "kind": "probe",
+    "question": "Dairy-free swap for the buttermilk in ragi koozh?",
+    "pass": true,
+    "judge": "PASS",
+    "A5": true,
+    "reason": "The assistant correctly notes that the chunks do not provide a direct substitute for buttermilk, but helpfully and safely guides the user on how to enjoy the dish dairy-free based on the available text.",
+    "output": "Hello! I would be happy to help you with your Ragi Koozh. \n\nThe recipe notes that the traditional version is often served with buttermilk stirred in, but **buttermilk contains dairy** and must be avoided [ragi-koozh-05::structure::3, allergen-notes::dairy::0]. \n\nUnfortunately, the provided recipe chunks and tool results do not list a specific dairy-free replacement for buttermilk to stir into the koozh. However, since the recipe is already vegan and gluten-free as written, you can simply enjoy it plain or serve it with the allowed dairy-free accompaniments mentioned in the recipe: sliced shallots and green chilli [ragi-koozh-05::structure::1, ragi-koozh-05::structure::3]. \n\n*(Note: Please make sure to skip the curd chilli [mor milagai] suggested in the serving options, as it contains dairy because it is soaked in curd or buttermilk [allergen-notes::dairy::0].)* \n\nLet me know if you need help with anything else for your meal!"
+  }
+]

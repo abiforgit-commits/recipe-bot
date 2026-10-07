@@ -1,0 +1,554 @@
+[
+  {
+    "trace_id": "a9858753d907",
+    "ts": "2026-10-06T19:30:50+00:00",
+    "user_id": "u000",
+    "prompt_version": "p-v2",
+    "input_type": "substitution",
+    "query": "Make the ragi koozh dairy-free",
+    "detected": {
+      "recipe_id": "ragi-koozh-05",
+      "banned": [
+        "dairy"
+      ],
+      "factor": null
+    },
+    "spans": [
+      {
+        "name": "retrieval",
+        "latency_ms": 660.1,
+        "context_ids": [
+          "ragi-koozh-05::structure::3",
+          "ragi-koozh-05::structure::0",
+          "ragi-koozh-05::structure::2",
+          "ragi-koozh-05::structure::1",
+          "dosa-batter-02::structure::3"
+        ],
+        "scores": [
+          0.0325,
+          0.032,
+          0.032,
+          0.0315,
+          0.0305
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "tools",
+        "latency_ms": 3.9,
+        "calls": [
+          {
+            "tool": "recipes.substitute_ingredient",
+            "args": {
+              "recipe_id": "ragi-koozh-05",
+              "allergen": "dairy"
+            },
+            "is_error": false,
+            "result": "{\n  \"recipe_id\": \"ragi-koozh-05\",\n  \"allergen_removed\": \"dairy\",\n  \"swaps\": [],\n  \"note\": \"each option lists the allergen it carries; pick one the request permits\"\n}"
+          }
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "generation",
+        "latency_ms": 2661.4,
+        "throttle_wait_ms": 0.0,
+        "model": "gemini-flash-lite-latest",
+        "prompt_tokens": 726,
+        "completion_tokens": 234,
+        "tokens": 960,
+        "cost_usd": 0.0001662
+      }
+    ],
+    "output": "To make **Ragi Koozh** completely dairy-free, it is actually very easy! \n\nAs written, the base recipe is entirely **vegan and gluten-free** [ragi-koozh-05::structure::3]. Dairy is only introduced at the very end when it is traditionally served with buttermilk stirred in [ragi-koozh-05::structure::3]. \n\nTo keep your koozh dairy-free, simply skip the buttermilk and enjoy it in its authentic plain, fermented form, or try these practical alternatives:\n* **Plant-based buttermilk:** Stir in a dairy-free yogurt alternative (like unsweetened almond, soy, or coconut yogurt) thinned out with a little water, or a splash of unflavored plant-based milk soured with a drop of lemon juice, to replicate that classic tangy flavor.\n* **Stick to the traditional accompaniments:** Serve it alongside the suggested sliced shallots, green chilli, and curd chilli (*mor milagai*) [ragi-koozh-05::structure::1] for a completely dairy-free, traditional experience.",
+    "latency_ms_total": 3326.3,
+    "tokens_total": 960,
+    "cost_usd_total": 0.0001662,
+    "status": "ok"
+  },
+  {
+    "trace_id": "003a5520e135",
+    "ts": "2026-10-06T19:30:53+00:00",
+    "user_id": "u000",
+    "prompt_version": "p-v2",
+    "input_type": "substitution",
+    "query": "I'm dairy-free. How should I serve ragi koozh?",
+    "detected": {
+      "recipe_id": "ragi-koozh-05",
+      "banned": [
+        "dairy"
+      ],
+      "factor": null
+    },
+    "spans": [
+      {
+        "name": "retrieval",
+        "latency_ms": 269.1,
+        "context_ids": [
+          "ragi-koozh-05::structure::1",
+          "ragi-koozh-05::structure::3",
+          "ragi-koozh-05::structure::2",
+          "ragi-koozh-05::structure::0",
+          "idli-batter-01::structure::3"
+        ],
+        "scores": [
+          0.0323,
+          0.032,
+          0.0315,
+          0.0315,
+          0.0303
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "tools",
+        "latency_ms": 3.1,
+        "calls": [
+          {
+            "tool": "recipes.substitute_ingredient",
+            "args": {
+              "recipe_id": "ragi-koozh-05",
+              "allergen": "dairy"
+            },
+            "is_error": false,
+            "result": "{\n  \"recipe_id\": \"ragi-koozh-05\",\n  \"allergen_removed\": \"dairy\",\n  \"swaps\": [],\n  \"note\": \"each option lists the allergen it carries; pick one the request permits\"\n}"
+          }
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "generation",
+        "latency_ms": 2892.5,
+        "throttle_wait_ms": 1565.5,
+        "model": "gemini-flash-lite-latest",
+        "prompt_tokens": 735,
+        "completion_tokens": 178,
+        "tokens": 913,
+        "cost_usd": 0.0001447
+      }
+    ],
+    "output": "Hello! As written, the Ragi Koozh is completely **vegan and dairy-free** [ragi-koozh-05::structure::3]. \n\nWhile it is often served with buttermilk stirred in (which does contain dairy), you can easily skip the buttermilk to keep it dairy-free [ragi-koozh-05::structure::3]. \n\nTo serve it traditionally and deliciously without dairy, enjoy it with:\n* Sliced shallots [ragi-koozh-05::structure::1]\n* Green chillies [ragi-koozh-05::structure::1]\n* Curd chilli (*mor milagai*) [ragi-koozh-05::structure::1]\n\nEnjoy your refreshing, cooling summer porridge! Let me know if you need any other tips.",
+    "latency_ms_total": 3164.9,
+    "tokens_total": 913,
+    "cost_usd_total": 0.0001447,
+    "status": "ok"
+  },
+  {
+    "trace_id": "e6fa2dbb1746",
+    "ts": "2026-10-06T19:30:58+00:00",
+    "user_id": "u000",
+    "prompt_version": "p-v2",
+    "input_type": "substitution",
+    "query": "Give me a dairy-free version of ragi koozh with the usual sides",
+    "detected": {
+      "recipe_id": "ragi-koozh-05",
+      "banned": [
+        "dairy"
+      ],
+      "factor": null
+    },
+    "spans": [
+      {
+        "name": "retrieval",
+        "latency_ms": 310.8,
+        "context_ids": [
+          "ragi-koozh-05::structure::3",
+          "ragi-koozh-05::structure::2",
+          "ragi-koozh-05::structure::1",
+          "ragi-koozh-05::structure::0",
+          "dosa-batter-02::structure::3"
+        ],
+        "scores": [
+          0.0328,
+          0.032,
+          0.0318,
+          0.0315,
+          0.0305
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "tools",
+        "latency_ms": 2.8,
+        "calls": [
+          {
+            "tool": "recipes.substitute_ingredient",
+            "args": {
+              "recipe_id": "ragi-koozh-05",
+              "allergen": "dairy"
+            },
+            "is_error": false,
+            "result": "{\n  \"recipe_id\": \"ragi-koozh-05\",\n  \"allergen_removed\": \"dairy\",\n  \"swaps\": [],\n  \"note\": \"each option lists the allergen it carries; pick one the request permits\"\n}"
+          }
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "generation",
+        "latency_ms": 4517.5,
+        "throttle_wait_ms": 2859.9,
+        "model": "gemini-flash-lite-latest",
+        "prompt_tokens": 733,
+        "completion_tokens": 338,
+        "tokens": 1071,
+        "cost_usd": 0.0002085
+      }
+    ],
+    "output": "Hello! I'd love to help you make Ragi Koozh. \n\nThe traditional Ragi Koozh recipe is naturally **vegan and gluten-free** as written, and the dairy is only added at the very end as an optional serving choice (often by stirring in buttermilk) [ragi-koozh-05::structure::3]. \n\nTo keep your Ragi Koozh completely dairy-free, simply skip the buttermilk and enjoy it in its plain, plant-based form! \n\n**The Usual Dairy-Free Sides:**\nYou can still serve your refreshing bowl of koozh with its traditional, delicious accompaniments:\n* Sliced shallots [ragi-koozh-05::structure::1]\n* Green chilli [ragi-koozh-05::structure::1]\n* Curd chilli (*mor milagai*) [ragi-koozh-05::structure::1]\n\n**A quick tip for making it:** \nFerment your ragi flour and water slurry overnight (10 to 12 hours) in a clay pot, cook it with soft broken rice and rock salt until it turns a glossy chocolate-brown, and then let it cool [ragi-koozh-05::structure::2]. Traditionally, it's even better when left to undergo a second, gentler fermentation overnight and served cold the next day as a cooling summer street food [ragi-koozh-05::structure::2]! \n\nEnjoy your homemade ragi koozh! Let me know if you need any other tips.",
+    "latency_ms_total": 4831.3,
+    "tokens_total": 1071,
+    "cost_usd_total": 0.0002085,
+    "status": "ok"
+  },
+  {
+    "trace_id": "4834d273f399",
+    "ts": "2026-10-06T19:31:02+00:00",
+    "user_id": "u000",
+    "prompt_version": "p-v2",
+    "input_type": "substitution",
+    "query": "Make the thayir curd recipe dairy-free",
+    "detected": {
+      "recipe_id": "thayir-04",
+      "banned": [
+        "dairy"
+      ],
+      "factor": null
+    },
+    "spans": [
+      {
+        "name": "retrieval",
+        "latency_ms": 274.8,
+        "context_ids": [
+          "thayir-04::structure::3",
+          "thayir-04::structure::0",
+          "thayir-04::structure::2",
+          "thayir-04::structure::1",
+          "dosa-batter-02::structure::3"
+        ],
+        "scores": [
+          0.0328,
+          0.0323,
+          0.0315,
+          0.0315,
+          0.0305
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "tools",
+        "latency_ms": 2.7,
+        "calls": [
+          {
+            "tool": "recipes.substitute_ingredient",
+            "args": {
+              "recipe_id": "thayir-04",
+              "allergen": "dairy"
+            },
+            "is_error": false,
+            "result": "{\n  \"recipe_id\": \"thayir-04\",\n  \"allergen_removed\": \"dairy\",\n  \"swaps\": [\n    {\n      \"from\": \"Whole milk (full-fat)\",\n      \"options\": [\n        {\n          \"to\": \"cashew milk\",\n          \"carries_allergen\": \"nuts\"\n        },\n        {\n          \"to\": \"oat milk\",\n          \"carries_allergen\": \"gluten\"\n        },\n        {\n          \"to\": \"soy milk\",\n          \"carries_allergen\": \"soy\"\n        }\n      ]\n    },\n    {\n      \"from\": \"Live curd from the previous batch\",\n      \"options\": [\n        {\n          \"to\": \"cashew curd starter\",\n          \"carries_allergen\": \"nuts\"\n        },\n        {\n          \"to\": \"coconut yoghurt starter\",\n          \"carries_allergen\": \"coconut\"\n        }\n      ]\n    }\n  ],\n  \"note\": \"each option lists the allergen it carries; pick one the request permits\"\n}"
+          }
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "generation",
+        "latency_ms": 4418.4,
+        "throttle_wait_ms": 2565.2,
+        "model": "gemini-flash-lite-latest",
+        "prompt_tokens": 837,
+        "completion_tokens": 328,
+        "tokens": 1165,
+        "cost_usd": 0.0002149
+      }
+    ],
+    "output": "To make the **Thayir (Homemade Curd)** recipe dairy-free, you will need to swap both the milk and the starter curd for plant-based alternatives [recipes.substitute_ingredient]. \n\nHere are the best options available depending on your dietary needs:\n\n*   **For the Whole Milk (1000g):**\n    *   **Soy milk:** Usually yields the most traditional texture and thickness for plant-based curds. *(Carries soy)* [recipes.substitute_ingredient]\n    *   **Cashew milk:** Creates a rich and creamy texture. *(Carries nuts)* [recipes.substitute_ingredient]\n    *   **Oat milk:** A great alternative, but check the label if you need to keep it strictly gluten-free. *(Carries gluten)* [recipes.substitute_ingredient]\n\n*   **For the Live Curd Starter (30g):**\n    *   **Cashew curd starter** *(Carries nuts)* [recipes.substitute_ingredient]\n    *   **Coconut yoghurt starter** *(Carries coconut)* [recipes.substitute_ingredient]\n    *(Note: Ensure whatever plant-based starter you use contains active live cultures so the curd can set properly!)*\n\n**A quick tip for making plant-based curds:** Plant milks can sometimes behave a bit differently than dairy milk. You may want to experiment slightly with the incubation temperature or time to get that perfect jiggle and release of whey mentioned in the original method [thayir-04::structure::2].",
+    "latency_ms_total": 4696.1,
+    "tokens_total": 1165,
+    "cost_usd_total": 0.0002149,
+    "status": "ok"
+  },
+  {
+    "trace_id": "1df50085bf02",
+    "ts": "2026-10-06T19:31:06+00:00",
+    "user_id": "u000",
+    "prompt_version": "p-v2",
+    "input_type": "substitution",
+    "query": "Can I make thayir without dairy?",
+    "detected": {
+      "recipe_id": "thayir-04",
+      "banned": [
+        "dairy"
+      ],
+      "factor": null
+    },
+    "spans": [
+      {
+        "name": "retrieval",
+        "latency_ms": 261.2,
+        "context_ids": [
+          "thayir-04::structure::3",
+          "thayir-04::structure::2",
+          "thayir-04::structure::0",
+          "thayir-04::structure::1",
+          "idli-batter-01::structure::3"
+        ],
+        "scores": [
+          0.0328,
+          0.0318,
+          0.0318,
+          0.0317,
+          0.0296
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "tools",
+        "latency_ms": 1.6,
+        "calls": [
+          {
+            "tool": "recipes.substitute_ingredient",
+            "args": {
+              "recipe_id": "thayir-04",
+              "allergen": "dairy"
+            },
+            "is_error": false,
+            "result": "{\n  \"recipe_id\": \"thayir-04\",\n  \"allergen_removed\": \"dairy\",\n  \"swaps\": [\n    {\n      \"from\": \"Whole milk (full-fat)\",\n      \"options\": [\n        {\n          \"to\": \"cashew milk\",\n          \"carries_allergen\": \"nuts\"\n        },\n        {\n          \"to\": \"oat milk\",\n          \"carries_allergen\": \"gluten\"\n        },\n        {\n          \"to\": \"soy milk\",\n          \"carries_allergen\": \"soy\"\n        }\n      ]\n    },\n    {\n      \"from\": \"Live curd from the previous batch\",\n      \"options\": [\n        {\n          \"to\": \"cashew curd starter\",\n          \"carries_allergen\": \"nuts\"\n        },\n        {\n          \"to\": \"coconut yoghurt starter\",\n          \"carries_allergen\": \"coconut\"\n        }\n      ]\n    }\n  ],\n  \"note\": \"each option lists the allergen it carries; pick one the request permits\"\n}"
+          }
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "generation",
+        "latency_ms": 3819.7,
+        "throttle_wait_ms": 2384.5,
+        "model": "gemini-flash-lite-latest",
+        "prompt_tokens": 838,
+        "completion_tokens": 275,
+        "tokens": 1113,
+        "cost_usd": 0.0001938
+      }
+    ],
+    "output": "Yes, you can make a dairy-free version of thayir! While traditional homemade curd contains dairy [thayir-04::structure::3], you can substitute the whole milk and live curd starter with plant-based alternatives [recipes.substitute_ingredient]. \n\nHere are the dairy-free swap options available:\n\n* **For the Whole Milk (1000g):**\n  * **Cashew milk** (carries tree nut allergens) [recipes.substitute_ingredient]\n  * **Oat milk** (carries gluten) [recipes.substitute_ingredient]\n  * **Soy milk** (carries soy allergens) [recipes.substitute_ingredient]\n\n* **For the Live Curd Starter (30g):**\n  * **Cashew curd starter** (carries tree nut allergens) [recipes.substitute_ingredient]\n  * **Coconut yoghurt starter** (carries coconut allergens) [recipes.substitute_ingredient]\n\nJust pick the options that fit your dietary needs and allergies [recipes.substitute_ingredient], and follow the standard method of heating, cooling to the right temperature, mixing in your plant-based starter, and letting it set undisturbed for 6 to 8 hours [thayir-04::structure::2]!",
+    "latency_ms_total": 4082.6,
+    "tokens_total": 1113,
+    "cost_usd_total": 0.0001938,
+    "status": "ok"
+  },
+  {
+    "trace_id": "386ce076eb41",
+    "ts": "2026-10-06T19:31:11+00:00",
+    "user_id": "u000",
+    "prompt_version": "p-v2",
+    "input_type": "substitution",
+    "query": "Dairy-free swap for the buttermilk in ragi koozh?",
+    "detected": {
+      "recipe_id": "ragi-koozh-05",
+      "banned": [
+        "dairy"
+      ],
+      "factor": null
+    },
+    "spans": [
+      {
+        "name": "retrieval",
+        "latency_ms": 238.0,
+        "context_ids": [
+          "ragi-koozh-05::structure::3",
+          "ragi-koozh-05::structure::2",
+          "ragi-koozh-05::structure::0",
+          "ragi-koozh-05::structure::1",
+          "dosa-batter-02::structure::3"
+        ],
+        "scores": [
+          0.0328,
+          0.032,
+          0.0318,
+          0.0315,
+          0.0303
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "tools",
+        "latency_ms": 2.1,
+        "calls": [
+          {
+            "tool": "recipes.substitute_ingredient",
+            "args": {
+              "recipe_id": "ragi-koozh-05",
+              "allergen": "dairy"
+            },
+            "is_error": false,
+            "result": "{\n  \"recipe_id\": \"ragi-koozh-05\",\n  \"allergen_removed\": \"dairy\",\n  \"swaps\": [],\n  \"note\": \"each option lists the allergen it carries; pick one the request permits\"\n}"
+          }
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "generation",
+        "latency_ms": 4242.7,
+        "throttle_wait_ms": 2825.8,
+        "model": "gemini-flash-lite-latest",
+        "prompt_tokens": 730,
+        "completion_tokens": 165,
+        "tokens": 895,
+        "cost_usd": 0.000139
+      }
+    ],
+    "output": "To keep your Ragi Koozh completely dairy-free, you can simply omit the buttermilk [ragi-koozh-05::structure::3], as the porridge naturally develops a pleasantly sour, fermented flavor during its overnight rest and secondary fermentation [ragi-koozh-05::structure::2]. \n\nIf you miss the creamy tang that buttermilk adds, you can easily substitute it with a plant-based alternative such as unsweetened plain coconut yogurt whisked with a little water, or a plain dairy-free yogurt (like almond or soy yogurt) thinned out to a drinkable consistency. \n\nEnjoy it traditionally served alongside sliced shallots, green chilli, and curd chilli (*mor milagai*) [ragi-koozh-05::structure::1]!",
+    "latency_ms_total": 4482.9,
+    "tokens_total": 895,
+    "cost_usd_total": 0.000139,
+    "status": "ok"
+  },
+  {
+    "trace_id": "25ed8df4cab7",
+    "ts": "2026-10-06T19:31:15+00:00",
+    "user_id": "u000",
+    "prompt_version": "p-v1",
+    "input_type": "substitution",
+    "query": "I'm dairy-free. How should I serve ragi koozh?",
+    "detected": {
+      "recipe_id": "ragi-koozh-05",
+      "banned": [
+        "dairy"
+      ],
+      "factor": null
+    },
+    "spans": [
+      {
+        "name": "retrieval",
+        "latency_ms": 840.0,
+        "context_ids": [
+          "ragi-koozh-05::structure::1",
+          "ragi-koozh-05::structure::3",
+          "ragi-koozh-05::structure::2",
+          "ragi-koozh-05::structure::0",
+          "idli-batter-01::structure::3"
+        ],
+        "scores": [
+          0.0323,
+          0.032,
+          0.0315,
+          0.0315,
+          0.0303
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "tools",
+        "latency_ms": 3.9,
+        "calls": [
+          {
+            "tool": "recipes.substitute_ingredient",
+            "args": {
+              "recipe_id": "ragi-koozh-05",
+              "allergen": "dairy"
+            },
+            "is_error": false,
+            "result": "{\n  \"recipe_id\": \"ragi-koozh-05\",\n  \"allergen_removed\": \"dairy\",\n  \"swaps\": [],\n  \"note\": \"each option lists the allergen it carries; pick one the request permits\"\n}"
+          }
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "generation",
+        "latency_ms": 3192.1,
+        "throttle_wait_ms": 2239.8,
+        "model": "gemini-flash-lite-latest",
+        "prompt_tokens": 719,
+        "completion_tokens": 96,
+        "tokens": 815,
+        "cost_usd": 0.0001103
+      }
+    ],
+    "output": "As written, Ragi Koozh is vegan and gluten-free [ragi-koozh-05::structure::3]. You can serve it with sliced shallots, green chilli, and curd chilli (mor milagai) [ragi-koozh-05::structure::1]. \n\nNote that while it is often served with buttermilk stirred in, that version contains dairy [ragi-koozh-05::structure::3].",
+    "latency_ms_total": 4036.3,
+    "tokens_total": 815,
+    "cost_usd_total": 0.0001103,
+    "status": "ok"
+  },
+  {
+    "trace_id": "e63a9fee39b1",
+    "ts": "2026-10-06T19:31:20+00:00",
+    "user_id": "u000",
+    "prompt_version": "p-v1",
+    "input_type": "substitution",
+    "query": "Make the thayir curd recipe dairy-free",
+    "detected": {
+      "recipe_id": "thayir-04",
+      "banned": [
+        "dairy"
+      ],
+      "factor": null
+    },
+    "spans": [
+      {
+        "name": "retrieval",
+        "latency_ms": 856.4,
+        "context_ids": [
+          "thayir-04::structure::3",
+          "thayir-04::structure::0",
+          "thayir-04::structure::2",
+          "thayir-04::structure::1",
+          "dosa-batter-02::structure::3"
+        ],
+        "scores": [
+          0.0328,
+          0.0323,
+          0.0315,
+          0.0315,
+          0.0305
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "tools",
+        "latency_ms": 7.5,
+        "calls": [
+          {
+            "tool": "recipes.substitute_ingredient",
+            "args": {
+              "recipe_id": "thayir-04",
+              "allergen": "dairy"
+            },
+            "is_error": false,
+            "result": "{\n  \"recipe_id\": \"thayir-04\",\n  \"allergen_removed\": \"dairy\",\n  \"swaps\": [\n    {\n      \"from\": \"Whole milk (full-fat)\",\n      \"options\": [\n        {\n          \"to\": \"cashew milk\",\n          \"carries_allergen\": \"nuts\"\n        },\n        {\n          \"to\": \"oat milk\",\n          \"carries_allergen\": \"gluten\"\n        },\n        {\n          \"to\": \"soy milk\",\n          \"carries_allergen\": \"soy\"\n        }\n      ]\n    },\n    {\n      \"from\": \"Live curd from the previous batch\",\n      \"options\": [\n        {\n          \"to\": \"cashew curd starter\",\n          \"carries_allergen\": \"nuts\"\n        },\n        {\n          \"to\": \"coconut yoghurt starter\",\n          \"carries_allergen\": \"coconut\"\n        }\n      ]\n    }\n  ],\n  \"note\": \"each option lists the allergen it carries; pick one the request permits\"\n}"
+          }
+        ],
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      {
+        "name": "generation",
+        "latency_ms": 3662.4,
+        "throttle_wait_ms": 2683.8,
+        "model": "gemini-flash-lite-latest",
+        "prompt_tokens": 821,
+        "completion_tokens": 144,
+        "tokens": 965,
+        "cost_usd": 0.0001397
+      }
+    ],
+    "output": "To make the Thayir recipe dairy-free, you can substitute the ingredients with the following options:\n\n* **Whole milk (full-fat)** can be replaced with:\n  * Cashew milk (carries nuts) [recipes.substitute_ingredient]\n  * Oat milk (carries gluten) [recipes.substitute_ingredient]\n  * Soy milk (carries soy) [recipes.substitute_ingredient]\n\n* **Live curd from the previous batch** can be replaced with:\n  * Cashew curd starter (carries nuts) [recipes.substitute_ingredient]\n  * Coconut yoghurt starter (carries coconut) [recipes.substitute_ingredient]",
+    "latency_ms_total": 4526.8,
+    "tokens_total": 965,
+    "cost_usd_total": 0.0001397,
+    "status": "ok"
+  }
+]

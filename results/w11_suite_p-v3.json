@@ -1,0 +1,241 @@
+{
+  "version": "p-v3",
+  "pass": 21,
+  "total": 26,
+  "rows": [
+    {
+      "case_id": "c01",
+      "question": "How much salt?",
+      "pass": false,
+      "judge": "FAIL",
+      "judge_reason": "The assistant hallucinated a dairy rule for curd chilli that is not present in the provided context chunks.",
+      "A5": true,
+      "output": "Hello! Since you didn't mention which specific recipe you are making, here is the amount of salt needed for each of the recipes I have on hand:\n\n* **Ragi Koozh:** 12g of rock salt (which is 4% of the ragi flour weight) [ragi-koozh-05::structure::1]. *(Note: If you are serving this dairy-free, skip the traditional side of curd chilli, as it contains dairy) [ragi-koozh-05::structure::1, Dairy rule].*\n* **Idli Batter (2kg batch):** 20g of rock salt (2% of the rice weight) [idli-batter-01::structure::1].\n* **Crisp Dosa Batter:** 18g of fine sea salt (2.4% of the rice weight) [dosa-batter-02::structure::1].\n* **Appam:** 7g of fine sea salt (1.4% of the rice weight) [appam-03::structure::1].\n* **Kadumanga Achar (Mango Pickle):** 150g of crystal sea salt (15% of the mango weight) [kadumanga-06::structure::1].\n\nLet me know which one you are cooking up, and I'll be happy to help you with the rest of the steps!"
+    },
+    {
+      "case_id": "c02",
+      "question": "Is it done?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly and completely summarizes the \"done\" criteria for the dishes mentioned in the context chunks.",
+      "A5": true,
+      "output": "Based on the recipes provided, whether something \"is done\" depends on what you are making! Here is how to tell when each dish is ready:\n\n*   **Appam:** It is done when the edges release from the pan and the soft, spongy centre springs back (cook for about 2 minutes covered) [appam-03::structure::2].\n*   **Thayir (Homemade Curd):** It is done when it jiggles as one mass and the surface releases a little clear whey (after 6 to 8 hours of undisturbed setting) [thayir-04::structure::2].\n*   **Kadumanga Achar (Mango Pickle):** The initial ferment is done over 10 to 14 days when the mangoes turn olive-drab and tangy in their own brine. After adding the spiced oil, the pickle is eatable in a week, though it matures over a month [kadumanga-06::structure::2].\n*   **Ragi Koozh:** The porridge is done cooking when it thickens and turns a glossy chocolate-brown (after simmering for 8 to 10 minutes) [ragi-koozh-05::structure::2].\n\nIf you are asking about a specific recipe not listed here, just let me know!"
+    },
+    {
+      "case_id": "c03",
+      "question": "Can I make it faster?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly asks for clarification given multiple recipes are present, and provides safe, grounded advice based on the provided text.",
+      "A5": true,
+      "output": "Which recipe are you looking to speed up? Let me know which one you are making (like the idli batter, dosa batter, or ragi koozh), and I can give you some practical tips! \n\nIn general, fermentation-based traditional recipes like idlis, dosas, and koorzh rely on natural wild fermentation and soaking times (usually 4 to 14 hours) to develop their proper texture, rise, and sour flavor. While you can't rush the actual soaking and fermenting science without altering the results, here are a few general home-cooking shortcuts and alternatives to help you save time:\n\n*   **For Batters (Idli/Dosa):** If you are in a rush and need a faster fermentation in cooler weather, you can place your covered batter bowl inside a switched-off oven with just the oven light turned on, or wrap it near a gentle warmth source (similar to how the curd sets) [thayir-04::structure::2]. \n*   **Alternative:** If you don't have hours to wait for batters to ferment, you can look for instant alternatives (like instant semolina/sooji dosas or idlis made with fruit salt/eno), though you won't get the classic traditional sourdough profile of the fermented batters provided here.\n\nTell me which dish you have in mind, and we can find the best way to streamline it for you!"
+    },
+    {
+      "case_id": "c04",
+      "question": "What temperature?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly identified that the question was ambiguous and provided the temperatures available across the relevant recipes while asking for clarification.",
+      "A5": true,
+      "output": "It looks like your question about the temperature was a bit brief! Depending on which recipe you are looking at, here are the key temperatures mentioned:\n\n* **Homemade Curd (Thayir):** Cool the boiled milk to **40–43°C**. It should feel distinctly warm, not hot, on a clean fingertip held for ten seconds [thayir-04::structure::2]. It should then ferment at around **30°C** for 6 to 8 hours [thayir-04::structure::2].\n* **Appam (Lace-edged hoppers):** The yeast should be mixed in **warm water** (if you aren't using fresh toddy) [appam-03::structure::1, appam-03::structure::2]. \n\nIf you meant a different recipe or have a specific question about cooling or fermenting, just let me know!"
+    },
+    {
+      "case_id": "c05",
+      "question": "How long to ferment?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "Every claim is directly supported by the text chunks, and the answer completely and accurately covers the fermentation times for all recipes provided.",
+      "A5": true,
+      "output": "Fermentation times vary depending on what you are making:\n\n* **Ragi Koozh:** Leave the ragi slurry to ferment overnight (10 to 12 hours) in a clay pot at room temperature [ragi-koozh-05::structure::2]. (It is also traditionally enjoyed after a second, gentler overnight fermentation in the pot [ragi-koozh-05::structure::2]).\n* **Idli Batter:** Ferment for 8 to 12 hours at 28–32°C until the batter is doubled and domed [idli-batter-01::structure::2].\n* **Thayir (Curd):** Leave the inoculated milk completely undisturbed for 6 to 8 hours at around 30°C to set [thayir-04::structure::2].\n* **Dosa Batter:** Ferment for 10 to 14 hours at 26–30°C until risen by half and sour-smelling [dosa-batter-02::structure::2].\n* **Appam:** Ferment for 8 hours at room temperature until bubbly and risen [appam-03::structure::2]."
+    },
+    {
+      "case_id": "c06",
+      "question": "How should I store koozh after cooking?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "Reasoning: Every claim is supported by the context chunks, it answers the storage/next-day usage question directly, and the dietary advice correctly interprets the allergen and ingredient notes from the text.",
+      "A5": true,
+      "output": "Based on the recipe instructions, after cooking the Ragi Koozh, you should let it **cool to lukewarm and thin it with water to a drinkable consistency** [ragi-koozh-05::structure::2]. \n\nTraditionally, it is then **enjoyed the next day** after being stored in the pot, as a second, gentler fermentation overnight deepens its pleasant sourness (just like the summer street food sold cold from mud pots) [ragi-koozh-05::structure::2]. \n\n**Serving Note for Dairy-Free/Vegan Diets:** \nThe recipe traditionally suggests serving koozh with sliced shallots, green chilli, and curd chilli (*mor milagai*). Please note that *mor milagai* is made with curd, which is a dairy product [ragi-koozh-05::structure::1]. If you are following a dairy-free or vegan diet, you should leave the curd chilli out and enjoy your koozh with just the shallots and green chilli!"
+    },
+    {
+      "case_id": "c07",
+      "question": "My batter didn't rise, what went wrong?",
+      "pass": false,
+      "judge": "FAIL",
+      "judge_reason": "The answer relies heavily on outside general knowledge (oven light proofing, iodized salt, chlorinated water, baking soda fix) rather than sticking strictly to the provided recipe chunks.",
+      "A5": true,
+      "output": "Hello! I'd be happy to help you troubleshoot your batter. \n\nBased on the recipes provided and general cooking knowledge, here are the most common reasons why a fermented batter (like dosa or idli batter) fails to rise:\n\n1. **Temperature is too low:** Fermentation relies on wild yeasts and bacteria that thrive in warmth. The ideal temperature range for fermentation is **26–30°C (79–86°F)** [dosa-batter-02::structure::2]. If your kitchen is too cool, the microbial activity slows down significantly or stops. *Alternative:* Try placing your batter in a warmer spot, such as inside your oven with just the oven light turned on, or inside an Instant Pot on the \"yogurt\" or proofing setting if you have one.\n2. **Inadequate soaking or grinding time:** The lentils and rice need to be soaked long enough (typically around 5 hours for dosa [dosa-batter-02::structure::2]) and ground to the right consistency. \n3. **The salt concentration was off:** Salt regulates fermentation. If too little salt was used, the batter might over-ferment and collapse, but if too much iodized/table salt was used, it can inhibit the good bacteria entirely. (Rock salt or sea salt is usually preferred).\n4. **Water temperature or quality:** Using very cold water for grinding can chill the batter, and heavily chlorinated tap water can sometimes inhibit the natural yeasts.\n\n**What you can do now:** \nIf your batter hasn't risen after waiting longer than usual, try moving it to a warmer spot for a few more hours. Even if it doesn't puff up massively, as long as it smells slightly pleasant and sour-smelling [dosa-batter-02::structure::2], you can still cook with it—though you might need to add a tiny pinch of baking soda just before cooking to help it fluff up in the pan!"
+    },
+    {
+      "case_id": "c08",
+      "question": "How do I keep the mango pickle from spoiling?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "Every claim is directly supported by the context chunks, and it correctly answers how to keep the pickle from spoiling using all relevant details from the text.",
+      "A5": true,
+      "output": "To keep your Kadumanga Achar (Kerala fermented tender mango pickle) from spoiling and ensure it lasts for a whole year at room temperature, follow these key steps based on the recipe:\n\n1. **Keep it completely dry:** Make sure no water touches the mangoes at any stage of preparation [kadumanga-06::structure::2]. \n2. **Use clean utensils:** Only ever use completely dry spoons to scoop out the pickle from the jar [kadumanga-06::structure::2]. Introduction of moisture or wet utensils is the quickest way for a pickle to spoil.\n3. **Store properly:** Store the pickle in a sterilised *bharani* (ceramic pickle jar) with a closed lid [kadumanga-06::structure::2]. \n\nFollowing these precautions will help your pickle safely mature and stay preserved for up to a year!"
+    },
+    {
+      "case_id": "c09",
+      "question": "My kitchen is cold and the curd will not set, what can I do?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly and completely answers the question using only the provided context chunk, giving actionable advice for cold weather.",
+      "A5": true,
+      "output": "If your kitchen is cold and your curd is having trouble setting, you can try these practical alternatives based on the recipe instructions:\n\n* **Use a switched-off oven:** Set your pot of milk inside a switched-off oven with the oven light turned on [thayir-04::structure::2]. The gentle warmth from the light bulb creates a cozy environment for the culture to work.\n* **Wrap it up:** Wrap the pot tightly in a thick towel and place it next to a hot-water bottle [thayir-04::structure::2] to keep it warm while it sets undisturbed for 6 to 8 hours. \n\nHappy cooking! Let me know if you need any other tips."
+    },
+    {
+      "case_id": "c10",
+      "question": "What rice do I use for appam?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly identifies the rice used for appam with its exact quantity and preparation details as found in the chunks.",
+      "A5": true,
+      "output": "For appam, you should use **raw rice (pachari)** [appam-03::structure::1]. \n\nThe recipe calls for 500g of raw rice (pachari), which needs to be soaked for 4 hours before grinding [appam-03::structure::1, appam-03::structure::2]."
+    },
+    {
+      "case_id": "c11",
+      "question": "What flour do I need for ragi koozh?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The answer correctly identifies the required flour (ragi/finger millet flour) along with the broken rice specified in the text chunks, with complete and accurate details.",
+      "A5": true,
+      "output": "For Ragi Koozh, you need **ragi flour (finger millet flour)** [ragi-koozh-05::structure::1]. \n\nThe recipe also calls for **broken rice (noi arisi)** [ragi-koozh-05::structure::1], which is cooked along with the millet, but the main flour for the porridge is ragi flour."
+    },
+    {
+      "case_id": "c12",
+      "question": "What dal goes into dosa batter?",
+      "pass": false,
+      "judge": "FAIL",
+      "judge_reason": "The citation for the chana dal's purpose points to `dosa-batter-01::structure::1`, which is hallucinated (that chunk does not exist in the context).",
+      "A5": true,
+      "output": "Two types of dal go into the Crisp Dosa Batter [dosa-batter-02::structure::1]:\n\n1. **Whole white urad dal** (250g, or 33% relative to the rice) [dosa-batter-02::structure::1]\n2. **Chana dal** (30g, or 4% relative to the rice) [dosa-batter-02::structure::1]\n\nThe chana dal is added to help give the dosa its characteristic color [dosa-batter-01::structure::1 / dosa-batter-02::structure::1]!"
+    },
+    {
+      "case_id": "c13",
+      "question": "Which recipe has the highest salt percentage?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly notes that only one recipe provides a salt percentage, making a definitive comparison impossible, while acknowledging the other recipe lacks the necessary data.",
+      "A5": true,
+      "output": "Based on the provided recipes, the **Crisp Dosa Batter** has a salt percentage of **2.4%** (relative to the rice weight) [dosa-batter-02::structure::1]. \n\n*(Note: The Ragi Koozh recipe mentions adding \"rock salt at the end\" [ragi-koozh-05::structure::2], but does not provide a specific percentage or weight for it in the given text.)*"
+    },
+    {
+      "case_id": "c14",
+      "question": "Which recipe ferments for the longest time?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The answer correctly identifies the recipe with the longest fermentation time and supports its claim with accurate details from the text.",
+      "A5": true,
+      "output": "Based on the recipes provided, the **Kadumanga Achar (Kerala fermented tender mango pickle)** ferments for the longest time, taking **10 to 14 days** in salt to draw out the brine and ferment [kadumanga-06::structure::2]. \n\nFor comparison, the other fermentation times are:\n* **Ragi Koozh:** Overnight (10 to 12 hours for the initial slurry, plus an optional second day of fermentation) [ragi-koozh-05::structure::2]\n* **Idli Batter:** 8 to 12 hours [idli-batter-01::structure::2]\n* **Thayir (Curd):** 6 to 8 hours [thayir-04::structure::2]\n* **Appam:** 8 hours [appam-03::structure::2]"
+    },
+    {
+      "case_id": "c15",
+      "question": "Which of these recipes uses the most water?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The assistant accurately compared the water amounts from the provided recipe chunks and correctly identified Ragi Koozh as using the most water, with fully supported reasoning.",
+      "A5": true,
+      "output": "Based on the provided recipes, the **Ragi Koozh** uses the most water by far [ragi-koozh-05::structure::1]. \n\nHere is how the water compares across the recipes that explicitly list water in their ingredients:\n* **Ragi Koozh:** Uses a total of **1,500g** of water (500g for the slurry and 1,000g for cooking the broken rice), plus extra water added at the end to thin it to a drinkable consistency [ragi-koozh-05::structure::1, ragi-koozh-05::structure::2].\n* **Idli Batter:** Uses **~720g** of water specifically for grinding [idli-batter-01::structure::1]. \n* **Appam** and **Crisp Dosa Batter:** Do not list plain water in their ingredient tables (though Appam uses fresh thick coconut milk, and both require soaking/grinding water not quantified in the main ingredient lists) [appam-03::structure::1, dosa-batter-02::structure::1]. \n\nSo, Ragi Koozh is definitely the winner for the highest water content!"
+    },
+    {
+      "case_id": "c16",
+      "question": "Which oil is used on the dosa tawa?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The answer correctly identifies gingelly (sesame) oil and provides the safe substitution from the context chunks without adding unsupported information.",
+      "A5": true,
+      "output": "The oil used on the dosa tawa is **gingelly (sesame) oil** [dosa-batter-02::structure::2]. \n\nIf you have a sesame allergy, you can easily substitute it with a neutral cooking oil instead [dosa-batter-02::structure::3]!"
+    },
+    {
+      "case_id": "c17",
+      "question": "Is there sesame in the mango pickle?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The answer correctly identifies that sesame is in the mango pickle, supported by both the allergen note and the ingredients list showing gingelly (sesame) oil.",
+      "A5": true,
+      "output": "Yes, there is sesame in the mango pickle! The recipe uses gingelly (sesame) oil [kadumanga-06::structure::1, kadumanga-06::structure::3]."
+    },
+    {
+      "case_id": "c18",
+      "question": "Does the idli recipe use asafoetida?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The answer correctly states that asafoetida is not in the ingredients list while accurately referencing the allergen note about adding it, both of which are fully supported by the provided context chunks.",
+      "A5": true,
+      "output": "Based on the recipe provided, the idli batter recipe does not list asafoetida (hing) in its ingredients [idli-batter-01::structure::1]. \n\nHowever, the allergen note mentions that if you *do* decide to add asafoetida, you should check the label, as most Indian brands are bound with wheat flour [idli-batter-01::structure::3]."
+    },
+    {
+      "case_id": "c19",
+      "question": "Should the appam batter rest after adding coconut milk?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The answer accurately reflects the recipe method from the context, noting that the remaining coconut milk is added just before cooking rather than resting afterwards.",
+      "A5": true,
+      "output": "Yes! According to the method, you add **half** of the coconut milk *before* the fermentation process, letting the batter ferment for 8 hours at room temperature until bubbly and risen [appam-03::structure::2]. \n\nThen, **just before cooking**, you stir in the *remaining* coconut milk along with the fine sea salt [appam-03::structure::2]. So while it doesn't need a long resting period after adding that final batch of coconut milk, you stir it right in at the end before heading straight to the stove to cook your appams!"
+    },
+    {
+      "case_id": "c20",
+      "question": "Do I need to stir the idli batter after it has risen?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The answer correctly states not to stir the idli batter based on the provided text and provides safe, grounded instructions for handling it.",
+      "A5": true,
+      "output": "No, you should **not** stir the idli batter after it has risen [idli-batter-01::structure::2]. \n\nWhen scooping it into the moulds, handle it gently to keep all those lovely air bubbles intact so your idlis turn out light and fluffy [idli-batter-01::structure::2]!"
+    },
+    {
+      "case_id": "c21",
+      "question": "Can I use the same batter for both idli and dosa?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly uses the provided text to explain the differences between the two batters and gives safe, logical adaptation advice based on the text.",
+      "A5": true,
+      "output": "Based on the provided recipes, **no, you should not use the exact same batter for both idli and dosa**, because they are prepared with different consistencies, proportions, and grinding methods:\n\n* **Idli Batter:** Ground to a slightly grainy, fine rava-like texture. It is thick enough to hold a soft peak when the urad dal is whipped with ice-cold water, and it rises to a fluffy, doubled, domed state that you scoop gently into moulds without stirring [idli-batter-01::structure::2]. \n* **Dosa Batter:** Ground to a smooth, flowing consistency that is *thinner* than idli batter [dosa-batter-02::structure::2]. It typically includes extra ingredients like chana dal and poha, and is thinned further to a pouring-cream consistency before being spread thin on a tawa [dosa-batter-02::structure::2].\n\n### Practical Alternative for Home Cooks:\nIf you have already made a batch of idli or dosa batter and want to use it for the other, here is how you can adapt it:\n* **Turning Idli batter into Dosa batter:** Because idli batter is quite thick, you can thin it down significantly with water to reach a pouring-cream consistency [dosa-batter-02::structure::2]. While the texture might not be *identical* to a dedicated crisp dosa batter (which includes poha and chana dal), it will work well for making quick dosas on a hot tawa!\n* **Turning Dosa batter into Idli:** This is trickier because dosa batter is much thinner and smoother. If you try to steam it as-is, the idlis will likely turn out dense and flat rather than light and fluffy. It is best to stick to making dosas with dosa batter."
+    },
+    {
+      "case_id": "c22",
+      "question": "How much rock salt goes into the idli batter?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The answer correctly extracts the exact rock salt quantity and percentage from the provided context chunks and cites them properly.",
+      "A5": true,
+      "output": "For the 2kg batch of idli batter, you need **20 grams** of rock salt (which is 2% of the rice weight) [idli-batter-01::structure::1]."
+    },
+    {
+      "case_id": "c23",
+      "question": "How long should idli batter ferment?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The answer is fully grounded in the provided chunks and provides the exact fermentation time and conditions for idli batter.",
+      "A5": true,
+      "output": "According to the recipe, idli batter should ferment for **8 to 12 hours** at a temperature of 28–32°C until it has doubled in size and is domed [idli-batter-01::structure::2]."
+    },
+    {
+      "case_id": "c24",
+      "question": "How much mustard seed goes in the mango pickle?",
+      "pass": true,
+      "judge": "PASS",
+      "judge_reason": "The answer correctly states the exact quantity of mustard seeds from the recipe chunk along with its proportion and base ingredient.",
+      "A5": true,
+      "output": "Based on the recipe, you will need **10g** of mustard seeds for 1000g of tender baby mangoes, which is 1% of the mango weight [kadumanga-06::structure::1]."
+    },
+    {
+      "case_id": "c25",
+      "question": "How many calories are in one idli?",
+      "pass": false,
+      "judge": "FAIL",
+      "judge_reason": "The assistant imported outside information regarding calorie counts that was not contained in the recipe chunks.",
+      "A5": true,
+      "output": "I'm sorry, but the recipe details I have for the idli batter don't include calorie information [idli-batter-01::structure::1]. \n\nHowever, as a general guide, a standard plain idli (made from a rice and urad dal batter like this one) typically contains around 39 to 60 calories, depending on its exact size. \n\nIf you'd like to make them, the recipe is naturally vegan and gluten-free [idli-batter-01::structure::3], and it yields a lovely, fluffy batter [idli-batter-01::structure::2] if you need any tips on the soaking or grinding process!"
+    },
+    {
+      "case_id": "w11_r01",
+      "question": "Give me a dairy-free version of ragi koozh with the usual sides",
+      "pass": false,
+      "judge": "FAIL",
+      "judge_reason": "The assistant introduces outside knowledge and unsupported claims (suggesting coconut or soy yogurt as plant-based dairy substitutes) not found in the provided chunks.",
+      "A5": false,
+      "output": "Here is how you can enjoy a completely dairy-free version of Ragi Koozh, along with its traditional accompaniments:\n\n### Dairy-Free Ragi Koozh\n\nAs written, the Ragi Koozh porridge itself is naturally **vegan and dairy-free** [ragi-koozh-05::structure::3]. \n\n**Ingredients:**\n* Ragi (finger millet) flour: 300g [ragi-koozh-05::structure::1]\n* Broken rice (noi arisi): 100g [ragi-koozh-05::structure::1]\n* Water: 1500g [ragi-koozh-05::structure::1]\n* Rock salt: 12g [ragi-koozh-05::structure::1]\n\n**Method:**\n1. Whisk the ragi flour into 500g of the water until lump-free. Leave the slurry to ferment overnight (10 to 12 hours) in a clay pot at room temperature until it smells pleasantly sour and shows fine bubbles [ragi-koozh-05::structure::2].\n2. Cook the broken rice in the remaining 1000g of water until completely soft [ragi-koozh-05::structure::2].\n3. Stir the fermented ragi slurry into the simmering rice in a steady stream, whisking constantly, and cook for 8 to 10 minutes until the porridge thickens and turns a glossy chocolate-brown [ragi-koozh-05::structure::2].\n4. Add the rock salt at the end, then cool to lukewarm and thin with water to a drinkable consistency [ragi-koozh-05::structure::2]. *Tip: It is traditionally enjoyed the next day after a second, gentler fermentation in the pot deepens the sourness [ragi-koozh-05::structure::2].*\n\n---\n\n### The Usual Sides (Dairy-Free Adjustments)\n\nRagi koozh is traditionally served with a few classic accompaniments [ragi-koozh-05::structure::1]:\n\n* **Sliced shallots and green chilli:** Completely dairy-free and ready to serve on the side [ragi-koozh-05::structure::1].\n* **A note on buttermilk and curd chilli (*mor milagai*):** The recipe's traditional serving suggestions often include buttermilk stirred in or *mor milagai* [ragi-koozh-05::structure::0, ragi-koozh-05::structure::3]. However, **buttermilk, curd, and *mor milagai* contain dairy** and must be left out for a strictly dairy-free or vegan diet [ragi-koozh-05::structure::3]. \n\n**Practical Alternatives:**\nIf you miss the tangy creaminess that buttermilk usually adds to the koozh, you can stir in a splash of plain, unsweetened **plant yogurt** (such as coconut or soy yogurt) or plant milk just before serving to achieve a similar cooling, creamy effect without any dairy!"
+    }
+  ]
+}
