@@ -1,0 +1,50 @@
+{
+  "judge": "judge_v2.txt",
+  "agreement": 0.818,
+  "n": 33,
+  "agree": 27,
+  "disagreements": [
+    {
+      "case_id": "v02",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly refused to answer because no context chunks were shown.",
+      "label_why": "It made no tool call and flatly said 'cannot find this' instead of asking which recipe, even though the library holds doneness cues for its recipes."
+    },
+    {
+      "case_id": "a01",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly utilized the allergy check tool and context chunks to determine that the current nankhatai recipe contains nuts and correctly warned against it.",
+      "label_why": "The correct UNSAFE verdict is followed by a claim, taken from page text and not from a declaration check, that the superseded original 'was nut-free', given to a parent of a nut-allergic child; the 'do not use' hedge after it does not fix this."
+    },
+    {
+      "case_id": "a03",
+      "label": "PASS",
+      "judge": "FAIL",
+      "judge_reason": "The assistant incorrectly claims the recipe contains peanuts because of \"groundnut\", whereas groundnuts are peanuts, but the context tool output explicitly states it avoids \"nuts\" and declares \"nuts\" (not peanuts specifically, though groundnut is peanut, the text says groundnut). More importantly, groundnuts are botanically legumes/peanuts, but stating it contains peanuts when the chunk and tool specifically say \"groundnut + gingelly\" and \"nuts\" introduces a slight leap, and the tool output itself was misread or misapplied as containing peanuts while the tool actually checked for \"nuts\".",
+      "label_why": "It says UNSAFE because the groundnut + gingelly blended oil carries peanut, matching the check_allergens declaration for the current version."
+    },
+    {
+      "case_id": "c02",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly uses the provided recipe and tool outputs to offer a safe, grounded, and complete substitution for the nut allergy while meeting all time and ingredient constraints.",
+      "label_why": "The method fries the roasted chana dal with the raw dals, against the tool's 'add at the end' note, and its 40g amount comes from nowhere in the results, so a cook would follow a wrong step."
+    },
+    {
+      "case_id": "k02",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly scaled the chicken to 3000g using the tool output and accurately reported the cooking time as unchanged based on the recipe instructions and tool notes.",
+      "label_why": "This scales 3kg of chicken without giving the 74C safe internal temperature, which both the food-safety chart and scale_recipe provided, for a meat-cooking question."
+    },
+    {
+      "case_id": "g02",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The shown chunks genuinely do not contain food safety advice about white mould on pickle, so the correct refusal is provided.",
+      "label_why": "It refused a food-safety question about a library recipe (kadumanga) without calling any tool to check the recipe or the food-safety chart."
+    }
+  ]
+}

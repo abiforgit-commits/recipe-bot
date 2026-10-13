@@ -32,8 +32,14 @@ if os.getenv("GEMINI_API_KEY"):
         base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
     )
     DEFAULT_MODEL = "gemini-flash-lite-latest"  # flash-latest hit its free-tier daily quota
-else:
+elif os.getenv("OPENAI_API_KEY"):
     LLM = OpenAI()
+else:
+    # Week 12 fresh-eyes finding: with no key at all, merely importing this module crashed
+    # commands that never call a model (tools, trajectory, agreement). Now only a real
+    # model call fails, with instructions.
+    LLM = None
+    DEFAULT_MODEL = "gemini-flash-lite-latest"
     DEFAULT_MODEL = "gpt-4o-mini"
 
 
@@ -44,6 +50,9 @@ MIN_INTERVAL = 4.5  # free tier allows ~15 requests/minute
 def call_llm(**kwargs):
     """LLM call with free-tier pacing and retry on quota/congestion errors."""
     import time as _t
+    if LLM is None:
+        raise RuntimeError("No model key: create a .env file with GEMINI_API_KEY=your-key "
+                           "(free key: https://aistudio.google.com/apikey)")
     for attempt in range(1, 8):
         gap = _t.time() - _LAST_CALL[0]
         if gap < MIN_INTERVAL:
@@ -53,7 +62,10 @@ def call_llm(**kwargs):
             return LLM.chat.completions.create(**kwargs)
         except Exception as e:
             msg = str(e)
-            if not any(t in msg for t in ("429", "503", "RESOURCE_EXHAUSTED", "UNAVAILABLE")):
+            # Week 12 seam S12: a dropped connection (machine asleep, DNS blip) used to kill a
+            # whole eval run; it is transient like a 429, so it is retried with backoff too.
+            if not any(t in msg for t in ("429", "503", "RESOURCE_EXHAUSTED", "UNAVAILABLE",
+                                          "Connection error", "getaddrinfo", "timed out")):
                 raise
             m = re.search(r"retryDelay['\":\s]+(\d+)s", msg)
             wait = int(m.group(1)) + 2 if m else 15 * attempt

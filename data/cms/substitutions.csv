@@ -1,0 +1,24 @@
+ingredient,carries,substitute,substitute_carries,kitchen_note
+Whole milk (full-fat),dairy,Cashew milk,nuts,sets softer; test kitchen's first choice for flavour
+Whole milk (full-fat),dairy,Oat milk,gluten,thin set; flagged gluten for cross-contact
+Whole milk (full-fat),dairy,Soy milk,soy,firmest plant set
+Live curd from the previous batch,dairy,Cashew curd starter,nuts,use with a plant milk
+Live curd from the previous batch,dairy,Coconut yoghurt starter,coconut,use with a plant milk
+Gingelly (sesame) oil,sesame,Groundnut oil,nuts,same smoke point
+Gingelly (sesame) oil,sesame,Sunflower oil,none,neutral flavour
+"Gingelly (sesame) oil, for the tawa",sesame,Sunflower oil,none,neutral flavour on the tawa
+Blended oil (groundnut + gingelly),nuts|sesame,Sunflower oil,none,neutral flavour; the pickle keeps the same
+Fresh thick coconut milk,coconut,Almond milk,nuts,lacier edge
+Fresh thick coconut milk,coconut,Oat milk,gluten,flagged gluten for cross-contact
+Fresh thick coconut milk,coconut,Sunflower-seed milk,none,closest body without coconut
+Grated coconut,coconut,Cashew paste,nuts,richer gravy
+Grated coconut,coconut,Roasted chana dal powder,none,thickens the masala the same way
+Mustard seeds,mustard,Nigella seeds,none,different but works in tempering
+Asafoetida (hing),gluten,Gluten-free asafoetida,none,check the certified label
+"Peanuts, raw",nuts,Roasted chana dal,none,keeps the crunch; add at the end
+"Ghee, soft but not melted",dairy,Coconut oil (solid),coconut,biscuits spread more
+"Ghee, soft but not melted",dairy,Vegetable shortening,none,less flavour; add 1g more cardamom
+Ghee and cashew-oil blend (supplier SB-2025),dairy|nuts,"Ghee, soft but not melted",dairy,the pre-2025 fat; removes the nuts but not the dairy
+Ghee and cashew-oil blend (supplier SB-2025),dairy|nuts,Vegetable shortening,none,less flavour; add 1g more cardamom
+Maida (all-purpose flour),gluten,Rice flour and besan (2:1),none,crumblier; reduce to 220g
+Fine semolina (rava),gluten,Fine rice rava,none,same texture

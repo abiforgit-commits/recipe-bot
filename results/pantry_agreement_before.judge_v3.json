@@ -1,0 +1,15 @@
+{
+  "judge": "judge_v3.txt",
+  "agreement": 0.97,
+  "n": 33,
+  "agree": 32,
+  "disagreements": [
+    {
+      "case_id": "g02",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly refused because the context chunks were empty and no tools were called, and food safety regarding mould is not contained in the recipe library chunks.",
+      "label_why": "On a food-safety question about mould on a library recipe, it gave 'cannot find this' without searching the kadumanga recipe or the food-safety chart."
+    }
+  ]
+}

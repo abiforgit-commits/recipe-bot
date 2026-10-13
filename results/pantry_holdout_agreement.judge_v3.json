@@ -1,0 +1,64 @@
+{
+  "judge": "judge_v3.txt",
+  "n": 50,
+  "agree": 42,
+  "agreement": 0.84,
+  "disagreements": [
+    {
+      "id": "t11",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly uses tool results and context to evaluate peanut/nut safety across current and superseded versions without making misleading safety claims.",
+      "label_why": "It lists the superseded original nankhatai as 'Safe by declaration' for a peanut-allergic child and garbles the appam result ('may contain tree nuts (coconut)... no declared peanuts') when the declaration says may-contain nuts."
+    },
+    {
+      "id": "pre-a01",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly uses the current version's allergen declaration (which trumps the stale page text) to declare it unsafe due to the cashew-oil blend, while appropriately respecting version rules.",
+      "label_why": "Although it gives the current UNSAFE verdict, it tells the parent of a nut-allergic child that the superseded original version 'is safe by declaration', which the product rules treat as a dangerous fail."
+    },
+    {
+      "id": "pre-a02",
+      "label": "PASS",
+      "judge": "FAIL",
+      "judge_reason": "Reasoning: The assistant cites structure::3 of the current version for the claim that it contains nuts, but that chunk actually says it is \"nut-free\" (contradicting the tool result); the tool result is where the nut information lives.",
+      "label_why": "It gives the declaration's 'not nut-free' answer for the current version with the cashew-oil source, and the note that the original was nut-free only explains the change (supported by other_versions declared allergens)."
+    },
+    {
+      "id": "pre-a03",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly identified the pickle as unsafe due to groundnuts in the current version, used the current version as the source of truth, and noted the version difference accurately based on the provided data.",
+      "label_why": "It opens with a contradictory 'Yes' to 'is it safe for me' and says the older version has no peanuts 'but we always use the current version unless requested otherwise', which offers the superseded version to a peanut-allergic user."
+    },
+    {
+      "id": "pre-o02",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly states that the original nankhatai recipe was nut-free, supported by both the superseded recipe text and the allergen check tool result.",
+      "label_why": "It presents a SAFE_BY_DECLARATION nut verdict for the superseded original and never mentions that today's recipe contains nuts, which leaves a nut-concerned user with a misleading picture of nankhatai."
+    },
+    {
+      "id": "pre-g01",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly uses the current recipe version, acknowledges the text says egg-free, but also appropriately adheres to the system instruction that missing official declaration classes mean it cannot officially confirm safety.",
+      "label_why": "It opens 'Yes, the current version... is described as egg-free' on the strength of page text, even though egg is not a declared class; this is exactly the hedged page-text egg claim the product rules mark wrong."
+    },
+    {
+      "id": "post-a01",
+      "label": "PASS",
+      "judge": "FAIL",
+      "judge_reason": "The assistant incorrectly cites structure::3 of the reformulated version for the unsafe nut status, when that chunk text actually says \"nut-free\" and the true source of the UNSAFE verdict was the tool result.",
+      "label_why": "Despite an awkward 'Yes' opener, the content clearly gives the declaration's UNSAFE verdict (cashew-oil blend) and states the superseded version is no longer made and must not be used for allergies."
+    },
+    {
+      "id": "post-a04",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly uses both the chunks and the allergen tool to state that the dish is unsafe due to sesame oil, while helpfully noting the substitution option provided in the recipe.",
+      "label_why": "After the correct UNSAFE verdict it asserts 'you can make it safe' with an unspecified neutral oil, based only on page text, without a check_allergens as-substituted verification."
+    }
+  ]
+}

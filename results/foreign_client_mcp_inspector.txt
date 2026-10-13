@@ -1,0 +1,32 @@
+# Our MCP server called by a client that isn't ours: the official MCP Inspector CLI
+# 2026-10-14 00:30 IST   npx @modelcontextprotocol/inspector@latest --cli <python> pantry_server.py ...
+
+## tools/list (names)
+search_recipes
+get_recipe
+check_allergens
+find_substitutes
+scale_recipe
+get_safe_temperature
+
+## tools/call check_allergens(recipe_id=nankhatai-07, avoid=["nuts"])
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"recipe_id\": \"nankhatai-07\",\n  \"version\": \"reformulated-2025\",\n  \"status\": \"current\",\n  \"cite_as\": \"nankhatai-07@reformulated-2025\",\n  \"avoid\": [\n    \"nuts\"\n  ],\n  \"verdict\": \"UNSAFE\",\n  \"contains_avoided\": [\n    \"nuts\"\n  ],\n  \"may_contain_avoided\": [],\n  \"declared_allergens\": [\n    \"dairy\",\n    \"gluten\",\n    \"nuts\"\n  ],\n  \"declared_may_contain\": [],\n  \"sources_of_avoided\": {\n    \"nuts\": [\n      \"Ghee and cashew-oil blend (supplier SB-2025)\"\n    ]\n  },\n  \"source\": \"CMS declaration fields (exact match), not the recipe text\",\n  \"revision_note\": \"2025 supplier change - ghee replaced by a ghee and cashew-oil blend (supplier SB-2025)\",\n  \"other_versions\": [\n    {\n      \"version\": \"original\",\n      \"status\": \"superseded\",\n      \"declared_allergens\": [\n        \"gluten\",\n        \"dairy\"\n      ]\n    }\n  ]\n}"
+    }
+  ],
+  "isError": false
+}
+
+## tools/call get_safe_temperature(food=chicken)
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"food\": \"chicken\",\n  \"category\": \"Chicken and all poultry (whole, pieces, minced)\",\n  \"safe_internal_temp_c\": 74,\n  \"as_written\": \"74°C (165°F)\",\n  \"rest\": \"none\",\n  \"how\": \"probe thermometer in the thickest part, away from bone\",\n  \"cite_as\": \"food-safety-chart@original::structure::1\"\n}"
+    }
+  ],
+  "isError": false
+}

@@ -1,0 +1,461 @@
+{
+  "summary": {
+    "tag": "before",
+    "cases": 33,
+    "tool_calls": 64,
+    "tool_choice_accuracy_per_call": 1.0,
+    "tool_choice_accuracy_mean_per_case": 0.939,
+    "outcome_pass_rate": 0.848,
+    "trajectory_pass_rate": 0.909,
+    "gap_outcome_minus_trajectory": -0.061,
+    "right_answer_wrong_path": [
+      "g02"
+    ],
+    "wrong_answer_right_path": [
+      "x02",
+      "a05",
+      "c02"
+    ],
+    "mode_counts": {
+      "skipped_required_tool": 2,
+      "checked_superseded_version": 1
+    }
+  },
+  "rows": [
+    {
+      "case_id": "b01",
+      "mode": "baseline_lookup",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "b02",
+      "mode": "baseline_lookup",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "b03",
+      "mode": "baseline_lookup",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "b04",
+      "mode": "baseline_lookup",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "v01",
+      "mode": "vague_question",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "v02",
+      "mode": "vague_question",
+      "outcome_pass": false,
+      "sequence": [],
+      "tool_choice_accuracy": 0.0,
+      "missing": [
+        "search_recipes"
+      ],
+      "modes": [
+        "skipped_required_tool"
+      ],
+      "trajectory_pass": false
+    },
+    {
+      "case_id": "x01",
+      "mode": "cross_recipe",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "search_recipes",
+        "search_recipes"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "x02",
+      "mode": "cross_recipe",
+      "outcome_pass": false,
+      "sequence": [
+        "search_recipes",
+        "search_recipes"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "a01",
+      "mode": "allergen_declared",
+      "outcome_pass": false,
+      "sequence": [
+        "search_recipes",
+        "check_allergens",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [
+        "checked_superseded_version"
+      ],
+      "trajectory_pass": false
+    },
+    {
+      "case_id": "a02",
+      "mode": "allergen_declared",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "a03",
+      "mode": "allergen_declared",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "a04",
+      "mode": "allergen_declared",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "a05",
+      "mode": "allergen_declared",
+      "outcome_pass": false,
+      "sequence": [
+        "search_recipes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "a06",
+      "mode": "allergen_declared",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "a07",
+      "mode": "allergen_declared",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "m01",
+      "mode": "allergen_may_contain",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "s01",
+      "mode": "allergen_safe",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "w11_r01",
+      "mode": "allergen_safe",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "get_recipe",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "o01",
+      "mode": "version_history",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "get_recipe",
+        "get_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "o02",
+      "mode": "version_history",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "c01",
+      "mode": "substitution_chain",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "find_substitutes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "c02",
+      "mode": "substitution_chain",
+      "outcome_pass": false,
+      "sequence": [
+        "search_recipes",
+        "check_allergens",
+        "find_substitutes",
+        "check_allergens",
+        "get_safe_temperature"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "c03",
+      "mode": "substitution_chain",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "find_substitutes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "k01",
+      "mode": "scaling",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "get_recipe",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "k02",
+      "mode": "scaling",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "scale_recipe",
+        "get_safe_temperature"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "k03",
+      "mode": "scaling",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "scale_recipe"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "t01",
+      "mode": "food_safety",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "get_safe_temperature"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "t02",
+      "mode": "food_safety",
+      "outcome_pass": true,
+      "sequence": [
+        "get_safe_temperature"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "t03",
+      "mode": "food_safety",
+      "outcome_pass": true,
+      "sequence": [
+        "get_safe_temperature"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "r01",
+      "mode": "refusal_out_of_library",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "r02",
+      "mode": "refusal_out_of_library",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "g01",
+      "mode": "no_guess_safety",
+      "outcome_pass": true,
+      "sequence": [
+        "search_recipes",
+        "check_allergens"
+      ],
+      "tool_choice_accuracy": 1.0,
+      "missing": [],
+      "modes": [],
+      "trajectory_pass": true
+    },
+    {
+      "case_id": "g02",
+      "mode": "no_guess_safety",
+      "outcome_pass": true,
+      "sequence": [],
+      "tool_choice_accuracy": 0.0,
+      "missing": [
+        "search_recipes"
+      ],
+      "modes": [
+        "skipped_required_tool"
+      ],
+      "trajectory_pass": false
+    }
+  ]
+}

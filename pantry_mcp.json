@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "pantry": {
+      "command": "python",
+      "args": [
+        "pantry_server.py"
+      ],
+      "env": {
+        "PANTRY_RELEASE": "r2"
+      }
+    },
+    "ingredient_db": {
+      "command": "python",
+      "args": [
+        "ingredient_db_server/server.py"
+      ]
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "k": 3,
+  "hits": 11,
+  "n": 12,
+  "week4_hybrid": "11/12",
+  "superseded_first": 1,
+  "rows": [
+    {
+      "id": 1,
+      "question": "What is noi arisi?",
+      "targets": [
+        "ragi-koozh-05@original::structure::1"
+      ],
+      "top3": [
+        "ragi-koozh-05@original::structure::1",
+        "kadumanga-06@original::structure::3",
+        "kadumanga-06@reformulated-2025::structure::3"
+      ],
+      "hit_rank": 1,
+      "superseded_ranked_first": false
+    },
+    {
+      "id": 2,
+      "question": "What can I cook in an appachatti?",
+      "targets": [
+        "appam-03@original::structure::2"
+      ],
+      "top3": [
+        "appam-03@original::structure::2",
+        "dosa-batter-02@original::structure::2",
+        "chettinad-chicken-08@original::structure::2"
+      ],
+      "hit_rank": 1,
+      "superseded_ranked_first": false
+    },
+    {
+      "id": 3,
+      "question": "What is kannimanga?",
+      "targets": [
+        "kadumanga-06@original::structure::1",
+        "kadumanga-06@reformulated-2025::structure::1"
+      ],
+      "top3": [
+        "kadumanga-06@reformulated-2025::structure::1",
+        "kadumanga-06@original::structure::1",
+        "kadumanga-06@reformulated-2025::structure::3"
+      ],
+      "hit_rank": 1,
+      "superseded_ranked_first": false
+    },
+    {
+      "id": 4,
+      "question": "What ingredient is 6.7% of the rice weight?",
+      "targets": [
+        "dosa-batter-02@original::structure::1"
+      ],
+      "top3": [
+        "dosa-batter-02@original::structure::1",
+        "appam-03@original::structure::1",
+        "dosa-batter-02@original::structure::0"
+      ],
+      "hit_rank": 1,
+      "superseded_ranked_first": false
+    },
+    {
+      "id": 5,
+      "question": "What is 72% of the rice weight in one of the batters?",
+      "targets": [
+        "idli-batter-01@original::structure::1"
+      ],
+      "top3": [
+        "idli-batter-01@original::structure::1",
+        "dosa-batter-02@original::structure::1",
+        "dosa-batter-02@original::structure::0"
+      ],
+      "hit_rank": 1,
+      "superseded_ranked_first": false
+    },
+    {
+      "id": 6,
+      "question": "My dosas keep sticking to the pan - what am I doing wrong?",
+      "targets": [
+        "dosa-batter-02@original::structure::2"
+      ],
+      "top3": [
+        "idli-batter-01@original::structure::2",
+        "dosa-batter-02@original::structure::2",
+        "lemon-rice-09@original::structure::2"
+      ],
+      "hit_rank": 2,
+      "superseded_ranked_first": false
+    },
+    {
+      "id": 7,
+      "question": "How do I know the urad dal has been ground enough?",
+      "targets": [
+        "idli-batter-01@original::structure::2"
+      ],
+      "top3": [
+        "idli-batter-01@original::structure::2",
+        "dosa-batter-02@original::structure::1",
+        "dosa-batter-02@original::structure::2"
+      ],
+      "hit_rank": 1,
+      "superseded_ranked_first": false
+    },
+    {
+      "id": 8,
+      "question": "Why did my curd become too sour by the evening?",
+      "targets": [
+        "thayir-04@original::structure::2"
+      ],
+      "top3": [
+        "thayir-04@original::structure::2",
+        "thayir-04@original::structure::1",
+        "thayir-04@original::structure::0"
+      ],
+      "hit_rank": 1,
+      "superseded_ranked_first": false
+    },
+    {
+      "id": 9,
+      "question": "How long until the mango pickle is ready to eat?",
+      "targets": [
+        "kadumanga-06@original::structure::2",
+        "kadumanga-06@reformulated-2025::structure::2"
+      ],
+      "top3": [
+        "kadumanga-06@original::structure::2",
+        "kadumanga-06@reformulated-2025::structure::0",
+        "kadumanga-06@original::structure::0"
+      ],
+      "hit_rank": 1,
+      "superseded_ranked_first": true
+    },
+    {
+      "id": 10,
+      "question": "Which recipe has the highest salt percentage?",
+      "targets": [
+        "kadumanga-06@original::structure::1",
+        "kadumanga-06@reformulated-2025::structure::1"
+      ],
+      "top3": [
+        "dosa-batter-02@original::structure::1",
+        "dosa-batter-02@original::structure::0",
+        "ragi-koozh-05@original::structure::2"
+      ],
+      "hit_rank": null,
+      "superseded_ranked_first": false
+    },
+    {
+      "id": 11,
+      "question": "Which batter should be thinner than idli batter?",
+      "targets": [
+        "dosa-batter-02@original::structure::2"
+      ],
+      "top3": [
+        "idli-batter-01@original::structure::0",
+        "dosa-batter-02@original::structure::2",
+        "idli-batter-01@original::structure::1"
+      ],
+      "hit_rank": 2,
+      "superseded_ranked_first": false
+    },
+    {
+      "id": 12,
+      "question": "What gives dosa its crispness?",
+      "targets": [
+        "dosa-batter-02@original::structure::1"
+      ],
+      "top3": [
+        "dosa-batter-02@original::structure::1",
+        "dosa-batter-02@original::structure::0",
+        "dosa-batter-02@original::structure::2"
+      ],
+      "hit_rank": 1,
+      "superseded_ranked_first": false
+    }
+  ]
+}

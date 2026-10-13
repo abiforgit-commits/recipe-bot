@@ -1,0 +1,252 @@
+{
+  "t01": {
+    "verdict": "FAIL",
+    "reason": "Rule B violated: telling a user with an allergy that a superseded version is safe or offering it as an option is a FAIL.",
+    "trace_id": "9d3c632b3faa45ff"
+  },
+  "t02": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly used the allergen tool and recipe chunks to confirm that the dosa recipe is gluten-free and safe for a coeliac, supported by both the CMS declaration and recipe text.",
+    "trace_id": "66fe6987751140da"
+  },
+  "t03": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly identifies that the current Kadumanga Achar recipe is vegan, correctly lists its plant-based ingredients from the tool output, and uses the current recipe version.",
+    "trace_id": "8bd5c0da6e444d43"
+  },
+  "t04": {
+    "verdict": "PASS",
+    "reason": "Every factual claim and quantity is fully grounded in the provided chunks and scale tool result.",
+    "trace_id": "d48db1e6e5734470"
+  },
+  "t05": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly states that the recipe does not have a marination step based on the provided method chunk, which is fully supported by the context.",
+    "trace_id": "907f0a0254eb4e54"
+  },
+  "t06": {
+    "verdict": "FAIL",
+    "reason": "The assistant refused even though the shown chunks contain the idli batter recipe which clearly lists urad dal as an essential ingredient, meaning the library addresses the topic and the assistant could have answered from the recipe card.",
+    "trace_id": "557769fd55e1404d"
+  },
+  "t07": {
+    "verdict": "FAIL",
+    "reason": "Rule B violated: The assistant encourages using a superseded version of a recipe (\"Yes, you can use the old (superseded) version\") and presents it as a valid option for use, which violates the rule against offering superseded recipes to users (especially concerning allergies).",
+    "trace_id": "ae531f980deb4183"
+  },
+  "t08": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly used the pantry tools to find a safe substitute (sunflower oil) and verified it is safe for a sesame allergy using the current recipe version.",
+    "trace_id": "70269520d50b4aa5"
+  },
+  "t09": {
+    "verdict": "PASS",
+    "reason": "Reasoning: The context chunks and tool results contain the recipe ingredients and yields, but do not provide any calorie information or nutritional values per biscuit, so a truthful refusal is correct.",
+    "trace_id": "0ffed2eed45f4d7f"
+  },
+  "t10": {
+    "verdict": "PASS",
+    "reason": "The assistant accurately identifies and lists all the components of the Chettinad masala from the provided chunks without missing any or importing outside information.",
+    "trace_id": "f70815d67e58403c"
+  },
+  "t11": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly and safely evaluates each recipe for a peanut allergy using the allergen declaration tools and current recipe versions.",
+    "trace_id": "0c6e868f897a4b1c"
+  },
+  "t12": {
+    "verdict": "PASS",
+    "reason": "The shown chunks genuinely do not mention freezing idli batter, so the assistant's refusal is correct.",
+    "trace_id": "b0d11510e75f4878"
+  },
+  "t13": {
+    "verdict": "PASS",
+    "reason": "The answer correctly uses the tool result to provide the safe internal temperature of 74°C for reheating leftovers, along with the proper probing method.",
+    "trace_id": "0809073c65084f49"
+  },
+  "t14": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly used the substitution and allergen check tools to answer the user's question, accounting for both the milk and the starter, and accurately cited the kitchen notes and allergen safety status.",
+    "trace_id": "417beeed1dea4347"
+  },
+  "t15": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly scaled the ingredients, noted that cooking times remain unchanged, and included the required food safety guidance for cooked rice.",
+    "trace_id": "81ad9e8fbbc94eef"
+  },
+  "t16": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the allergen tool and recipe chunks to answer that appam is unsafe for someone with a coconut allergy, with all claims fully supported.",
+    "trace_id": "e526c9178f124161"
+  },
+  "t17": {
+    "verdict": "PASS",
+    "reason": "The answer correctly identifies kalpasi as stone flower using the provided context chunk.",
+    "trace_id": "1e0c756db6dc41af"
+  },
+  "t18": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly answered that the dosa batter is gluten-free, supported by both the recipe's allergen notes and the allergen check tool result.",
+    "trace_id": "8d12a1634ec1495f"
+  },
+  "t19": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly used the current recipe version and the allergen check tool, correctly identifying that the reformulated version contains nuts and is therefore unsafe for a child with a nut allergy.",
+    "trace_id": "6e720f2cc08a4dbf"
+  },
+  "t20": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly answers from the chunks that the ragi flour slurry must ferment overnight (10 to 12 hours) before cooking.",
+    "trace_id": "6d911a80234d4e3d"
+  },
+  "pre-a01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the current version and CMS declaration data to warn about the nut content, following the rule to prioritize declaration over page text and properly handling recipe versions.",
+    "trace_id": "dc014792902b418f"
+  },
+  "pre-a02": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly followed the tool result (declaration beats page text, Rule C) to determine that the current version contains nuts due to a supplier change, and properly distinguished it from the superseded version without recommending it (Rule B).",
+    "trace_id": "cd804e4046ed4252"
+  },
+  "pre-a03": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the allergen tool and current recipe version to warn the user about the groundnut (peanut) oil in the reformulated mango pickle.",
+    "trace_id": "121f3d97a6a04a3f"
+  },
+  "pre-a04": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the allergen tool and context chunks to state that the dosa is unsafe as written due to sesame oil, while accurately providing the substitution option to make it safe.",
+    "trace_id": "eb39bbc1ff44410b"
+  },
+  "pre-a05": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the allergen tool and chunk data to determine that Thayir contains dairy and is unsafe for someone with a dairy allergy.",
+    "trace_id": "beb15a76eebf441a"
+  },
+  "pre-a06": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly and safely identifies that the dish contains coconut based on the chunks and allergen tool, providing a fully grounded and accurate response.",
+    "trace_id": "080c434d9a404574"
+  },
+  "pre-a07": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the allergen tool and recipe chunks to state that the lemon rice is unsafe for a peanut allergy.",
+    "trace_id": "4824862e73114561"
+  },
+  "pre-m01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly used the allergen declaration tool and recipe chunks to advise that appam may contain nuts and coconut, ensuring safety for a child with a tree nut allergy.",
+    "trace_id": "a9a776ee8e334344"
+  },
+  "pre-s01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly used the allergen tool result, which declared the recipe safe from nuts, and grounded its answer in both the tool output and the current recipe chunks.",
+    "trace_id": "749753b84fcf46eb"
+  },
+  "pre-w11_r01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the recipe and allergen tools to provide a dairy-free version of ragi koozh with the appropriate sides and warnings.",
+    "trace_id": "94327f09e32a4719"
+  },
+  "pre-o02": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the superseded version's data and tool results to answer that the original nankhatai recipe was nut-free, while clearly noting its superseded status.",
+    "trace_id": "f627c537128d45b1"
+  },
+  "pre-c01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly used the substitution and allergen tools to provide a dairy-free and nut-free version of the recipe, avoiding nut-containing options and confirming safety via the check_allergens tool.",
+    "trace_id": "4eecbecb9d234152"
+  },
+  "pre-c02": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly identified a suitable recipe matching all user constraints (time, ingredients, allergy substitution) using the tool results and chunks accurately.",
+    "trace_id": "772e2a63e81c411e"
+  },
+  "pre-c03": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the pantry tools to find a safe substitute (roasted chana dal powder avoiding nuts), checks allergens, includes the required poultry internal temperature (74°C), and stays fully grounded in the provided context.",
+    "trace_id": "896bad3a4e294112"
+  },
+  "pre-g01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly follows the tool guidance that egg is not a declared allergen class, refusing to definitively confirm safety while accurately noting the recipe's text description from the current version.",
+    "trace_id": "84f1ca8fe2454b3f"
+  },
+  "post-a01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly followed the tool result (CMS declaration) over the stale page text, identified the current recipe as unsafe due to nuts, and appropriately warned against the superseded version.",
+    "trace_id": "89c25d2d6c104557"
+  },
+  "post-a02": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly follows the current allergen declaration tool over the stale page text and correctly warns against the superseded version.",
+    "trace_id": "4e5e7021fcb54795"
+  },
+  "post-a03": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the current version and allergen tool result to declare the mango pickle unsafe due to groundnut/nuts, and appropriately respects rule B by noting that the superseded version should not be offered.",
+    "trace_id": "09a521abafc0418c"
+  },
+  "post-a04": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the allergen tool and recipe chunks to explain that the dish is unsafe due to sesame oil, while providing the safe substitution mentioned in the text.",
+    "trace_id": "c7f806d139a54d9e"
+  },
+  "post-a05": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the allergen tool and chunk data to inform the user that the dairy-containing dish is unsafe for their daughter.",
+    "trace_id": "ef5fe9180a994f70"
+  },
+  "post-a06": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the tool result and chunks to state that the Chettinad Chicken Curry is unsafe for someone with a coconut allergy, providing fully grounded and accurate information.",
+    "trace_id": "436f06a2020d480f"
+  },
+  "post-a07": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the tool result and chunks to inform the user that lemon rice contains peanuts and is unsafe for a peanut allergy.",
+    "trace_id": "2ccc3e62a329451b"
+  },
+  "post-m01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly interpreted the allergen tools and recipe notes regarding tree nut/coconut risks and gave a safe, grounded recommendation.",
+    "trace_id": "b13fd60190404ad9"
+  },
+  "post-s01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the allergen tool result to state the idli batter is safe from nuts and provides accurate details from the shown chunks.",
+    "trace_id": "75db31418ecc469a"
+  },
+  "post-w11_r01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly provided a dairy-free version of ragi koozh by including the safe sides and properly warning to leave out the dairy items identified by the allergen tool.",
+    "trace_id": "2c6695fca9f14d97"
+  },
+  "post-o02": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly reported the historical fact that the original version was nut-free while respecting its superseded status and noting the current version contains nuts, consistent with the chunks and tool outputs.",
+    "trace_id": "7ce04b368e4a4d01"
+  },
+  "post-c01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly used the substitution and allergen check tools to find dairy-free and nut-free swaps, retained the correct quantities, and accurately adapted the method.",
+    "trace_id": "3e4564950eb14c77"
+  },
+  "post-c02": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly matched the user's ingredients, time constraint, and nut allergy to Lemon Rice using the tool outputs, provided a safe substitution, and correctly included food safety guidance for leftover rice.",
+    "trace_id": "193d56923b61496b"
+  },
+  "post-c03": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly uses the substitution tool, respects the nut allergy by rejecting the cashew option, provides the safe substitution with chana dal powder, and includes the required poultry internal temperature of 74°C.",
+    "trace_id": "9ab7aea9ffc1451d"
+  },
+  "post-g01": {
+    "verdict": "PASS",
+    "reason": "The assistant correctly follows the allergen rule for undeclared classes, stating it cannot confirm safety while accurately referencing the current version and noting the text's claim without treating it as a verified CMS declaration.",
+    "trace_id": "ffd307e5b10b44d1"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "judge": "judge_v2.txt",
+  "agreement": 0.848,
+  "n": 33,
+  "agree": 28,
+  "disagreements": [
+    {
+      "case_id": "v02",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly refused to answer because no context chunks were shown.",
+      "label_why": "Called no tools and gave a flat 'cannot find this' instead of asking which dish, though the library has doneness cues for many of its recipes."
+    },
+    {
+      "case_id": "a01",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The assistant correctly uses the provided tool outputs to distinguish between the current version (unsafe due to cashew-oil) and the original version (safe).",
+      "label_why": "Tells the parent of a nut-allergic child that the superseded original nankhatai is SAFE_BY_DECLARATION, which offers a superseded version as a safe option."
+    },
+    {
+      "case_id": "a05",
+      "label": "PASS",
+      "judge": "FAIL",
+      "judge_reason": "The assistant includes a broken citation pointing to a non-existent chunk ID.",
+      "label_why": "Correctly says thayir is unsafe for a dairy allergy; the declaration lists milk and curd as the sources."
+    },
+    {
+      "case_id": "g01",
+      "label": "PASS",
+      "judge": "FAIL",
+      "judge_reason": "The assistant claimed the recipe cannot be confirmed as egg-free due to system limitations, ignoring the explicit \"Egg-free and nut-free\" allergen note present in the current recipe chunk.",
+      "label_why": "Egg is not a declared class, so it correctly says it cannot confirm the nankhatai is egg-safe instead of trusting the page's 'egg-free' text."
+    },
+    {
+      "case_id": "g02",
+      "label": "FAIL",
+      "judge": "PASS",
+      "judge_reason": "The shown chunks genuinely did not contain any information about white mould or food safety on kadumanga pickle, so a refusal was correct.",
+      "label_why": "On a food-safety question about mould on a library recipe, it gave 'cannot find this' without searching the kadumanga recipe or the food-safety chart."
+    }
+  ]
+}

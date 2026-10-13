@@ -58,8 +58,14 @@ def no_invented_grams(output, case, chunk_lookup):
 DAIRY_SIDE = re.compile(r"curd[- ]chill?i|mor\s*milagai", re.I)
 # Said outright. Hedges ("if you are strictly avoiding dairy, you can substitute", "or
 # skip it!") don't count: that is exactly how the failing answers were worded.
-DAIRY_STATED = re.compile(
-    r"contains? dairy|counts as dairy|\bis dairy\b|not dairy[- ]free|isn'?t dairy[- ]free", re.I)
+DAIRY_STATED = re.compile(  # "dairy-based" added in Week 12 (re-validated: still 45/45)
+    r"contains? dairy|counts as dairy|\bis dairy\b|not dairy[- ]free|isn'?t dairy[- ]free|"
+    r"dairy[- ]based", re.I)
+
+
+LEAVE_OUT = re.compile(r"\bleav(?:e|ing)\s+(?:\w+\s+){0,2}out\b|\bomit\b|\bskip\b|\bdo not (?:use|serve|add)\b|"
+                       r"\bdon'?t (?:use|serve|add)\b", re.I)
+CONDITIONAL = re.compile(r"\bif\b|\bunless\b|strictly avoiding", re.I)
 
 
 def a5_no_dairy_side_for_dairy_free(output, case, chunk_lookup):
@@ -74,8 +80,13 @@ def a5_no_dairy_side_for_dairy_free(output, case, chunk_lookup):
     # PASSED two bad ones ("Without the buttermilk ... you can still enjoy it with curd
     # chilli"). v3 agrees with all 45 hand-labelled dairy-free answers in
     # results/w11_a5_validation.json (w11_a5_check.py); v2 agreed with 42.
+    # v4 (Week 12): an UNCONDITIONAL "leave these out" on the curd-chilli line also passes
+    # ("...curd chilli (mor milagai), you should leave these out to keep it dairy-free").
+    # Week 11's failing answers were CONDITIONAL hedges ("IF you are strictly avoiding
+    # dairy, you can substitute"), which still fail. Re-validated: still 45/45.
     lines = [u for u in re.split(r"\n+", output) if DAIRY_SIDE.search(u)]
-    return not lines or any(DAIRY_STATED.search(u) for u in lines)
+    return not lines or any(DAIRY_STATED.search(u) or (LEAVE_OUT.search(u) and not CONDITIONAL.search(u))
+                            for u in lines)
 
 
 ASSERTIONS = {

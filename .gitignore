@@ -3,3 +3,6 @@
 __pycache__/
 chroma_db/
 *.pyc
+# Capstone request/span logs hold (pseudonymised, redacted) user traffic: they stay on
+# the machine that served it. Exported example traces are committed separately.
+logs/pantry_*.jsonl

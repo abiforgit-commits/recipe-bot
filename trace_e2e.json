@@ -1,0 +1,475 @@
+{
+  "trace_id": "ccd49cb657b6423c",
+  "ts": "2026-10-11T19:21:06+00:00",
+  "user": "e8dc70fed2fa",
+  "prompt_version": "pv1",
+  "model": "gemini-flash-lite-latest",
+  "question": "I've got leftover cooked rice, two lemons and mustard seeds. [health detail removed] and I have 25 minutes - what can I make?",
+  "answer": "You can make **Lemon Rice (Chitranna)** [lemon-rice-09@original::structure::0]. It takes about 20 minutes and uses your leftover cooked rice, mustard seeds, and two lemons (which yields the required 40g of juice) [lemon-rice-09@original::structure::0, lemon-rice-09@original::structure::1, lemon-rice-09@original::structure::2].\n\n### Allergen note for your kid\n* **Original recipe:** Marked as **UNSAFE** because it contains raw peanuts (nuts) [lemon-rice-09@original::structure::1, lemon-rice-09@original::structure::3]. \n* **Nut-free adjustment:** Swap the raw peanuts for **roasted chana dal** to keep the crunch [lemon-rice-09@original::find_substitutes]. With this substitution, the recipe is **SAFE BY DECLARATION** for a nut allergy [lemon-rice-09@original::check_allergens].\n\n### Food safety note\nSince you are using leftover cooked rice, ensure it is reheated thoroughly to a safe internal temperature of **74°C (165°F)** if serving it warm [food-safety-chart@original::structure::1].",
+  "constraints_detected": [
+    "mustard",
+    "nuts"
+  ],
+  "constraints_checked": [
+    "nuts"
+  ],
+  "allergen_checks": [
+    {
+      "recipe_id": "lemon-rice-09",
+      "version": "original",
+      "status": "current",
+      "cite_as": "lemon-rice-09@original",
+      "avoid": [
+        "nuts"
+      ],
+      "verdict": "UNSAFE",
+      "contains_avoided": [
+        "nuts"
+      ],
+      "may_contain_avoided": [],
+      "declared_allergens": [
+        "gluten",
+        "mustard",
+        "nuts"
+      ],
+      "declared_may_contain": [],
+      "sources_of_avoided": {
+        "nuts": [
+          "Peanuts, raw"
+        ]
+      },
+      "source": "CMS declaration fields (exact match), not the recipe text"
+    },
+    {
+      "recipe_id": "lemon-rice-09",
+      "version": "original",
+      "status": "current",
+      "cite_as": "lemon-rice-09@original",
+      "avoid": [
+        "nuts"
+      ],
+      "verdict": "SAFE_BY_DECLARATION",
+      "contains_avoided": [],
+      "may_contain_avoided": [],
+      "declared_allergens": [
+        "gluten",
+        "mustard"
+      ],
+      "declared_may_contain": [],
+      "sources_of_avoided": {},
+      "source": "CMS declaration fields (exact match), not the recipe text",
+      "as_substituted": [
+        {
+          "from": "Peanuts, raw",
+          "to": "Roasted chana dal",
+          "to_carries": []
+        }
+      ]
+    }
+  ],
+  "citations": [
+    "lemon-rice-09@original::structure::0",
+    "lemon-rice-09@original::structure::1",
+    "lemon-rice-09@original::structure::2",
+    "lemon-rice-09@original::structure::3",
+    "food-safety-chart@original::structure::1"
+  ],
+  "tool_sequence": [
+    "search_recipes",
+    "check_allergens",
+    "find_substitutes",
+    "check_allergens",
+    "get_safe_temperature"
+  ],
+  "spans": [
+    {
+      "span_id": "ccd49cb657b6423c-01",
+      "kind": "llm",
+      "name": "llm/lap-1",
+      "lap": 1,
+      "latency_ms": 4278.9,
+      "throttle_wait_ms": 3006.9,
+      "model": "gemini-flash-lite-latest",
+      "prompt_tokens": 1698,
+      "completion_tokens": 20,
+      "cost_usd": 0.0001778
+    },
+    {
+      "span_id": "ccd49cb657b6423c-02",
+      "kind": "tool",
+      "name": "tool/pantry__search_recipes",
+      "lap": 1,
+      "server": "pantry",
+      "tool": "search_recipes",
+      "args": {
+        "query": "lemon rice"
+      },
+      "is_error": false,
+      "latency_ms": 284.1,
+      "result": {
+        "query": "lemon rice",
+        "hits": [
+          {
+            "chunk_id": "lemon-rice-09@original::structure::0",
+            "recipe_id": "lemon-rice-09",
+            "version": "original",
+            "status": "current",
+            "title": "Lemon Rice (Chitranna)",
+            "source": "data/cms/lemon-rice-09.original.md:16",
+            "score": 0.0328,
+            "text": "# Lemon Rice (Chitranna) — version: original\n\nA 20-minute tempered rice for leftover rice: sharp, bright and crunchy."
+          },
+          {
+            "chunk_id": "lemon-rice-09@original::structure::1",
+            "recipe_id": "lemon-rice-09",
+            "version": "original",
+            "status": "current",
+            "title": "Lemon Rice (Chitranna)",
+            "source": "data/cms/lemon-rice-09.original.md:20",
+            "score": 0.0323,
+            "text": "# Lemon Rice (Chitranna) — version: original\n\n## Ingredients\n\n| Ingredient | Amount |\n|---|---|\n| Cooked rice, cooled | 600g |\n| Lemon juice (about 2 lemons) | 40g |\n| Sunflower oil | 30g |\n| Peanuts, raw | 40g |\n| Mustard seeds | 5g |\n| Chana dal | 10g |\n| Urad dal | 5g |\n| Green chillies, slit | 2 |\n| Curry leaves | 1 sprig |\n| Turmeric powder | 2g |\n| Asafoetida (hing) | 1g |\n| Salt | 8g |\n\nYield: serves 3."
+          },
+          {
+            "chunk_id": "lemon-rice-09@original::structure::2",
+            "recipe_id": "lemon-rice-09",
+            "version": "original",
+            "status": "current",
+            "title": "Lemon Rice (Chitranna)",
+            "source": "data/cms/lemon-rice-09.original.md:39",
+            "score": 0.0315,
+            "text": "# Lemon Rice (Chitranna) — version: original\n\n## Method\n\nSpread the cooked rice on a plate to cool and separate the grains. Heat the\noil, add the mustard seeds and let them crackle, then the chana dal, urad\ndal and peanuts, and fry until the dals are golden and the peanuts crisp.\nAdd the green chillies, curry leaves, asafoetida and turmeric, and fry 10\nseconds. Take the pan off the heat, stir in the lemon juice and salt, then\nfold the tempering through the rice until every grain is yellow. Ready in\nabout 20 minutes from cooked rice."
+          },
+          {
+            "chunk_id": "lemon-rice-09@original::structure::3",
+            "recipe_id": "lemon-rice-09",
+            "version": "original",
+            "status": "current",
+            "title": "Lemon Rice (Chitranna)",
+            "source": "data/cms/lemon-rice-09.original.md:49",
+            "score": 0.0315,
+            "text": "# Lemon Rice (Chitranna) — version: original\n\n## Allergen note\n\nContains peanuts and mustard. Asafoetida is usually bound with wheat flour —\nuse a certified gluten-free hing for gluten-free diets."
+          },
+          {
+            "chunk_id": "appam-03@original::structure::1",
+            "recipe_id": "appam-03",
+            "version": "original",
+            "status": "current",
+            "title": "Appam (lace-edged fermented rice hoppers)",
+            "source": "data/cms/appam-03.original.md:20",
+            "score": 0.0305,
+            "text": "# Appam (lace-edged fermented rice hoppers) — version: original\n\n## Ingredients\n\n| Ingredient | Weight | % of rice |\n|---|---|---|\n| Raw rice (pachari), soaked | 500g | 100% |\n| Cooked rice | 100g | 20% |\n| Fresh thick coconut milk | 400g | 80% |\n| Fresh toddy (or 1g instant yeast + 10g sugar in warm water) | 100g | 20% |\n| Sugar | 15g | 3% |\n| Fine sea salt | 7g | 1.4% |"
+          }
+        ]
+      },
+      "error": null,
+      "cost_usd": 0.0
+    },
+    {
+      "span_id": "ccd49cb657b6423c-03",
+      "kind": "llm",
+      "name": "llm/lap-2",
+      "lap": 2,
+      "latency_ms": 4177.2,
+      "throttle_wait_ms": 2944.7,
+      "model": "gemini-flash-lite-latest",
+      "prompt_tokens": 2970,
+      "completion_tokens": 33,
+      "cost_usd": 0.0003102
+    },
+    {
+      "span_id": "ccd49cb657b6423c-04",
+      "kind": "tool",
+      "name": "tool/pantry__check_allergens",
+      "lap": 2,
+      "server": "pantry",
+      "tool": "check_allergens",
+      "args": {
+        "recipe_id": "lemon-rice-09",
+        "avoid": [
+          "nuts"
+        ]
+      },
+      "is_error": false,
+      "latency_ms": 5.1,
+      "result": {
+        "recipe_id": "lemon-rice-09",
+        "version": "original",
+        "status": "current",
+        "cite_as": "lemon-rice-09@original",
+        "avoid": [
+          "nuts"
+        ],
+        "verdict": "UNSAFE",
+        "contains_avoided": [
+          "nuts"
+        ],
+        "may_contain_avoided": [],
+        "declared_allergens": [
+          "gluten",
+          "mustard",
+          "nuts"
+        ],
+        "declared_may_contain": [],
+        "sources_of_avoided": {
+          "nuts": [
+            "Peanuts, raw"
+          ]
+        },
+        "source": "CMS declaration fields (exact match), not the recipe text"
+      },
+      "error": null,
+      "cost_usd": 0.0
+    },
+    {
+      "span_id": "ccd49cb657b6423c-05",
+      "kind": "llm",
+      "name": "llm/lap-3",
+      "lap": 3,
+      "latency_ms": 4458.6,
+      "throttle_wait_ms": 3262.9,
+      "model": "gemini-flash-lite-latest",
+      "prompt_tokens": 3231,
+      "completion_tokens": 35,
+      "cost_usd": 0.0003371
+    },
+    {
+      "span_id": "ccd49cb657b6423c-06",
+      "kind": "tool",
+      "name": "tool/pantry__find_substitutes",
+      "lap": 3,
+      "server": "pantry",
+      "tool": "find_substitutes",
+      "args": {
+        "allergen": "nuts",
+        "recipe_id": "lemon-rice-09"
+      },
+      "is_error": false,
+      "latency_ms": 2.8,
+      "result": {
+        "recipe_id": "lemon-rice-09",
+        "version": "original",
+        "allergen_removed": "nuts",
+        "swaps": [
+          {
+            "from": "Peanuts, raw",
+            "options": [
+              {
+                "to": "Roasted chana dal",
+                "carries": [],
+                "kitchen_note": "keeps the crunch; add at the end"
+              }
+            ]
+          }
+        ],
+        "next_step": "Pick options that carry nothing the user avoids, then call check_allergens with swaps=[{from, to}] to check the recipe AS SUBSTITUTED."
+      },
+      "error": null,
+      "cost_usd": 0.0
+    },
+    {
+      "span_id": "ccd49cb657b6423c-07",
+      "kind": "llm",
+      "name": "llm/lap-4",
+      "lap": 4,
+      "latency_ms": 4646.6,
+      "throttle_wait_ms": 3302.3,
+      "model": "gemini-flash-lite-latest",
+      "prompt_tokens": 3457,
+      "completion_tokens": 55,
+      "cost_usd": 0.0003677
+    },
+    {
+      "span_id": "ccd49cb657b6423c-08",
+      "kind": "tool",
+      "name": "tool/pantry__check_allergens",
+      "lap": 4,
+      "server": "pantry",
+      "tool": "check_allergens",
+      "args": {
+        "swap_to": [
+          "Roasted chana dal"
+        ],
+        "swap_from": [
+          "Peanuts, raw"
+        ],
+        "recipe_id": "lemon-rice-09",
+        "avoid": [
+          "nuts"
+        ]
+      },
+      "is_error": false,
+      "latency_ms": 3.7,
+      "result": {
+        "recipe_id": "lemon-rice-09",
+        "version": "original",
+        "status": "current",
+        "cite_as": "lemon-rice-09@original",
+        "avoid": [
+          "nuts"
+        ],
+        "verdict": "SAFE_BY_DECLARATION",
+        "contains_avoided": [],
+        "may_contain_avoided": [],
+        "declared_allergens": [
+          "gluten",
+          "mustard"
+        ],
+        "declared_may_contain": [],
+        "sources_of_avoided": {},
+        "source": "CMS declaration fields (exact match), not the recipe text",
+        "as_substituted": [
+          {
+            "from": "Peanuts, raw",
+            "to": "Roasted chana dal",
+            "to_carries": []
+          }
+        ]
+      },
+      "error": null,
+      "cost_usd": 0.0
+    },
+    {
+      "span_id": "ccd49cb657b6423c-09",
+      "kind": "llm",
+      "name": "llm/lap-5",
+      "lap": 5,
+      "latency_ms": 4275.7,
+      "throttle_wait_ms": 3153.0,
+      "model": "gemini-flash-lite-latest",
+      "prompt_tokens": 3765,
+      "completion_tokens": 22,
+      "cost_usd": 0.0003853
+    },
+    {
+      "span_id": "ccd49cb657b6423c-10",
+      "kind": "tool",
+      "name": "tool/pantry__get_safe_temperature",
+      "lap": 5,
+      "server": "pantry",
+      "tool": "get_safe_temperature",
+      "args": {
+        "food": "leftovers"
+      },
+      "is_error": false,
+      "latency_ms": 12.8,
+      "result": {
+        "food": "leftovers",
+        "category": "Leftovers and reheated dishes",
+        "safe_internal_temp_c": 74,
+        "as_written": "74°C (165°F)",
+        "rest": "none",
+        "how": "probe thermometer in the thickest part, away from bone",
+        "cite_as": "food-safety-chart@original::structure::1"
+      },
+      "error": null,
+      "cost_usd": 0.0
+    },
+    {
+      "span_id": "ccd49cb657b6423c-11",
+      "kind": "llm",
+      "name": "llm/lap-6",
+      "lap": 6,
+      "latency_ms": 5375.4,
+      "throttle_wait_ms": 3365.6,
+      "model": "gemini-flash-lite-latest",
+      "prompt_tokens": 3928,
+      "completion_tokens": 280,
+      "cost_usd": 0.0005048
+    }
+  ],
+  "stop_reason": "completed",
+  "laps": 6,
+  "tokens_total": 19494,
+  "cost_usd_total": 0.0020829,
+  "latency_ms_total": 27522.0,
+  "rendered": "You can make **Lemon Rice (Chitranna)** [lemon-rice-09@original::structure::0]. It takes about 20 minutes and uses your leftover cooked rice, mustard seeds, and two lemons (which yields the required 40g of juice) [lemon-rice-09@original::structure::0, lemon-rice-09@original::structure::1, lemon-rice-09@original::structure::2].\n\n### Allergen note for your kid\n* **Original recipe:** Marked as **UNSAFE** because it contains raw peanuts (nuts) [lemon-rice-09@original::structure::1, lemon-rice-09@original::structure::3]. \n* **Nut-free adjustment:** Swap the raw peanuts for **roasted chana dal** to keep the crunch [lemon-rice-09@original::find_substitutes]. With this substitution, the recipe is **SAFE BY DECLARATION** for a nut allergy [lemon-rice-09@original::check_allergens].\n\n### Food safety note\nSince you are using leftover cooked rice, ensure it is reheated thoroughly to a safe internal temperature of **74°C (165°F)** if serving it warm [food-safety-chart@original::structure::1].\n\nSources:\n  [1] lemon-rice-09@original::structure::0  ->  data/cms/lemon-rice-09.original.md:16  (Lemon Rice (Chitranna), version original, current)\n  [2] lemon-rice-09@original::structure::1  ->  data/cms/lemon-rice-09.original.md:20  (Lemon Rice (Chitranna), version original, current)\n  [3] lemon-rice-09@original::structure::2  ->  data/cms/lemon-rice-09.original.md:39  (Lemon Rice (Chitranna), version original, current)\n  [4] lemon-rice-09@original::structure::3  ->  data/cms/lemon-rice-09.original.md:49  (Lemon Rice (Chitranna), version original, current)\n  [5] food-safety-chart@original::structure::1  ->  data/cms/food-safety-chart.original.md:15  (Food-safety chart (test kitchen), version original, current)\n\nAllergen check (from the CMS declaration fields, exact match; not the page text):\n  - lemon-rice-09@original (current), avoiding nuts: UNSAFE - declares nuts (Peanuts, raw)\n  - lemon-rice-09@original (current), avoiding nuts: SAFE_BY_DECLARATION - as substituted: Peanuts, raw -> Roasted chana dal",
+  "server_spans": [
+    {
+      "trace_id": "ccd49cb657b6423c",
+      "parent_span_id": "ccd49cb657b6423c-02",
+      "server": "pantry",
+      "span": "mcp.server/search_recipes",
+      "tool": "search_recipes",
+      "args": {
+        "query": "lemon rice"
+      },
+      "ts": "2026-10-12T00:50:43+0530",
+      "is_error": false,
+      "latency_ms": 277.3,
+      "cost_usd": 0.0
+    },
+    {
+      "trace_id": "ccd49cb657b6423c",
+      "parent_span_id": "ccd49cb657b6423c-04",
+      "server": "pantry",
+      "span": "mcp.server/check_allergens",
+      "tool": "check_allergens",
+      "args": {
+        "recipe_id": "lemon-rice-09",
+        "avoid": [
+          "nuts"
+        ],
+        "version": "current",
+        "swaps": []
+      },
+      "ts": "2026-10-12T00:50:48+0530",
+      "is_error": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "trace_id": "ccd49cb657b6423c",
+      "parent_span_id": "ccd49cb657b6423c-06",
+      "server": "pantry",
+      "span": "mcp.server/find_substitutes",
+      "tool": "find_substitutes",
+      "args": {
+        "recipe_id": "lemon-rice-09",
+        "allergen": "nuts",
+        "version": "current"
+      },
+      "ts": "2026-10-12T00:50:52+0530",
+      "is_error": false,
+      "latency_ms": 0.1,
+      "cost_usd": 0.0
+    },
+    {
+      "trace_id": "ccd49cb657b6423c",
+      "parent_span_id": "ccd49cb657b6423c-08",
+      "server": "pantry",
+      "span": "mcp.server/check_allergens",
+      "tool": "check_allergens",
+      "args": {
+        "recipe_id": "lemon-rice-09",
+        "avoid": [
+          "nuts"
+        ],
+        "version": "current",
+        "swaps": [
+          {
+            "from": "Peanuts, raw",
+            "to": "Roasted chana dal"
+          }
+        ]
+      },
+      "ts": "2026-10-12T00:50:57+0530",
+      "is_error": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "trace_id": "ccd49cb657b6423c",
+      "parent_span_id": "ccd49cb657b6423c-10",
+      "server": "pantry",
+      "span": "mcp.server/get_safe_temperature",
+      "tool": "get_safe_temperature",
+      "args": {
+        "food": "leftovers"
+      },
+      "ts": "2026-10-12T00:51:01+0530",
+      "is_error": false,
+      "latency_ms": 8.4,
+      "cost_usd": 0.0
+    }
+  ]
+}
