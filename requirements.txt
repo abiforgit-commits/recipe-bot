@@ -3,3 +3,5 @@ openai>=2.0
 python-dotenv>=1.0
 rank-bm25>=0.2
 mcp>=2.2
+starlette>=1.0  # web UI (pantry_web.py); installed with mcp already
+uvicorn>=0.30

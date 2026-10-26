@@ -1,7 +1,8 @@
 """Pantry-to-Plate: the Week 12 capstone. ONE entry point for the whole system.
 
     python pantry.py ask "My son is allergic to nuts - can he have the nankhatai?"
-    python pantry.py eval --tag before        full eval suite on the integrated system
+    python pantry.py web [--port 8000]        the same agent in the browser (pantry_web.py)
+    python pantry.py eval --tag before       full eval suite on the integrated system
     python pantry.py trajectory --tag before  tool-choice accuracy + outcome-vs-trajectory gap
     python pantry.py agreement --tag before   the judge vs the hand labels
     python pantry.py trace <trace_id>         one question, every span, across the agent and MCP hops
@@ -64,6 +65,11 @@ def cmd_ask(a):
     print(f"full trace: python pantry.py trace {rec['trace_id']}")
 
 
+def cmd_web(a):
+    from pantry_web import serve  # no key needed to open it: asking says what to do without one
+    serve(a.port, open_browser=not a.no_browser)
+
+
 def cmd_trace(a):
     from pantry_trace import merged_trace
     rec = merged_trace(a.trace_id)
@@ -119,6 +125,9 @@ def main():
     p = sub.add_parser("ask")
     p.add_argument("question")
     p.add_argument("--user", default="cli-user")
+    p = sub.add_parser("web")
+    p.add_argument("--port", type=int, default=8000)
+    p.add_argument("--no-browser", action="store_true", help="don't open a browser tab")
     p = sub.add_parser("trace")
     p.add_argument("trace_id")
     p.add_argument("--json", action="store_true")

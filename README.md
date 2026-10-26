@@ -50,6 +50,27 @@ What you'll see:
 - an **Allergen check** block printed by code from the declaration fields, not by the model;
 - a trace id.
 
+### Or use it in the browser
+
+```powershell
+python pantry.py web
+```
+
+This opens http://127.0.0.1:8000. It's the same agent, the same MCP servers and the same
+log as `ask`, behind a web page:
+- type a question (or pick an example) and watch each MCP tool call appear as the agent makes it;
+- the answer's citations link to its **Sources**. Superseded versions show in red, and an id that
+  isn't in the library is flagged;
+- the **Allergen check** label is printed by code from the declaration fields. It says
+  CANNOT CONFIRM when the check errors, and NOT RUN when an allergy question was never checked;
+- the **Trace** shows every model call and tool call, with the server's own spans under the
+  same trace id;
+- **Recent questions** reads `logs/pantry_requests.jsonl` back, as written (health details removed).
+  `http://127.0.0.1:8000/?trace=<id>` opens one directly.
+
+It listens on 127.0.0.1 only, because it spends your model key. `--port 8001` changes the port,
+and `--no-browser` stops it opening a tab. Ctrl+C stops it.
+
 **Privacy:** the request log removes stated health conditions. `pantry.py trace` shows
 the question as e.g. `[health detail removed] - can he have the nankhatai?` and
 pseudonymises the user id. Times in the log are UTC.
@@ -59,6 +80,7 @@ pseudonymises the user id. Times in the log are UTC.
 | Command | What it does | Model calls (needs a key) |
 |---|---|---|
 | `python pantry.py ask "<question>"` | answer one question end to end | yes |
+| `python pantry.py web [--port 8000]` | the same agent in the browser: live tool calls, answer, allergen check, trace, recent questions | only to ask |
 | `python pantry.py trace <trace_id>` | that question's spans across the agent and MCP hops: latency, tokens, cost | no |
 | `python pantry.py eval --tag mine --judge judge_v4.txt` | the full eval suite (33 cases) on the integrated system, ~25 min: assertions, then the judge | yes |
 | `python pantry.py trajectory --tag mine --judge judge_v4.txt` | tool-choice accuracy and outcome-vs-trajectory gap, from that eval run | no |

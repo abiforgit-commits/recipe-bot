@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pantry-to-Plate</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%238f5c06'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23f2f4f1'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Pantry-to-Plate web UI. The allergen check is drawn as a food-packaging label (heavy black
+   rules): it is printed by code from the declaration fields, so it looks unlike the model's prose. */
+:root {
+  --bg: #f2f4f1; --surface: #ffffff; --sunk: #e8ece7; --ink: #15201a; --muted: #59655e; --line: #d3dad4;
+  --accent: #8f5c06; --accent-soft: #f6ead2; --safe: #1c7a4b; --safe-soft: #e1f2e8;
+  --unsafe: #b3261e; --unsafe-soft: #fbe5e2; --warn: #8a5a00; --wait: #b9c2bb; --model: #2f5d50; --tool: #8f5c06;
+  --f-display: "Archivo", "Arial Narrow", "Segoe UI", Arial, sans-serif;
+  --f-body: "Libre Franklin", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", Consolas, ui-monospace, monospace;
+  --r: 6px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1411; --surface: #161d19; --sunk: #1d2621; --ink: #e5ebe6; --muted: #9aa6a0; --line: #2a352f;
+    --accent: #e2a542; --accent-soft: #3a2c12; --safe: #55c48c; --safe-soft: #12301f;
+    --unsafe: #f2766b; --unsafe-soft: #3b1714; --warn: #e2a542; --wait: #3a4640; --model: #7fbfa9; --tool: #e2a542;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 16px; }
+h1, h2, h3, h4 { font-family: var(--f-display); margin: 0; text-wrap: balance; }
+code, .mono { font-family: var(--f-mono); font-size: 0.86em; }
+button, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+[hidden] { display: none !important; }
+.small { font-size: 13px; color: var(--muted); }
+.eyebrow { font-family: var(--f-display); font-stretch: 85%; font-weight: 700; font-size: 11px; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--muted); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 1px 7px; border-radius: 999px;
+  font-family: var(--f-display); font-stretch: 85%; font-weight: 700; font-size: 11px; letter-spacing: 0.05em;
+  text-transform: uppercase; border: 1px solid currentColor; white-space: nowrap; }
+.chip.safe { color: var(--safe); background: var(--safe-soft); }
+.chip.unsafe { color: var(--unsafe); background: var(--unsafe-soft); }
+.chip.warn { color: var(--warn); background: var(--accent-soft); }
+.chip.neutral { color: var(--muted); }
+
+/* top bar */
+.top { border-bottom: 1px solid var(--line); background: var(--surface); }
+.top-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding-block: 14px; }
+.brand { font-family: var(--f-display); font-stretch: 72%; font-weight: 850; font-size: 28px; letter-spacing: -0.01em;
+  line-height: 1; text-transform: uppercase; }
+.brand span { color: var(--accent); }
+.tagline { font-size: 13px; color: var(--muted); margin-top: 3px; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill { font-family: var(--f-mono); font-size: 12px; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--sunk); white-space: nowrap; }
+.pill b { font-weight: 600; color: var(--accent); }
+.banner { background: var(--unsafe-soft); color: var(--unsafe); border-bottom: 1px solid var(--unsafe); }
+.banner .wrap { padding-block: 10px; font-size: 14px; }
+
+/* layout */
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; padding-block: 22px 60px; align-items: start; }
+@media (max-width: 920px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
+
+/* ask box */
+.askbox { display: grid; gap: 10px; }
+.askbox textarea { width: 100%; resize: vertical; min-height: 84px; padding: 12px 14px; border: 1px solid var(--line);
+  border-radius: var(--r); background: var(--bg); font-size: 16px; line-height: 1.45; }
+.askbox textarea:focus { border-color: var(--ink); outline: none; }
+.ask-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.examples { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.ex { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 10px; font-size: 13px;
+  cursor: pointer; text-align: left; }
+.ex:hover { border-color: var(--muted); }
+.btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg);
+  padding: 9px 20px; border-radius: var(--r); cursor: pointer; font-weight: 650; font-size: 15px; }
+.btn:hover { opacity: 0.88; }
+.btn:disabled { opacity: 0.5; cursor: progress; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); padding: 5px 10px; font-size: 13px; font-weight: 600; }
+.hint { margin: 0; font-size: 12.5px; color: var(--muted); }
+
+/* question card */
+.qcard { display: grid; gap: 8px; }
+.q-typed { font-family: var(--f-display); font-stretch: 92%; font-weight: 600; font-size: clamp(18px, 2.3vw, 21px); line-height: 1.3; overflow-wrap: anywhere; }
+.q-logged { font-size: 13px; color: var(--muted); }
+.q-logged code { color: var(--ink); background: var(--sunk); padding: 2px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+.redact { background: var(--ink); color: var(--bg); padding: 0 4px; border-radius: 2px; font-family: var(--f-body); }
+.fromlog { font-size: 13px; border-left: 3px solid var(--accent); padding: 2px 0 2px 10px; }
+
+/* live steps + finished steps */
+.steps { list-style: none; margin: 8px 0 0; padding: 0; }
+.step { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding: 7px 0; border-top: 1px dashed var(--line); }
+.step:first-child { border-top: 0; }
+.step-k { font-family: var(--f-display); font-stretch: 85%; font-weight: 700; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; }
+.step.tool .step-k { color: var(--tool); }
+.step.llm .step-k, .step.thinking .step-k { color: var(--model); }
+.step-b { min-width: 0; overflow-wrap: anywhere; }
+.step-b .mono { font-size: 13px; }
+.step-r { font-family: var(--f-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.step.err .step-b { color: var(--unsafe); }
+.spin { display: inline-block; width: 12px; height: 12px; border: 2px solid var(--line); border-top-color: var(--model); border-radius: 50%;
+  vertical-align: -1px; margin-right: 6px; }
+@media (prefers-reduced-motion: no-preference) { .spin { animation: spin 0.8s linear infinite; } @keyframes spin { to { transform: rotate(360deg); } } }
+@media (max-width: 520px) { .step { grid-template-columns: 74px minmax(0, 1fr); } .step-r { grid-column: 2; } }
+
+/* answer */
+.answer-body { max-width: 72ch; }
+.answer-body p { margin: 0 0 10px; }
+.answer-body h4 { font-size: 15px; font-stretch: 90%; margin: 14px 0 6px; }
+.answer-body ul { margin: 0 0 10px; padding-left: 20px; }
+.answer-body code { background: var(--sunk); padding: 1px 5px; border-radius: 3px; }
+.cite { display: inline; margin: 0 2px; padding: 0 6px 0 0; border-radius: 4px; font-family: var(--f-mono); font-size: 11.5px;
+  background: var(--sunk); border: 1px solid var(--line); color: var(--ink); text-decoration: none; white-space: nowrap;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.cite .n { display: inline-block; padding: 0 5px; margin-right: 4px; background: var(--line); border-radius: 3px 0 0 3px; font-weight: 600; }
+.cite .ver { color: var(--accent); font-weight: 600; }
+a.cite:hover { border-color: var(--muted); }
+.cite.superseded { border-color: var(--unsafe); background: var(--unsafe-soft); }
+.cite.superseded .ver { color: var(--unsafe); }
+.cite.broken { border-style: dashed; border-color: var(--warn); padding-left: 6px; }
+.cite.broken b { color: var(--warn); font-family: var(--f-body); font-size: 10.5px; }
+@media (max-width: 520px) { .cite { white-space: normal; overflow-wrap: anywhere; } }
+.sources { list-style: none; margin: 14px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line); display: grid; gap: 8px; }
+.sources li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; font-size: 13px; }
+.sources li:target { background: var(--accent-soft); border-radius: 4px; }
+.sources .n { font-family: var(--f-mono); font-weight: 600; color: var(--muted); }
+.sources .id { font-family: var(--f-mono); overflow-wrap: anywhere; }
+.sources .where { font-family: var(--f-mono); font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.broken-note { margin: 10px 0 0; font-size: 13px; color: var(--warn); }
+
+/* the food label */
+.label { border: 3px solid var(--ink); border-radius: 2px; background: var(--surface); padding: 10px 14px 12px; }
+.label-h { font-family: var(--f-display); font-stretch: 68%; font-weight: 900; font-size: 26px; text-transform: uppercase;
+  line-height: 1; padding-bottom: 6px; border-bottom: 8px solid var(--ink); }
+.label-src { font-size: 12px; padding: 5px 0; border-bottom: 1px solid var(--ink); }
+.label-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--ink); }
+.label-row:last-child { border-bottom: 0; }
+.label-id { font-family: var(--f-mono); font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
+.label-why { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.verdict { font-family: var(--f-display); font-stretch: 75%; font-weight: 850; font-size: 15px; letter-spacing: 0.02em;
+  padding: 3px 9px; border: 2px solid currentColor; white-space: nowrap; text-align: center; }
+.verdict.safe { color: var(--safe); }
+.verdict.unsafe { color: var(--unsafe); }
+.verdict.warn { color: var(--warn); }
+.verdict.neutral { color: var(--muted); }
+@media (max-width: 520px) { .label-row { grid-template-columns: minmax(0, 1fr); } .verdict { justify-self: start; } }
+
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); border: 1px solid var(--line);
+  border-radius: var(--r); background: var(--surface); overflow: hidden; }
+.stat { padding: 10px 14px; border-left: 1px solid var(--line); border-top: 1px solid var(--line); margin: -1px 0 0 -1px; min-width: 0; }
+.stat.wide { grid-column: span 2; }
+.stat-k { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; font-family: var(--f-display); font-stretch: 85%; font-weight: 650; }
+.stat-v { font-family: var(--f-mono); font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+.copy { border: 0; background: none; padding: 0 0 0 6px; cursor: pointer; color: var(--accent); font-size: 12px; font-family: var(--f-body); font-weight: 600; }
+
+/* trace */
+details.trace > summary { cursor: pointer; list-style: none; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; }
+details.trace > summary::-webkit-details-marker { display: none; }
+details.trace > summary h3 { font-size: 16px; font-stretch: 90%; }
+details.trace > summary h3::before { content: "+ "; font-family: var(--f-mono); color: var(--accent); }
+details.trace[open] > summary h3::before { content: "– "; }
+.wf-scroll { overflow-x: auto; margin-top: 12px; }
+.wf-grid { min-width: 600px; }
+.wf-row { display: grid; grid-template-columns: 230px minmax(0, 1fr) 74px; gap: 10px; align-items: center; min-height: 30px; padding: 3px 0; }
+.wf-name { font-family: var(--f-mono); font-size: 12px; min-width: 0; }
+.wf-name .args { display: block; font-family: var(--f-body); font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wf-row.server .wf-name { padding-left: 14px; color: var(--muted); }
+.wf-row.err .wf-name { color: var(--unsafe); }
+.wf-track { position: relative; height: 14px; background: linear-gradient(var(--line), var(--line)) center / 100% 1px no-repeat; }
+.wf-bar { position: absolute; top: 0; height: 14px; border-radius: 2px; min-width: 3px; display: flex; overflow: hidden; }
+.wf-row.server .wf-bar { top: 4px; height: 6px; opacity: 0.6; }
+.wf-wait { background: repeating-linear-gradient(135deg, var(--wait) 0 4px, transparent 4px 7px); border: 1px solid var(--wait); }
+.wf-model { background: var(--model); flex: 1; }
+.wf-tool { background: var(--tool); }
+.wf-ms { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); text-align: right; }
+.wf-axis { display: grid; grid-template-columns: 230px minmax(0, 1fr) 74px; gap: 10px; margin-top: 6px; }
+.wf-ticks { position: relative; height: 16px; font-family: var(--f-mono); font-size: 10.5px; color: var(--muted); }
+.wf-ticks span { position: absolute; transform: translateX(-50%); }
+.wf-ticks span:first-child { transform: none; }
+.wf-legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 10px; }
+.sw { display: inline-block; width: 18px; height: 10px; vertical-align: -1px; margin-right: 5px; border-radius: 2px; }
+.trace-notes { display: grid; gap: 4px; margin-top: 12px; font-size: 13px; color: var(--muted); }
+.trace-notes b { color: var(--ink); font-weight: 600; }
+
+.errcard { border-color: var(--unsafe); background: var(--unsafe-soft); color: var(--unsafe); }
+.errcard b { display: block; margin-bottom: 4px; }
+
+/* recent questions */
+.side { display: grid; gap: 10px; min-width: 0; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; }
+@media (max-width: 920px) { .side { position: static; max-height: none; } }
+.side-h { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.side-h h2 { font-size: 15px; font-stretch: 88%; letter-spacing: 0.04em; text-transform: uppercase; }
+.side p { margin: 0; }
+.history { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.h-item { width: 100%; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: var(--r);
+  padding: 9px 11px; cursor: pointer; display: grid; gap: 4px; }
+.h-item:hover { border-color: var(--muted); }
+.h-item[aria-current="true"] { border-color: var(--ink); box-shadow: inset 4px 0 0 var(--accent); }
+.h-q { font-size: 13.5px; line-height: 1.35; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.h-meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 11.5px; color: var(--muted); font-family: var(--f-mono); }
+.empty { font-size: 13px; color: var(--muted); padding: 10px 0; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <div>
+      <div class="brand">Pantry-to-<span>Plate</span></div>
+      <div class="tagline">Recipe answers from the publisher's library, cited by recipe and version. Allergens checked against the declaration, not the page text.</div>
+    </div>
+    <div class="pills" id="pills"><span class="pill">connecting…</span></div>
+  </div>
+</header>
+<div class="banner" id="banner" hidden><div class="wrap" id="banner-text"></div></div>
+
+<main class="wrap layout">
+  <section class="main" aria-label="Ask">
+    <form class="card askbox" id="ask-form">
+      <label class="eyebrow" for="q">Ask a cooking question</label>
+      <textarea id="q" maxlength="1000" placeholder="e.g. My son is allergic to nuts - can he have the nankhatai?"></textarea>
+      <div class="ask-row">
+        <div class="examples" id="examples" aria-label="Example questions"></div>
+        <button class="btn" id="ask-btn" type="submit">Ask</button>
+      </div>
+      <p class="hint">Usually 10–30 seconds: the free tier allows 15 model calls a minute. Ctrl+Enter asks.</p>
+    </form>
+    <div class="main" id="result" aria-live="polite"></div>
+  </section>
+
+  <aside class="side" aria-label="Recent questions">
+    <div class="side-h"><h2>Recent questions</h2><button class="btn ghost" id="refresh" type="button">Refresh</button></div>
+    <p class="small">Read back from <code>logs/pantry_requests.jsonl</code>, as written: health details removed, user ids pseudonymised.</p>
+    <ol class="history" id="history"><li class="empty">Loading…</li></ol>
+  </aside>
+</main>
+
+<script>
+const EXAMPLES = [
+  ["Nut allergy + nankhatai", "My son is allergic to nuts - can he have the nankhatai?"],
+  ["Leftover rice, 25 min", "I've got leftover cooked rice, two lemons and mustard seeds. My kid is allergic to nuts and I have 25 minutes - what can I make?"],
+  ["Scale 4×", "I need 4 times the nankhatai for a school fair. How much maida do I need, and how long do I bake them?"],
+  ["Egg allergy", "Is the nankhatai safe for someone with an egg allergy?"],
+];
+const VERDICT = {
+  SAFE_BY_DECLARATION: ["safe", "SAFE BY DECLARATION"],
+  UNSAFE: ["unsafe", "UNSAFE"],
+  MAY_CONTAIN: ["warn", "MAY CONTAIN"],
+  SUPERSEDED_NOT_OFFERED: ["neutral", "OLD VERSION · NOT OFFERED"],
+};
+
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmtMs = ms => ms >= 1000 ? (ms / 1000).toFixed(1) + " s" : Math.round(ms) + " ms";
+const sum = (a, f) => a.reduce((t, x) => t + (f(x) || 0), 0);
+const fmtArgs = args => Object.entries(args || {}).map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(", ") : typeof v === "object" ? JSON.stringify(v) : v}`).join(" · ");
+const when = ts => { const d = new Date(ts); return isNaN(d) ? ts : d.toLocaleString(undefined, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); };
+
+let USER = "web-user";
+try {
+  USER = localStorage.getItem("pantry-user") || "";
+  if (!USER) { USER = "web-" + Math.random().toString(16).slice(2, 10); localStorage.setItem("pantry-user", USER); }
+} catch (e) { USER = "web-user"; }
+
+let running = false, hasKey = true, currentTrace = null;
+
+/* ---------- header ---------- */
+async function loadInfo() {
+  try {
+    const info = await (await fetch("/api/info")).json();
+    hasKey = info.has_key;
+    $("#pills").innerHTML = `
+      <span class="pill" title="ask.DEFAULT_MODEL">model <b>${esc(info.model)}</b></span>
+      <span class="pill" title="PANTRY_RELEASE in pantry_mcp.json">release <b>${esc(info.release)}</b></span>
+      <span class="pill" title="${esc(info.tools.join("\n"))}"><b>${info.tools.length}</b> tools · <b>${info.servers}</b> MCP servers</span>`;
+    if (!hasKey) showBanner("No model key found. Create a file named .env in the week3-rag folder containing GEMINI_API_KEY=your-key, then restart python pantry.py web. Recent questions still work.");
+  } catch (e) {
+    $("#pills").innerHTML = `<span class="pill">server not reachable</span>`;
+    showBanner("Can't reach the Pantry-to-Plate server. Is python pantry.py web still running?");
+  }
+}
+function showBanner(text) { $("#banner-text").textContent = text; $("#banner").hidden = false; }
+
+/* ---------- recent questions ---------- */
+async function loadHistory() {
+  try {
+    const rows = await (await fetch("/api/history")).json();
+    if (!rows.length) { $("#history").innerHTML = `<li class="empty">No questions yet.</li>`; return; }
+    $("#history").innerHTML = rows.map(r => {
+      let chip = "";
+      if (r.not_run) chip = `<span class="chip unsafe">allergy not checked</span>`;
+      else if (r.verdicts.length) chip = `<span class="chip neutral">${r.verdicts.length} allergen check${r.verdicts.length > 1 ? "s" : ""}</span>`;
+      if (r.stop_reason !== "completed") chip += `<span class="chip warn">budget stop</span>`;
+      return `<li><button class="h-item" type="button" data-trace="${esc(r.trace_id)}" aria-current="${r.trace_id === currentTrace}">
+        <span class="h-q">${inlineText(r.question)}</span>
+        <span class="h-meta"><span>${esc(when(r.ts))}</span><span>$${Number(r.cost_usd_total).toFixed(5)}</span><span>${r.laps} model calls</span>${chip}</span>
+      </button></li>`;
+    }).join("");
+  } catch (e) {
+    $("#history").innerHTML = `<li class="empty">Couldn't read the log.</li>`;
+  }
+}
+function markCurrent() {
+  document.querySelectorAll(".h-item").forEach(b => b.setAttribute("aria-current", String(b.dataset.trace === currentTrace)));
+}
+async function openTrace(id) {
+  if (running) return;
+  try {
+    const res = await fetch("/api/trace/" + encodeURIComponent(id));
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || res.statusText);
+    renderRecord(data);
+    if (window.matchMedia("(max-width: 920px)").matches) $("#result").scrollIntoView({ block: "start" });
+  } catch (e) { renderError(null, e.message); }
+}
+
+/* ---------- asking ---------- */
+async function ask(question) {
+  if (running) return;
+  if (!hasKey) { renderError(question, "No model key. Add GEMINI_API_KEY to .env and restart python pantry.py web."); return; }
+  running = true; setBusy(true);
+  const started = performance.now(), steps = [];
+  renderRunning(question);
+  const tick = setInterval(() => { const el = $("#elapsed"); if (el) el.textContent = ((performance.now() - started) / 1000).toFixed(0) + " s"; }, 500);
+  let finished = false;
+  try {
+    const res = await fetch("/api/ask", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question, user: USER }) });
+    if (!res.ok) { const e = await res.json().catch(() => ({})); throw new Error(e.error || res.statusText); }
+    const reader = res.body.getReader(), dec = new TextDecoder();
+    let buf = "";
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i;
+      while ((i = buf.indexOf("\n")) >= 0) {
+        const line = buf.slice(0, i); buf = buf.slice(i + 1);
+        if (!line.trim()) continue;
+        const ev = JSON.parse(line);
+        if (ev.type === "tool") { steps.push(ev); renderLiveSteps(steps); }
+        else if (ev.type === "done") { finished = true; renderRecord(ev.record); }
+        else if (ev.type === "error") throw new Error(ev.message);
+      }
+    }
+    if (!finished) throw new Error("The connection closed before the answer arrived. The answer may still be in Recent questions.");
+  } catch (e) {
+    renderError(question, e.message);
+  } finally {
+    clearInterval(tick); running = false; setBusy(false); loadHistory();
+  }
+}
+function setBusy(on) {
+  $("#ask-btn").disabled = on;
+  $("#ask-btn").textContent = on ? "Working…" : "Ask";
+}
+
+function renderRunning(question) {
+  currentTrace = null; markCurrent();
+  $("#result").innerHTML = `
+    <div class="card qcard">
+      <div class="eyebrow">Working · <span id="elapsed">0 s</span></div>
+      <div class="q-typed">“${esc(question)}”</div>
+      <ol class="steps" id="live-steps"><li class="step thinking"><span class="step-k">Model</span><span class="step-b"><span class="spin"></span>reading the question, choosing a tool…</span><span class="step-r"></span></li></ol>
+      <p class="small" style="margin:6px 0 0">Each MCP tool call shows up as the agent makes it. Most of the wait is the free tier's pacing, not the model thinking.</p>
+    </div>`;
+}
+function renderLiveSteps(steps) {
+  $("#live-steps").innerHTML = steps.map(s => `
+    <li class="step tool${s.is_error ? " err" : ""}"><span class="step-k">Tool</span>
+      <span class="step-b"><span class="mono">${esc(s.name)}</span> <span class="small">${esc(fmtArgs(s.args))}</span>${s.is_error ? " <b>→ error</b>" : ""}</span><span class="step-r"></span></li>`).join("")
+    + `<li class="step thinking"><span class="step-k">Model</span><span class="step-b"><span class="spin"></span>deciding the next step…</span><span class="step-r"></span></li>`;
+}
+function renderError(question, message) {
+  $("#result").innerHTML = (question ? `<div class="card qcard"><div class="eyebrow">You asked</div><div class="q-typed">“${esc(question)}”</div></div>` : "")
+    + `<div class="card errcard"><b>Something went wrong</b>${esc(message)}</div>`;
+}
+
+/* ---------- the answer ---------- */
+function inlineText(s) {
+  return esc(s).replace(/\[health detail removed\]/g, '<span class="redact">health detail removed</span>');
+}
+const ID_PART = /^[a-z0-9-]+(?:@[a-z0-9-]+)?(?:::[a-z_]+(?:::\d+)?)?$/;
+// anything that starts like recipe@version is a citation, even a malformed one such as
+// nankhatai-07@reformulated-2025::<automatic> (an invented id: taxonomy mode 2)
+const LOOKS_CITED = /^[a-z0-9-]+@[a-z0-9-]+/;
+const unesc = s => s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
+function chip(id, ctx) {
+  const s = ctx.index.get(id);
+  if (!s) { ctx.broken.add(id); return `<span class="cite broken" title="Not in the recipe library">${esc(id)} <b>not in library</b></span>`; }
+  const [recipe, rest = ""] = id.split("@");
+  const version = rest.split("::")[0];
+  const sup = s.status === "superseded";
+  return `<a class="cite${sup ? " superseded" : ""}" href="#src-${s.n}" title="${esc(id)}${sup ? " — superseded version, no longer made" : ""}"><span class="n">${s.n}</span>${esc(recipe)}@<span class="ver">${esc(version)}</span></a>`;
+}
+function inline(text, ctx) {
+  let h = esc(text);
+  h = h.replace(/\[([^\[\]]+)\]/g, (m, inner) => {
+    const parts = unesc(inner).split(",").map(p => p.trim().replace(/^`|`$/g, ""));
+    if (!parts.every(p => LOOKS_CITED.test(p) || (ID_PART.test(p) && p.includes("::")))) return m;
+    return parts.map(p => chip(p, ctx)).join("");
+  });
+  h = h.replace(/\[health detail removed\]/g, '<span class="redact">health detail removed</span>');
+  h = h.replace(/`([^`]+)`/g, "<code>$1</code>");
+  h = h.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  h = h.replace(/(^|[^*\w])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>");
+  return h;
+}
+function renderAnswer(text, ctx) {
+  const out = [];
+  let para = [], list = null;
+  const flushPara = () => { if (para.length) { out.push("<p>" + inline(para.join(" "), ctx) + "</p>"); para = []; } };
+  const flushList = () => { if (list) { out.push("<ul>" + list.map(li => "<li>" + inline(li, ctx) + "</li>").join("") + "</ul>"); list = null; } };
+  for (const raw of String(text).split("\n")) {
+    const line = raw.trim();
+    let m;
+    if (!line) { flushPara(); flushList(); }
+    else if ((m = line.match(/^#{1,4}\s+(.*)$/))) { flushPara(); flushList(); out.push("<h4>" + inline(m[1], ctx) + "</h4>"); }
+    else if ((m = line.match(/^(?:[*-]|\d+\.)\s+(.*)$/))) { flushPara(); (list ||= []).push(m[1]); }
+    else { flushList(); para.push(line); }
+  }
+  flushPara(); flushList();
+  return out.join("");
+}
+
+function labelHtml(r) {
+  const checks = r.allergen_checks || [];
+  const failed = r.spans.filter(s => s.tool === "check_allergens" && s.is_error);
+  if (!checks.length && !failed.length && !(r.constraints_detected || []).length) return "";
+  const rows = checks.map(c => {
+    const [cls, word] = VERDICT[c.verdict] || ["neutral", c.verdict];
+    const why = [];
+    if (c.contains_avoided?.length) why.push("Declares " + c.contains_avoided.map(a => {
+      const src = (c.sources_of_avoided || {})[a];
+      return src?.length ? `${a} (${src.join(", ")})` : a; }).join(", "));
+    if (c.may_contain_avoided?.length) why.push("May contain " + c.may_contain_avoided.join(", ") + ": a warning, never safe");
+    if (c.as_substituted?.length) why.push("As substituted: " + c.as_substituted.map(x => `${x.from} → ${x.to}`).join(", "));
+    if (c.current_version) why.push(`History only. Today's recipe ${c.current_version.cite_as}: ${(VERDICT[c.current_version.verdict] || [, c.current_version.verdict])[1]}`);
+    if (c.serving_suggestions_to_leave_out) why.push("Leave out: " + Object.values(c.serving_suggestions_to_leave_out).flat().join(", "));
+    if (!why.length && c.verdict === "SAFE_BY_DECLARATION") why.push("Nothing you avoid is declared");
+    const status = c.status === "superseded" ? `<span class="chip unsafe">superseded</span>` : `<span class="chip neutral">${esc(c.status || "current")}</span>`;
+    return `<div class="label-row"><div><div class="label-id">${esc(c.cite_as)} ${status}</div>
+      <div class="label-why">Avoiding ${esc((c.avoid || []).join(", "))} · ${esc(why.join(" · "))}</div></div>
+      <span class="verdict ${cls}">${esc(word)}</span></div>`;
+  });
+  failed.forEach(s => rows.push(`<div class="label-row"><div><div class="label-id">${esc(s.args?.recipe_id || "")}${s.args?.version ? "@" + esc(s.args.version) : ""} · avoiding ${esc((s.args?.avoid || []).join(", "))}</div>
+    <div class="label-why">${esc(s.error || "The check returned an error.")}</div></div><span class="verdict warn">CANNOT CONFIRM</span></div>`));
+  if ((r.constraints_detected || []).length && !checks.length && !failed.length) {
+    rows.push(`<div class="label-row"><div><div class="label-id">No recipe was checked</div>
+      <div class="label-why">The question names ${esc(r.constraints_detected.join(", "))}. Do not rely on this answer for an allergy.</div></div><span class="verdict unsafe">NOT RUN</span></div>`);
+  }
+  return `<div class="label"><div class="label-h">Allergen check</div>
+    <div class="label-src">From the CMS declaration fields, exact match. Not the page text. Printed by code, not by the model.</div>${rows.join("")}</div>`;
+}
+
+function waterfall(r) {
+  const spans = r.spans, total = sum(spans, s => s.latency_ms) || 1;
+  const byParent = {};
+  (r.server_spans || []).forEach(s => (byParent[s.parent_span_id] ||= []).push(s));
+  let at = 0;
+  const rows = spans.map(s => {
+    const left = (at / total) * 100, width = (s.latency_ms / total) * 100;
+    at += s.latency_ms;
+    if (s.kind === "llm") {
+      const waitPct = s.latency_ms ? ((s.throttle_wait_ms || 0) / s.latency_ms) * 100 : 0;
+      const tok = (s.prompt_tokens || 0) + (s.completion_tokens || 0);
+      return `<div class="wf-row"><span class="wf-name">model · lap ${s.lap}<span class="args">${tok.toLocaleString()} tokens · $${Number(s.cost_usd).toFixed(7)}</span></span>
+        <div class="wf-track"><div class="wf-bar" style="left:${left}%;width:${width}%"><span class="wf-wait" style="width:${waitPct}%"></span><span class="wf-model"></span></div></div>
+        <span class="wf-ms">${fmtMs(s.latency_ms)}</span></div>`;
+    }
+    const kids = (byParent[s.span_id] || []).map(k => `<div class="wf-row server"><span class="wf-name">└ ${esc(k.span)}<span class="args">server side, same trace id</span></span>
+        <div class="wf-track"><div class="wf-bar wf-tool" style="left:${left}%;width:${(k.latency_ms / total) * 100}%"></div></div>
+        <span class="wf-ms">${fmtMs(k.latency_ms)}</span></div>`).join("");
+    return `<div class="wf-row${s.is_error ? " err" : ""}"><span class="wf-name">${esc(s.name.replace(/^tool\//, ""))}<span class="args" title="${esc(fmtArgs(s.args))}">${esc(fmtArgs(s.args))}${s.is_error ? " → error" : ""}</span></span>
+        <div class="wf-track"><div class="wf-bar wf-tool" style="left:${left}%;width:${width}%"></div></div>
+        <span class="wf-ms">${fmtMs(s.latency_ms)}</span></div>` + kids;
+  }).join("");
+  const secs = total / 1000, step = secs > 120 ? 30 : secs > 40 ? 10 : secs > 10 ? 5 : 2;
+  const ticks = [];
+  for (let v = 0; v <= secs; v += step) ticks.push(`<span style="left:${(v / secs) * 100}%">${v}s</span>`);
+  return rows + `<div class="wf-axis"><span></span><div class="wf-ticks">${ticks.join("")}</div><span></span></div>`;
+}
+
+function renderRecord(r) {
+  currentTrace = r.trace_id; markCurrent();
+  const index = new Map(r.sources.map((s, i) => [s.id, { ...s, n: i + 1 }]));
+  const ctx = { index, broken: new Set() };
+  const answerHtml = r.answer ? renderAnswer(r.answer, ctx) : `<p class="small">No answer: ${esc(r.stop_reason)}</p>`;
+  const llm = r.spans.filter(s => s.kind === "llm"), tools = r.spans.filter(s => s.kind === "tool");
+  const spanMs = sum(r.spans, s => s.latency_ms), waitMs = sum(llm, s => s.throttle_wait_ms);
+  const waitPct = spanMs ? Math.round((waitMs / spanMs) * 100) : 0;
+  const prompts = llm.map(s => (s.prompt_tokens || 0).toLocaleString());
+  const sources = r.sources.length ? `<ol class="sources">${r.sources.map((s, i) => `
+      <li id="src-${i + 1}"><span class="n">${i + 1}</span><div><div class="id">${esc(s.id)}</div>
+        <div class="small">${esc(s.title)} · version ${esc(s.version)} · ${s.status === "superseded" ? '<span class="chip unsafe">superseded</span>' : `<span class="chip neutral">${esc(s.status)}</span>`}</div>
+        <div class="where">${esc(s.where)}</div></div></li>`).join("")}</ol>` : "";
+  const brokenNote = ctx.broken.size ? `<p class="broken-note">${ctx.broken.size} cited id${ctx.broken.size > 1 ? "s are" : " is"} not in the library: the model invented ${ctx.broken.size > 1 ? "them" : "it"}.</p>` : "";
+
+  $("#result").innerHTML = `
+    <div class="card qcard">
+      <div class="eyebrow">${r.from_log ? "From the log" : "You asked"}</div>
+      <div class="q-typed">“${inlineText(r.question)}”</div>
+      ${r.from_log
+        ? `<div class="fromlog">Read back from the log, so health details were removed when it was written. User <span class="mono">${esc(r.user)}</span> (pseudonymised).</div>`
+        : `<div class="q-logged">Written to the log as <code>${inlineText(r.question_logged)}</code></div>`}
+    </div>
+    <div class="card">
+      <div class="eyebrow" style="margin-bottom:8px">Answer</div>
+      <div class="answer-body">${answerHtml}</div>
+      ${brokenNote}${sources}
+    </div>
+    ${labelHtml(r)}
+    <div class="stats">
+      <div class="stat wide"><div class="stat-k">Trace id</div><div class="stat-v">${esc(r.trace_id)}<button class="copy" type="button" data-copy="${esc(r.trace_id)}">copy</button></div></div>
+      <div class="stat"><div class="stat-k">Model calls</div><div class="stat-v">${r.laps}</div></div>
+      <div class="stat"><div class="stat-k">Tool calls</div><div class="stat-v">${r.tool_calls}</div></div>
+      <div class="stat"><div class="stat-k">Tokens</div><div class="stat-v">${Number(r.tokens_total).toLocaleString()}</div></div>
+      <div class="stat"><div class="stat-k">Cost</div><div class="stat-v">$${Number(r.cost_usd_total).toFixed(6)}</div></div>
+      <div class="stat"><div class="stat-k">Time</div><div class="stat-v">${fmtMs(r.latency_ms_total)}</div></div>
+      <div class="stat"><div class="stat-k">Stop</div><div class="stat-v">${esc(r.stop_reason)}</div></div>
+    </div>
+    <details class="card trace" open>
+      <summary><h3>Trace</h3><span class="small">${llm.length} model spans · ${tools.length} tool spans · ${(r.server_spans || []).length} server spans</span></summary>
+      <div class="wf-scroll"><div class="wf-grid">${waterfall(r)}</div></div>
+      <div class="wf-legend">
+        <span><i class="sw wf-wait"></i>waiting on the free tier's pacing</span>
+        <span><i class="sw" style="background:var(--model)"></i>model working</span>
+        <span><i class="sw" style="background:var(--tool)"></i>MCP tool call</span>
+      </div>
+      <div class="trace-notes">
+        <div><b>${waitPct}% of the time was waiting</b> on the free tier's 15-calls-a-minute pacing.</div>
+        <div><b>All of the cost is model tokens.</b> The MCP servers never call a model. The prompt is re-sent every lap: ${prompts.join(" → ")} tokens.</div>
+        <div>Same trace in the terminal: <code>python pantry.py trace ${esc(r.trace_id)}</code></div>
+      </div>
+    </details>`;
+}
+
+/* ---------- wiring ---------- */
+$("#examples").innerHTML = EXAMPLES.map(([label, q]) => `<button class="ex" type="button" data-q="${esc(q)}">${esc(label)}</button>`).join("");
+$("#examples").addEventListener("click", e => { const b = e.target.closest(".ex"); if (b) { $("#q").value = b.dataset.q; $("#q").focus(); } });
+$("#ask-form").addEventListener("submit", e => { e.preventDefault(); const q = $("#q").value.trim(); if (q) ask(q); else $("#q").focus(); });
+$("#q").addEventListener("keydown", e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); $("#ask-form").requestSubmit(); } });
+$("#history").addEventListener("click", e => { const b = e.target.closest(".h-item"); if (b) openTrace(b.dataset.trace); });
+$("#refresh").addEventListener("click", loadHistory);
+$("#result").addEventListener("click", async e => {
+  const b = e.target.closest(".copy"); if (!b) return;
+  try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "copied"; }
+  catch (err) { b.textContent = "select it"; }
+  setTimeout(() => { b.textContent = "copy"; }, 1500);
+});
+
+loadInfo();
+loadHistory().then(() => {
+  const id = new URLSearchParams(location.search).get("trace");
+  if (id) openTrace(id);
+});
+</script>
+</body>
+</html>
