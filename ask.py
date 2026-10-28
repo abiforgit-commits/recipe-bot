@@ -43,8 +43,19 @@ else:
     DEFAULT_MODEL = "gpt-4o-mini"
 
 
-_LAST_CALL = [0.0]
-MIN_INTERVAL = 4.5  # free tier allows ~15 requests/minute
+# Free-tier pacing: at most MAX_PER_MINUTE calls in any 60 s. Week 12 web UI finding: the old
+# fixed 4.5 s gap between calls made every 3-call question wait ~4 s while nowhere near the limit.
+_RECENT = []  # start times of this process's calls in the last 60 s
+MAX_PER_MINUTE = 13  # the free tier allows ~15 requests/minute; the old 4.5 s gap averaged 13.3
+
+
+def _pace(t):
+    while True:
+        now = t.time()
+        _RECENT[:] = [s for s in _RECENT if now - s < 60]
+        if len(_RECENT) < MAX_PER_MINUTE:
+            return
+        t.sleep(60 - (now - _RECENT[0]) + 0.05)
 
 
 def call_llm(**kwargs):
@@ -54,11 +65,9 @@ def call_llm(**kwargs):
         raise RuntimeError("No model key: create a .env file with GEMINI_API_KEY=your-key "
                            "(free key: https://aistudio.google.com/apikey)")
     for attempt in range(1, 8):
-        gap = _t.time() - _LAST_CALL[0]
-        if gap < MIN_INTERVAL:
-            _t.sleep(MIN_INTERVAL - gap)
+        _pace(_t)
         try:
-            _LAST_CALL[0] = _t.time()
+            _RECENT.append(_t.time())
             return LLM.chat.completions.create(**kwargs)
         except Exception as e:
             msg = str(e)

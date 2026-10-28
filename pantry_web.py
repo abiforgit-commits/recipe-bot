@@ -4,11 +4,14 @@
 
 The pipeline does not change: one PantryAgent (Week 7 loop + Week 9 MCP host) answers, the
 MCP servers in pantry_mcp.json do the work, and every question is logged under one trace id
-with the PII line applied (pantry_trace.py). The page adds:
-  - live progress: each MCP tool call shows up as it happens
-  - the answer with its sources and the code-rendered allergen check
+with the PII line applied (pantry_trace.py). The page is a chat:
+  - follow-up questions: the page sends the conversation's earlier turns with each question
+  - live progress: each MCP tool call shows up as it happens, an allergen verdict as soon as
+    check_allergens returns, and the answer text as the model writes it
+  - regenerate: the same question again at a higher temperature; the page keeps every version
   - the trace: every span, with the server's own spans under the same trace id
-  - recent questions read back from the log, as logged (health details removed)
+  - chats are kept in the browser (localStorage); the server keeps only the redacted log,
+    which the page can also read back (health details removed)
 
 It listens on 127.0.0.1 only: it spends your model key, so it is not for the network.
 """
@@ -35,8 +38,16 @@ from pantry_trace import CLIENT_LOG, SERVER_LOG, load, merged_trace, redact
 ROOT = Path(__file__).parent
 PAGE = ROOT / "web" / "index.html"
 MAX_QUESTION = 1000
+MAX_ANSWER = 4000  # per earlier turn sent back as history
+MAX_TURNS = 6  # earlier turns the model sees: each one is re-sent on every lap of the loop
+REGEN_TEMPERATURE = 0.7
 HISTORY = 30
 TRACE_ID = re.compile(r"^[0-9a-f]{6,16}$")
+CONVERSATION_ID = re.compile(r"^[a-z0-9-]{1,40}$")
+# what the page needs to draw an allergen verdict before the answer is finished
+ALLERGEN_KEYS = ("recipe_id", "version", "cite_as", "status", "avoid", "verdict", "contains_avoided",
+                 "may_contain_avoided", "sources_of_avoided", "as_substituted", "current_version",
+                 "serving_suggestions_to_leave_out")
 BUSY = ("Another question is still running. One at a time: the free tier allows "
         "15 model calls a minute.")
 
@@ -68,9 +79,10 @@ class AgentService:
                 self.ready.set_exception(e)
             raise
 
-    def ask(self, question, user, on_event):
+    def ask(self, question, user, on_event, on_token, history, temperature, conversation_id):
         return asyncio.run_coroutine_threadsafe(
-            self.agent.ask(question, user=user, on_event=on_event), self.loop)
+            self.agent.ask(question, user=user, on_event=on_event, on_token=on_token, history=history,
+                           temperature=temperature, conversation_id=conversation_id), self.loop)
 
     def stop(self):
         self.loop.call_soon_threadsafe(self._stop.set)
@@ -81,8 +93,8 @@ SERVICE = None
 
 def _span_view(s):
     """A span without the raw tool payload (search results can be long)."""
-    keep = ("span_id", "kind", "name", "lap", "latency_ms", "throttle_wait_ms", "prompt_tokens",
-            "completion_tokens", "cost_usd", "server", "tool", "args", "is_error")
+    keep = ("span_id", "kind", "name", "lap", "latency_ms", "throttle_wait_ms", "first_token_ms",
+            "prompt_tokens", "completion_tokens", "cost_usd", "server", "tool", "args", "is_error")
     out = {k: s[k] for k in keep if k in s}
     if s.get("error"):
         out["error"] = s["error"][:300]
@@ -103,7 +115,9 @@ def view(rec, from_log=False):
     if servers is None:
         servers = [s for s in load(SERVER_LOG) if s["trace_id"] == rec["trace_id"]]
     return {"trace_id": rec["trace_id"], "ts": rec["ts"], "user": rec["user"], "model": rec["model"],
-            "prompt_version": rec["prompt_version"], "question": rec["question"],
+            "prompt_version": rec["prompt_version"], "temperature": rec.get("temperature", 0),
+            "conversation_id": rec.get("conversation_id"), "turn": rec.get("turn", 1),
+            "question": rec["question"],
             "question_logged": redact(rec["question"]), "answer": rec.get("answer"),
             "sources": sources, "allergen_checks": rec.get("allergen_checks", []),
             "constraints_detected": rec.get("constraints_detected", []),
@@ -121,6 +135,15 @@ def _line(obj):
     return json.dumps(obj, ensure_ascii=False) + "\n"
 
 
+def _history(raw):
+    """The earlier turns the page sends back, [{"question", "answer"}]: the last MAX_TURNS."""
+    turns = []
+    for t in raw if isinstance(raw, list) else []:
+        if isinstance(t, dict) and str(t.get("question") or "").strip() and str(t.get("answer") or "").strip():
+            turns.append({"question": str(t["question"])[:MAX_QUESTION], "answer": str(t["answer"])[:MAX_ANSWER]})
+    return turns[-MAX_TURNS:]
+
+
 async def page(_):
     return FileResponse(PAGE, headers={"Cache-Control": "no-store"})
 
@@ -129,7 +152,8 @@ async def api_info(_):
     cfg = json.loads(CONFIG.read_text(encoding="utf-8"))
     release = cfg["mcpServers"].get("pantry", {}).get("env", {}).get("PANTRY_RELEASE", "r1")
     return JSONResponse({"model": DEFAULT_MODEL, "release": release, "has_key": LLM is not None,
-                         "tools": list(SERVICE.agent.catalogue), "servers": len(SERVICE.agent.sessions)})
+                         "tools": list(SERVICE.agent.catalogue), "servers": len(SERVICE.agent.sessions),
+                         "regen_temperature": REGEN_TEMPERATURE, "max_turns": MAX_TURNS})
 
 
 async def api_history(_):
@@ -159,6 +183,10 @@ async def api_ask(request):
         return JSONResponse({"error": "Send JSON: {\"question\": \"...\"}"}, status_code=400)
     question = str(body.get("question") or "").strip()
     user = str(body.get("user") or "web-user")[:64]
+    history = _history(body.get("history"))
+    conversation_id = str(body.get("conversation_id") or "")
+    conversation_id = conversation_id if CONVERSATION_ID.match(conversation_id) else None
+    temperature = REGEN_TEMPERATURE if body.get("regenerate") else 0
     if not question:
         return JSONResponse({"error": "Type a question first."}, status_code=400)
     if len(question) > MAX_QUESTION:
@@ -172,11 +200,23 @@ async def api_ask(request):
 
     web_loop, events = asyncio.get_running_loop(), asyncio.Queue()
 
-    def on_event(kind, name, args, is_error, _text):  # called on the agent thread
-        web_loop.call_soon_threadsafe(events.put_nowait, {"type": kind, "name": name, "args": args,
-                                                          "is_error": is_error})
+    def on_event(kind, name, args, is_error, text):  # called on the agent thread
+        ev = {"type": kind, "name": name, "args": args, "is_error": is_error}
+        if is_error:
+            ev["error"] = (text or "")[:300]
+        elif name.endswith("__check_allergens"):
+            try:
+                res = json.loads(text)
+            except (json.JSONDecodeError, TypeError):
+                res = None
+            if isinstance(res, dict) and "verdict" in res:
+                ev["result"] = {k: res[k] for k in ALLERGEN_KEYS if k in res}
+        web_loop.call_soon_threadsafe(events.put_nowait, ev)
 
-    job = SERVICE.ask(question, user, on_event)
+    def on_token(lap, text):  # called on the agent thread; text None = drop this lap's text
+        web_loop.call_soon_threadsafe(events.put_nowait, {"type": "token", "lap": lap, "text": text})
+
+    job = SERVICE.ask(question, user, on_event, on_token, history, temperature, conversation_id)
     # released when the agent finishes, even if the page was closed mid-question
     job.add_done_callback(lambda _: SERVICE.busy.release())
     done = asyncio.wrap_future(job)

@@ -56,17 +56,32 @@ What you'll see:
 python pantry.py web
 ```
 
-This opens http://127.0.0.1:8000. It's the same agent, the same MCP servers and the same
-log as `ask`, behind a web page:
-- type a question (or pick an example) and watch each MCP tool call appear as the agent makes it;
-- the answer's citations link to its **Sources**. Superseded versions show in red, and an id that
-  isn't in the library is flagged;
-- the **Allergen check** label is printed by code from the declaration fields. It says
-  CANNOT CONFIRM when the check errors, and NOT RUN when an allergy question was never checked;
-- the **Trace** shows every model call and tool call, with the server's own spans under the
-  same trace id;
-- **Recent questions** reads `logs/pantry_requests.jsonl` back, as written (health details removed).
-  `http://127.0.0.1:8000/?trace=<id>` opens one directly.
+This opens http://127.0.0.1:8000, a chat. It's the same agent, the same MCP servers and the
+same log as `ask`, behind a chat page:
+- ask a question (or pick an example). Each MCP tool call appears as the agent makes it, and the
+  answer streams in as the model writes it;
+- **follow-up questions** continue the conversation ("What about the appam?"). The page sends
+  the last 6 turns back with each question. An allergy named earlier still counts, so a follow-up
+  that checks no recipe still shows NOT RUN;
+- the **Allergen check** label is printed by code from the declaration fields. It appears as soon
+  as `check_allergens` returns, before the answer text. It says CANNOT CONFIRM when the check
+  errors, and NOT RUN when an allergy question was never checked;
+- the answer's citations link to its **Sources**. Superseded versions show in red, and an id
+  that isn't in the library is flagged;
+- **Regenerate** asks the last question again at temperature 0.7, because at 0 it would repeat
+  itself. Every version is kept: ‹ 1 / 2 › switches between them, and the one on screen is what
+  the next question builds on. The eval suite measured temperature 0, not these;
+- **Trace** shows every model call and tool call, with the server's own spans under the same
+  trace id;
+- **Chats** are saved in your browser only. The **Log** tab reads `logs/pantry_requests.jsonl`
+  back, as written (health details removed). `http://127.0.0.1:8000/?trace=<id>` opens one
+  directly.
+
+**Speed:** a typical question takes about 4–5 s (it was about 10 s) and the first words show
+before that. Two fixes made this. Searches reuse one loaded embedding model, so a search takes
+~70 ms instead of 0.5–1.4 s and returns the same results (checked on all 44 logged queries).
+Model calls only wait when 13 have already gone out in the last minute, instead of always
+waiting 4.5 s between calls. What's left is the model itself: about 1–2 s for each of ~3 calls.
 
 It listens on 127.0.0.1 only, because it spends your model key. `--port 8001` changes the port,
 and `--no-browser` stops it opening a tab. Ctrl+C stops it.
@@ -80,7 +95,7 @@ pseudonymises the user id. Times in the log are UTC.
 | Command | What it does | Model calls (needs a key) |
 |---|---|---|
 | `python pantry.py ask "<question>"` | answer one question end to end | yes |
-| `python pantry.py web [--port 8000]` | the same agent in the browser: live tool calls, answer, allergen check, trace, recent questions | only to ask |
+| `python pantry.py web [--port 8000]` | the same agent as a chat in the browser: follow-ups, streaming answers, regenerate, allergen check, trace, log | only to ask |
 | `python pantry.py trace <trace_id>` | that question's spans across the agent and MCP hops: latency, tokens, cost | no |
 | `python pantry.py eval --tag mine --judge judge_v4.txt` | the full eval suite (33 cases) on the integrated system, ~25 min: assertions, then the judge | yes |
 | `python pantry.py trajectory --tag mine --judge judge_v4.txt` | tool-choice accuracy and outcome-vs-trajectory gap, from that eval run | no |

@@ -113,6 +113,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--http", type=int, help="serve streamable HTTP on this port instead of stdio")
     a = ap.parse_args()
+    pc.search("warm-up")  # open the index and load the embedding model now (2-7 s), not in the first question
     if a.http:
         mcp.run(transport="streamable-http", port=a.http)
     else:

@@ -16,6 +16,11 @@ Two parts of every answer are rendered by CODE from tool results, not written by
 model: the source list (clickable, with version) and the allergen-check block. The
 model writes the prose. The block shows what the declaration fields say whatever the
 prose claims, and shows "NOT RUN" when an allergy question was never checked.
+
+Conversations (the web page): pass the earlier turns as `history`. Each turn is still one
+trace id, and an allergy named in an earlier turn still counts: constraints_detected covers
+the whole conversation. `on_token` streams the answer text as the model writes it; without
+it, every call is the same non-streamed request the eval suite measured.
 """
 import json
 import re
@@ -24,6 +29,9 @@ import uuid
 from contextlib import AsyncExitStack
 from datetime import datetime, timezone
 from pathlib import Path
+from types import SimpleNamespace
+
+from openai.types.chat import ChatCompletionMessage
 
 from ask import DEFAULT_MODEL, call_llm
 from w9_agent import PRICE_IN, PRICE_OUT, connect_all, result_text, to_llm_tools
@@ -127,6 +135,49 @@ def _parse(text):
         return None
 
 
+def _model_call(messages, tools, temperature, lap, on_token):
+    """One lap's model call: (message, usage, ms to the first streamed text or None)."""
+    kwargs = dict(model=DEFAULT_MODEL, temperature=temperature, messages=messages, tools=tools)
+    if on_token is None:
+        resp = call_llm(**kwargs)
+        return resp.choices[0].message, resp.usage, None
+    t0 = time.perf_counter()
+    stream = call_llm(stream=True, stream_options={"include_usage": True}, **kwargs)
+    text, calls, extra, usage, first = [], {}, {}, None, None
+    try:
+        for chunk in stream:
+            usage = chunk.usage or usage
+            if not chunk.choices:
+                continue
+            delta = chunk.choices[0].delta
+            if delta.content:
+                if first is None:
+                    first = round((time.perf_counter() - t0) * 1000, 1)
+                text.append(delta.content)
+                on_token(lap, delta.content)
+            for i, tc in enumerate(delta.tool_calls or []):
+                part = tc.model_dump(exclude_none=True)  # keeps Gemini's thought_signature
+                key = part.pop("index", i)
+                if key in calls:  # OpenAI streams arguments in pieces; Gemini sends each call whole
+                    calls[key]["function"]["arguments"] += part.get("function", {}).get("arguments", "")
+                else:
+                    calls[key] = part
+            extra.update(delta.model_extra or {})
+    except Exception:  # broke mid-stream: it can't be resumed, so drop its text and run the lap whole
+        on_token(lap, None)
+        resp = call_llm(**kwargs)
+        if resp.choices[0].message.content:
+            on_token(lap, resp.choices[0].message.content)
+        return resp.choices[0].message, resp.usage, None
+    msg = {"role": "assistant", **extra}
+    if text:
+        msg["content"] = "".join(text)
+    if calls:
+        msg["tool_calls"] = [calls[k] for k in sorted(calls)]
+    return (ChatCompletionMessage.model_validate(msg),
+            usage or SimpleNamespace(prompt_tokens=0, completion_tokens=0), first)
+
+
 def render(rec, markdown=False):
     """Answer + sources + allergen block, the way the user sees it."""
     lines = [rec["answer"] or f"(no answer: {rec['stop_reason']})", ""]
@@ -164,7 +215,10 @@ def render(rec, markdown=False):
                     i for items in c["serving_suggestions_to_leave_out"].values() for i in items))
             lines.append(f"  - {c['cite_as']} ({c['status']}), avoiding {', '.join(c['avoid'])}: "
                          f"{c['verdict']}" + (f" - {'; '.join(extra)}" if extra else ""))
-        if rec["constraints_detected"] and not checks:
+        if rec["constraints_detected"] and not checks and rec.get("turn", 1) > 1:
+            lines.append(f"  - NOT RUN. This conversation names {', '.join(rec['constraints_detected'])} but "
+                         f"no recipe was checked in this answer. Do not rely on it for an allergy.")
+        elif rec["constraints_detected"] and not checks:
             lines.append(f"  - NOT RUN. The question names {', '.join(rec['constraints_detected'])} but no "
                          f"recipe was checked. Do not rely on this answer for an allergy.")
     return "\n".join(lines)
@@ -186,10 +240,19 @@ class PantryAgent:
     async def __aexit__(self, *exc):
         await self._stack.__aexit__(*exc)
 
-    async def ask(self, question, user="anonymous", log=True, on_event=None):
+    async def ask(self, question, user="anonymous", log=True, on_event=None, history=None, temperature=0,
+                  on_token=None, conversation_id=None):
+        """history: this conversation's earlier turns, [{"question", "answer"}], oldest first.
+        on_token(lap, text): the answer text as it streams; text None means drop this lap's
+        text so far (the stream broke and the lap is re-run)."""
         trace_id, t_req = uuid.uuid4().hex[:16], time.perf_counter()
         spans, usage, n_span = [], {"in": 0, "out": 0}, [0]
-        messages = [{"role": "system", "content": self.system}, {"role": "user", "content": question}]
+        history = history or []
+        messages = [{"role": "system", "content": self.system}]
+        for turn in history:
+            messages += [{"role": "user", "content": turn["question"]},
+                         {"role": "assistant", "content": turn["answer"]}]
+        messages.append({"role": "user", "content": question})
         stop_reason, final = "completed", None
         say = on_event or (lambda *_: None)
 
@@ -210,12 +273,10 @@ class PantryAgent:
                 break
 
             slept0, t0 = _SLEPT[0], time.perf_counter()
-            resp = call_llm(model=DEFAULT_MODEL, temperature=0, messages=messages, tools=self.tools)
+            msg, u, first_ms = _model_call(messages, self.tools, temperature, lap, on_token)
             wall = time.perf_counter() - t0
-            u = resp.usage
             usage["in"] += u.prompt_tokens
             usage["out"] += u.completion_tokens
-            msg = resp.choices[0].message
             spans.append({"span_id": span_id(), "kind": "llm", "name": f"llm/lap-{lap}", "lap": lap,
                           "latency_ms": round(wall * 1000, 1),
                           "throttle_wait_ms": round((_SLEPT[0] - slept0) * 1000, 1),
@@ -223,6 +284,8 @@ class PantryAgent:
                           "completion_tokens": u.completion_tokens,
                           "cost_usd": round((u.prompt_tokens * PRICE_IN + u.completion_tokens * PRICE_OUT)
                                             / 1_000_000, 8)})
+            if first_ms is not None:
+                spans[-1]["first_token_ms"] = first_ms
             if not msg.tool_calls:
                 final = (msg.content or "").strip()
                 break
@@ -253,10 +316,12 @@ class PantryAgent:
 
         checks = [s["result"] for s in spans
                   if s["kind"] == "tool" and isinstance(s.get("result"), dict) and "verdict" in s["result"]]
+        asked = [t["question"] for t in history] + [question]
         rec = {"trace_id": trace_id, "ts": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                "user": pseudonym(user), "prompt_version": self.prompt_version, "model": DEFAULT_MODEL,
+               "temperature": temperature, "conversation_id": conversation_id, "turn": len(history) + 1,
                "question": question, "answer": final,
-               "constraints_detected": detected_constraints(question),
+               "constraints_detected": sorted({c for q in asked for c in detected_constraints(q)}),
                "constraints_checked": sorted({a for c in checks for a in c["avoid"]}),
                "allergen_checks": checks, "citations": citations(final),
                # an unknown tool keeps the name the model called (e.g. pantry__pantry__...) so the

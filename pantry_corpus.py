@@ -147,6 +147,17 @@ def _tokenize(text):
 _IDS = sorted(CHUNKS)
 _BM25 = BM25Okapi([_tokenize(CHUNKS[c]) for c in _IDS])
 _COL = [None]
+_EMBED = [None]
+
+
+def _embed(texts):
+    """Chroma's own default model (all-MiniLM-L6-v2, ONNX), loaded once. Chroma's default
+    embedding function reloads it on every call: 0.5-1 s per search instead of ~60 ms,
+    for the same vectors."""
+    if _EMBED[0] is None:
+        from chromadb.utils.embedding_functions import ONNXMiniLM_L6_V2
+        _EMBED[0] = ONNXMiniLM_L6_V2()
+    return _EMBED[0](texts)
 
 
 def _collection():
@@ -171,7 +182,8 @@ def build_index(client=None):
     except Exception:
         pass
     col = client.create_collection(COLLECTION, metadata={"hnsw:space": "cosine"})
-    col.add(ids=_IDS, documents=[CHUNKS[c] for c in _IDS],
+    docs = [CHUNKS[c] for c in _IDS]
+    col.add(ids=_IDS, documents=docs, embeddings=_embed(docs),
             metadatas=[{k: v for k, v in chunk_meta(c).items()} for c in _IDS])
     return col
 
@@ -179,7 +191,7 @@ def build_index(client=None):
 def search(query, k=K):
     """Week 4 hybrid: dense + BM25 candidate lists over every chunk, fused by RRF.
     Both versions of a two-version recipe stay in the index (the CMS has both)."""
-    res = _collection().query(query_texts=[query], n_results=len(_IDS))
+    res = _collection().query(query_embeddings=_embed([query]), n_results=len(_IDS), include=["distances"])
     fused = {}
     for rank, cid in enumerate(res["ids"][0], 1):
         fused[cid] = fused.get(cid, 0.0) + 1.0 / (RRF_K + rank)
